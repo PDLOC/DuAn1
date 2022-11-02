@@ -115,7 +115,7 @@ public class LoginForm extends javax.swing.JDialog {
         jPanel2.add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 280, 20));
 
         Disable.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Disable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/invisible_20px.png"))); // NOI18N
+        Disable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/user_20px.png"))); // NOI18N
         Disable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 DisableMouseClicked(evt);
