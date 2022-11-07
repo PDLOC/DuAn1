@@ -9,5 +9,108 @@ package ENTITY;
  * @author Admin
  */
 public class SanPham {
-    
+    private String MaSP;
+    private String TenSP;
+    private String MaNPP;
+    private String MaNV;
+    private int SoLuong;
+    private double DonGia;
+    private String Loai;
+    private String MoTa;
+    private String Hinh;
+    private boolean TinhTrang;
+
+    public SanPham(String MaSP, String TenSP, String MaNPP, String MaNV, int SoLuong, double DonGia, String Loai, String MoTa, String Hinh, boolean TinhTrang) {
+        this.MaSP = MaSP;
+        this.TenSP = TenSP;
+        this.MaNPP = MaNPP;
+        this.MaNV = MaNV;
+        this.SoLuong = SoLuong;
+        this.DonGia = DonGia;
+        this.Loai = Loai;
+        this.MoTa = MoTa;
+        this.Hinh = Hinh;
+        this.TinhTrang = TinhTrang;
+    }
+
+    public String getMaSP() {
+        return MaSP;
+    }
+
+    public void setMaSP(String MaSP) {
+        this.MaSP = MaSP;
+    }
+
+    public String getTenSP() {
+        return TenSP;
+    }
+
+    public void setTenSP(String TenSP) {
+        this.TenSP = TenSP;
+    }
+
+    public String getMaNPP() {
+        return MaNPP;
+    }
+
+    public void setMaNPP(String MaNPP) {
+        this.MaNPP = MaNPP;
+    }
+
+    public String getMaNV() {
+        return MaNV;
+    }
+
+    public void setMaNV(String MaNV) {
+        this.MaNV = MaNV;
+    }
+
+    public int getSoLuong() {
+        return SoLuong;
+    }
+
+    public void setSoLuong(int SoLuong) {
+        this.SoLuong = SoLuong;
+    }
+
+    public double getDonGia() {
+        return DonGia;
+    }
+
+    public void setDonGia(double DonGia) {
+        this.DonGia = DonGia;
+    }
+
+    public String getLoai() {
+        return Loai;
+    }
+
+    public void setLoai(String Loai) {
+        this.Loai = Loai;
+    }
+
+    public String getMoTa() {
+        return MoTa;
+    }
+
+    public void setMoTa(String MoTa) {
+        this.MoTa = MoTa;
+    }
+
+    public String getHinh() {
+        return Hinh;
+    }
+
+    public void setHinh(String Hinh) {
+        this.Hinh = Hinh;
+    }
+
+    public boolean isTinhTrang() {
+        return TinhTrang;
+    }
+
+    public void setTinhTrang(boolean TinhTrang) {
+        this.TinhTrang = TinhTrang;
+    }
+
 }

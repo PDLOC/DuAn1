@@ -88,7 +88,6 @@ public class KhachHangDAO {
         model.setSdt(rs.getString("SoDienThoai"));
         model.setDiaChi(rs.getString("DiaChi"));
         model.setNgayTG(rs.getDate("NgayDauTien"));
-        
         return model;
     }
 }

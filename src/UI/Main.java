@@ -31,7 +31,6 @@ public class Main extends javax.swing.JFrame {
         panelClick = new Color(102, 255, 204);
         init();
         background();
-        System.out.println("Chó vũ");
     }
 
     /**
