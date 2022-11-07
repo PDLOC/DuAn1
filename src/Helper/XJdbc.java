@@ -18,7 +18,7 @@ public class XJdbc {
     private static String driver="com.microsoft.sqlserver.jdbc.SQLServerDriver";
     private static String dburl="jdbc:sqlserver://localhost;databaseName=duan1;encrypt=true;trustServerCertificate=true;";
     private static String username="edu";
-    private static String password="123";   
+    private static String password="123";
     /*
      * Nạp driver
      */
