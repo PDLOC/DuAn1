@@ -13,6 +13,10 @@ public class NhaPhanPhoi {
     private String TenNPP;
     private String NoiSX;
     private String Hinh;
+
+    public NhaPhanPhoi() {
+    }
+    
     public NhaPhanPhoi(String MaNPP, String TenNPP, String NoiSX, String Hinh) {
         this.MaNPP = MaNPP;
         this.TenNPP = TenNPP;

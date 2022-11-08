@@ -31,6 +31,8 @@ public class Main extends javax.swing.JFrame {
         panelClick = new Color(102, 255, 204);
         init();
         background();
+        NhanVienForm nv = new NhanVienForm();
+        jDesktopPane1.add(nv).setVisible(true);
     }
 
     /**

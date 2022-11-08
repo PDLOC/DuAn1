@@ -24,7 +24,7 @@ public class XImage {
         APP_ICON = new ImageIcon(XImage.class.getResource(file)).getImage();
     }  
     public static boolean saveLogo(File file){
-        File dir = new File("logos");
+        File dir = new File("IMAGE");
         if(!dir.exists()){
             dir.mkdirs();
         }
@@ -40,7 +40,7 @@ public class XImage {
         }
     }
     public static ImageIcon readLogo(String fileName){
-        File path = new File("logos", fileName);
+        File path = new File("IMAGE", fileName);
         return new ImageIcon(path.getAbsolutePath());
     }
 }
