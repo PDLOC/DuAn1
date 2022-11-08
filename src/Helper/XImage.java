@@ -18,11 +18,11 @@ import javax.swing.ImageIcon;
  * @author ADMIN
  */
 public class XImage {
-    public static final Image APP_ICON;
-    static{
-        String file = "/com/polypro/icon/fpt.png";
-        APP_ICON = new ImageIcon(XImage.class.getResource(file)).getImage();
-    }  
+//    public static final Image APP_ICON;
+//    static{
+//        String file = "/com/polypro/icon/fpt.png";
+//        APP_ICON = new ImageIcon(XImage.class.getResource(file)).getImage();
+//    }  
     public static boolean saveLogo(File file){
         File dir = new File("IMAGE");
         if(!dir.exists()){

@@ -40,10 +40,10 @@ public class NhaPhanPhoiDAO {
         XJdbc.executeUpdate(sql, manpp);
     }
     
-//    public List<KhachHang> select(){
-//        String sql="SELECT * FROM KhachHang";
-//        return select(sql);
-//    }
+    public List<NhaPhanPhoi> select(){
+        String sql="SELECT * FROM NhaPhanPhoi";
+        return select(sql);
+    }
     
     public NhaPhanPhoi findById(String manpp){
         String sql="SELECT * FROM NhaPhanPhoi WHERE MaNPP=?";

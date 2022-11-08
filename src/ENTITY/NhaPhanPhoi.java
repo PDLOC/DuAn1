@@ -9,6 +9,7 @@ package ENTITY;
  * @author Admin
  */
 public class NhaPhanPhoi {
+
     private String MaNPP;
     private String TenNPP;
     private String NoiSX;
@@ -16,22 +17,19 @@ public class NhaPhanPhoi {
 
     public NhaPhanPhoi() {
     }
-    
+
     public NhaPhanPhoi(String MaNPP, String TenNPP, String NoiSX, String Hinh) {
         this.MaNPP = MaNPP;
         this.TenNPP = TenNPP;
         this.NoiSX = NoiSX;
         this.Hinh = Hinh;
     }
-
-    public String getHinh() {
-        return Hinh;
+    
+    @Override
+    public String toString() {
+        return this.TenNPP;
     }
-
-    public void setHinh(String Hinh) {
-        this.Hinh = Hinh;
-    }
-
+    
     public String getMaNPP() {
         return MaNPP;
     }
@@ -55,5 +53,12 @@ public class NhaPhanPhoi {
     public void setNoiSX(String NoiSX) {
         this.NoiSX = NoiSX;
     }
-    
+
+    public String getHinh() {
+        return Hinh;
+    }
+
+    public void setHinh(String Hinh) {
+        this.Hinh = Hinh;
+    }
 }

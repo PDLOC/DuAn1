@@ -4,10 +4,96 @@
  */
 package DAO;
 
+import ENTITY.NhanVien;
+import Helper.XDate;
+import Helper.XJdbc;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Admin
  */
 public class NhanVienDAO {
-    
+
+    public void insert(NhanVien model) {
+        String sql = "INSERT INTO NhanVien (Manv, tennv, Gioitinh, Email, SoDienThoai, Luong, DiaChi, Vaitro, Hinh, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        XJdbc.executeUpdate(sql,
+                model.getMaNV(),
+                model.getTenNV(),
+                model.isGioiTinh(),
+                model.getEmail(),
+                model.getSDT(),
+                model.getLuong(),
+                model.getDiaChi(),
+                model.isVaiTro(),
+                model.getImage(),
+                model.getMatKhau());
+    }
+
+    public void update(NhanVien model) {
+        String sql = "UPDATE NhanVien SET tennv=?, GioiTinh=?, Email=?, SoDienThoai=?, Luong=?, DiaChi=?, Vaitro=?, Hinh=?, password=? WHERE Manv=?";
+        XJdbc.executeUpdate(sql,
+                model.getTenNV(),
+                model.isGioiTinh(),
+                model.getEmail(),
+                model.getSDT(),
+                model.getLuong(),
+                model.getDiaChi(),
+                model.isVaiTro(),
+                model.getImage(),
+                model.getMatKhau(),
+                model.getMaNV());
+    }
+
+    public void delete(String manv) {
+        String sql = "DELETE FROM NhanVien WHERE Manv=?";
+        XJdbc.executeUpdate(sql, manv);
+    }
+
+    public NhanVien findById(String manv) {
+        String sql = "SELECT * FROM NhanVien WHERE Manv=?";
+        List<NhanVien> list = select(sql, manv);
+        return list.size() > 0 ? list.get(0) : null;
+    }
+
+    public List<NhanVien> selectByKeyword(String keyword) {
+        String sql = "SELECT * FROM NhanVien WHERE Manv LIKE ? ";
+        return select(sql, "%" + keyword + "%");
+    }
+
+    private List<NhanVien> select(String sql, Object... args) {
+        List<NhanVien> list = new ArrayList<>();
+        try {
+            ResultSet rs = null;
+            try {
+                rs = XJdbc.executeQuery(sql, args);
+                while (rs.next()) {
+                    NhanVien model = readFromResultSet(rs);
+                    list.add(model);
+                }
+            } finally {
+                rs.getStatement().getConnection().close();
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+        return list;
+    }
+
+    private NhanVien readFromResultSet(ResultSet rs) throws SQLException {
+        NhanVien model = new NhanVien();
+        model.setMaNV(rs.getString("Manv"));
+        model.setTenNV(rs.getString("Tennv"));
+        model.setGioiTinh(rs.getBoolean("GioiTinh"));
+        model.setEmail(rs.getString("Email"));
+        model.setSDT(rs.getString("SoDienThoai"));
+        model.setLuong(rs.getString("Luong"));
+        model.setDiaChi(rs.getString("DiaChi"));
+        model.setVaiTro(rs.getBoolean("VaiTro"));
+        model.setImage(rs.getString("Hinh"));
+        model.setMatKhau(rs.getString("Password"));
+        return model;
+    }
 }

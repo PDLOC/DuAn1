@@ -20,6 +20,9 @@ public class SanPham {
     private String Hinh;
     private boolean TinhTrang;
 
+    public SanPham() {
+    }
+
     public SanPham(String MaSP, String TenSP, String MaNPP, String MaNV, int SoLuong, double DonGia, String Loai, String MoTa, String Hinh, boolean TinhTrang) {
         this.MaSP = MaSP;
         this.TenSP = TenSP;
