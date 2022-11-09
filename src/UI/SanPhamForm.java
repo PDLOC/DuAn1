@@ -347,7 +347,16 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
 
         tblSanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
                 "MÃ SẢN PHẨM", "TÊN SẢN PHẨM", "MÃ NHÀ PHÂN PHỐI", "MÃ NHÂN VIÊN", "SỐ LƯỢNG", "ĐƠN GIÁ", "LOẠI", "MÔ TẢ", "HÌNH", "TÌNH TRẠNG"
@@ -1005,7 +1014,7 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         txtDonGiaSP.setText(modelSP.getDonGia() + "");
         cboLoai.setSelectedItem(modelSP.getLoai());
         taMoTa.setText(modelSP.getMoTa());
-        lblHinhSP.setToolTipText(modelSP.getHinh());
+        lblHinhSP.setText(modelSP.getHinh());
         if (modelSP.getHinh() != null) {
             Image img = XImage.readLogo(modelSP.getHinh()).getImage().getScaledInstance(lblHinhSP.getWidth(), lblHinhSP.getHeight(), Image.SCALE_SMOOTH);
             lblHinhSP.setIcon(new ImageIcon(img));
@@ -1048,13 +1057,14 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
             SanPham modelSP = getFormSP();
             try {
                 daoSP.insert(modelSP);
-                this.fillTableSP();
                 List<SanPham> list = daoSP.select();
                 for (SanPham sp : list) {
                     if (txtMaSP.getText().equalsIgnoreCase(sp.getMaSP())) {
                         JOptionPane.showMessageDialog(this, "Mã đã tồn tại, vui lòng nhập mã khác !");
+                        return;
                     }
                 }
+                fillTableSP();
                 JOptionPane.showMessageDialog(this, "Thêm mới thành công!");
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, e);
@@ -1099,13 +1109,13 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
     }
 
     void selectImageSP() {
-        if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION);
-        File file = fileChooser.getSelectedFile();
-        if (XImage.saveLogo(file)) {
-            Image img = XImage.readLogo(file.getName()).getImage().getScaledInstance(lblHinhSP.getWidth(), lblHinhSP.getHeight(), Image.SCALE_SMOOTH);
-            lblHinhSP.setIcon(new ImageIcon(img));
-            lblHinhSP.setToolTipText(file.getName());
-
+        if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            File file = fileChooser.getSelectedFile();
+            if (XImage.saveLogo(file)) {
+                Image img = XImage.readLogo(file.getName()).getImage().getScaledInstance(lblHinhSP.getWidth(), lblHinhSP.getHeight(), Image.SCALE_SMOOTH);
+                lblHinhSP.setIcon(new ImageIcon(img));
+                lblHinhSP.setToolTipText(file.getName());
+            }
         } else {
             JOptionPane.showMessageDialog(this, "Bạn chưa chọn ảnh");
         }
