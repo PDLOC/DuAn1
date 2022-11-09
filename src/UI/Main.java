@@ -667,7 +667,7 @@ public class Main extends javax.swing.JFrame {
         if (choice == JOptionPane.YES_OPTION) {
             this.setVisible(false);
             this.openLogin();
-            this.openLoading();
+//            this.openLoading();
             this.setVisible(true);
         }
     }//GEN-LAST:event_jLabel1MouseClicked
@@ -765,15 +765,14 @@ public class Main extends javax.swing.JFrame {
                 lblDongHo.setText(format.format(new Date()));
             }
         }).start();
-        openLogin();
-        openLoading();
+//        openLogin();
     }
 
     void openLogin() {
         new LoginForm(this, true).setVisible(true);
     }
 
-    void openLoading() {
-        new LoadingForm(this, true).setVisible(true);
-    }
+//    void openLoading() {
+//        new LoadingForm(this, true).setVisible(true);
+//    }
 }

@@ -9,21 +9,23 @@ package ENTITY;
  * @author Admin
  */
 public class NhanVien {
+
     private String MaNV;
     private String TenNV;
     private boolean GioiTinh;
     private String Email;
     private String SDT;
-    private String Luong;
+    private double Luong;
     private String DiaChi;
     private boolean VaiTro;
     private String image;
     private String MatKhau;
+    private String Code;
 
     public NhanVien() {
     }
 
-    public NhanVien(String MaNV, String TenNV, boolean GioiTinh, String Email, String SDT, String Luong, String DiaChi, boolean VaiTro, String image, String MatKhau) {
+    public NhanVien(String MaNV, String TenNV, boolean GioiTinh, String Email, String SDT, double Luong, String DiaChi, boolean VaiTro, String image, String MatKhau) {
         this.MaNV = MaNV;
         this.TenNV = TenNV;
         this.GioiTinh = GioiTinh;
@@ -76,11 +78,11 @@ public class NhanVien {
         this.SDT = SDT;
     }
 
-    public String getLuong() {
+    public double getLuong() {
         return Luong;
     }
 
-    public void setLuong(String Luong) {
+    public void setLuong(double Luong) {
         this.Luong = Luong;
     }
 
@@ -115,5 +117,12 @@ public class NhanVien {
     public void setMatKhau(String MatKhau) {
         this.MatKhau = MatKhau;
     }
-    
+
+    public String getCode() {
+        return Code;
+    }
+
+    public void setCode(String Code) {
+        this.Code = Code;
+    }
 }

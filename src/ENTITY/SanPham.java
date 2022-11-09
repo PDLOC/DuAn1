@@ -14,7 +14,7 @@ public class SanPham {
     private String MaNPP;
     private String MaNV;
     private int SoLuong;
-    private double DonGia;
+    private long DonGia;
     private String Loai;
     private String MoTa;
     private String Hinh;
@@ -23,7 +23,7 @@ public class SanPham {
     public SanPham() {
     }
 
-    public SanPham(String MaSP, String TenSP, String MaNPP, String MaNV, int SoLuong, double DonGia, String Loai, String MoTa, String Hinh, boolean TinhTrang) {
+    public SanPham(String MaSP, String TenSP, String MaNPP, String MaNV, int SoLuong, long DonGia, String Loai, String MoTa, String Hinh, boolean TinhTrang) {
         this.MaSP = MaSP;
         this.TenSP = TenSP;
         this.MaNPP = MaNPP;
@@ -76,11 +76,11 @@ public class SanPham {
         this.SoLuong = SoLuong;
     }
 
-    public double getDonGia() {
+    public long getDonGia() {
         return DonGia;
     }
 
-    public void setDonGia(double DonGia) {
+    public void setDonGia(long DonGia) {
         this.DonGia = DonGia;
     }
 

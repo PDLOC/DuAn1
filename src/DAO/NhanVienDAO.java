@@ -52,6 +52,15 @@ public class NhanVienDAO {
         XJdbc.executeUpdate(sql, manv);
     }
 
+    public NhanVien selectById(String manv) {
+        String sql = "select * from nhanvien where manv = ?";
+        List<NhanVien> list = this.select(sql, manv);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
+    }
+
     public NhanVien findById(String manv) {
         String sql = "SELECT * FROM NhanVien WHERE Manv=?";
         List<NhanVien> list = select(sql, manv);
@@ -89,11 +98,12 @@ public class NhanVienDAO {
         model.setGioiTinh(rs.getBoolean("GioiTinh"));
         model.setEmail(rs.getString("Email"));
         model.setSDT(rs.getString("SoDienThoai"));
-        model.setLuong(rs.getString("Luong"));
+        model.setLuong(rs.getDouble("Luong"));
         model.setDiaChi(rs.getString("DiaChi"));
         model.setVaiTro(rs.getBoolean("VaiTro"));
         model.setImage(rs.getString("Hinh"));
         model.setMatKhau(rs.getString("Password"));
+        model.setCode(rs.getString("code"));
         return model;
     }
 }

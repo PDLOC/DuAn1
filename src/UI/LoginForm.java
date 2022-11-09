@@ -4,6 +4,11 @@
  */
 package UI;
 
+import DAO.AccountDAO;
+import DAO.NhanVienDAO;
+import ENTITY.NhanVien;
+import ENTITY.RememberAccount;
+import Helper.Auth;
 import javax.swing.JOptionPane;
 
 /**
@@ -11,7 +16,11 @@ import javax.swing.JOptionPane;
  * @author Admin
  */
 public class LoginForm extends javax.swing.JDialog {
-    int x,y;
+
+    NhanVienDAO dao = new NhanVienDAO();
+    int x, y;
+    boolean isRemember = true;
+
     /**
      * Creates new form LoginForm
      */
@@ -178,6 +187,7 @@ public class LoginForm extends javax.swing.JDialog {
 
     private void chkRememberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkRememberActionPerformed
         // TODO add your handling code here:
+        isRemember = chkRemember.isSelected();
     }//GEN-LAST:event_chkRememberActionPerformed
 
     private void ExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExitMouseClicked
@@ -187,13 +197,38 @@ public class LoginForm extends javax.swing.JDialog {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(this, "Đăng nhập thành công");
-        this.dispose();
+        String user = txtUser.getText();
+        String pass = new String(txtPass.getPassword());
+        NhanVien nv = dao.selectById(user);
+        if (user.equalsIgnoreCase("")) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập tài khoản");
+        } else if (pass.equalsIgnoreCase("")) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập mật khẩu");
+        } else if (nv == null) {
+            JOptionPane.showMessageDialog(this, "Tài khoản hoặc mật khẩu không tồn tại");
+        } else {
+            if (nv.getMaNV().equalsIgnoreCase(user) && nv.getMatKhau().equalsIgnoreCase(pass)) {
+                if (isRemember) {
+                    AccountDAO.updateRememberAccount(nv.getMaNV(), nv.getMatKhau());
+                } else {
+                    AccountDAO.updateRememberAccount("", "");
+                }
+                Auth.user = nv;
+                String vaitro = nv.isVaiTro() ? "Quản lý" : "Nhân viên";
+                String ten = nv.getTenNV();
+                JOptionPane.showMessageDialog(this, "" + vaitro.toUpperCase() + " " + ten.toUpperCase() + " ĐÃ ĐĂNG NHẬP");
+                this.dispose();
+                new LoadingForm(null, true).setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(this, "Tài khoản hoặc mật khẩu không đúng");
+            }
+        }
+
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void ShowMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ShowMouseClicked
         // TODO add your handling code here:
-        txtPass.setEchoChar((char)42);
+        txtPass.setEchoChar((char) 42);
         Disable.setVisible(true);
         Disable.setEnabled(true);
         Show.setVisible(false);
@@ -202,7 +237,7 @@ public class LoginForm extends javax.swing.JDialog {
 
     private void DisableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DisableMouseClicked
         // TODO add your handling code here:
-        txtPass.setEchoChar((char)0);
+        txtPass.setEchoChar((char) 0);
         Disable.setVisible(false);
         Disable.setEnabled(false);
         Show.setVisible(true);
@@ -270,4 +305,9 @@ public class LoginForm extends javax.swing.JDialog {
     private javax.swing.JPasswordField txtPass;
     private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
+    private void loadRememberAccount() {
+        RememberAccount acc = AccountDAO.getRememberAccount();
+        txtUser.setText(acc.getUsername());
+        txtPass.setText(acc.getPassword());
+    }
 }

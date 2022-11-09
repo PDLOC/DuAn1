@@ -64,7 +64,7 @@ public class SanPhamDAO {
     }
 
     public List<SanPham> selectByKeyword(String keyword) {
-        String sql = "SELECT * FROM SanPham WHERE MaSP LIKE ? ";
+        String sql = "SELECT * FROM SanPham WHERE TenSP LIKE ? ";
         return select(sql, "%" + keyword + "%");
     }
 
@@ -94,7 +94,7 @@ public class SanPhamDAO {
         model.setMaNPP(rs.getString("Manpp"));
         model.setMaNV(rs.getString("MaNV"));
         model.setSoLuong(rs.getInt("SoLuong"));
-        model.setDonGia(rs.getDouble("DonGia"));
+        model.setDonGia(rs.getLong("DonGia"));
         model.setLoai(rs.getString("Loai"));
         model.setMoTa(rs.getString("MoTa"));
         model.setHinh(rs.getString("Hinh"));

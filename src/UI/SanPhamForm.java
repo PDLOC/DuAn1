@@ -12,6 +12,7 @@ import Helper.XDate;
 import Helper.XImage;
 import java.awt.Image;
 import java.io.File;
+import java.text.DecimalFormat;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.Icon;
@@ -43,6 +44,7 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         fillComBoBox();
         fillTableNhaPP();
         fillTableSP();
+        
     }
 
     /**
@@ -117,6 +119,7 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         cboNhaPhanPhoi = new javax.swing.JComboBox<>();
         txtMaNV = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -340,14 +343,11 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel9.setText("Tình trạng:");
         jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 100, 30));
-        jPanel2.add(txtDonGiaSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, 180, 30));
+        jPanel2.add(txtDonGiaSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, 150, 30));
 
         tblSanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "MÃ SẢN PHẨM", "TÊN SẢN PHẨM", "MÃ NHÀ PHÂN PHỐI", "MÃ NHÂN VIÊN", "SỐ LƯỢNG", "ĐƠN GIÁ", "LOẠI", "MÔ TẢ", "HÌNH", "TÌNH TRẠNG"
@@ -536,6 +536,12 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         jPanel2.add(rdoHetHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 270, -1, -1));
 
         lblHinhSP.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblHinhSP.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lblHinhSP.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblHinhSPMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -573,6 +579,10 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setText("Nhân viên");
         jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, 140, 30));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel5.setText("VNĐ");
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 190, 30, 30));
 
         jTabbedPane1.addTab("SẢN PHẨM", jPanel2);
 
@@ -715,6 +725,11 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         this.clearSP();
     }//GEN-LAST:event_btnClearSPActionPerformed
 
+    private void lblHinhSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHinhSPMouseClicked
+        // TODO add your handling code here:
+        this.selectImageSP();
+    }//GEN-LAST:event_lblHinhSPMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClearPP;
@@ -750,6 +765,7 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -784,8 +800,8 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtTenSP;
     // End of variables declaration//GEN-END:variables
     void fillTableNhaPP() {
-        DefaultTableModel model = (DefaultTableModel) tblNhaPhanPhoi.getModel();
-        model.setRowCount(0);
+        DefaultTableModel modelNPP = (DefaultTableModel) tblNhaPhanPhoi.getModel();
+        modelNPP.setRowCount(0);
         try {
             String keyword = txtFindNPP.getText();
             List<NhaPhanPhoi> list = daoNPP.selectByKeyword(keyword);
@@ -796,7 +812,7 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
                     npp.getNoiSX(),
                     npp.getHinh()
                 };
-                model.addRow(row);
+                modelNPP.addRow(row);
             }
             fillComBoBox();
         } catch (Exception e) {
@@ -804,24 +820,24 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         }
     }
 
-    void setForm(NhaPhanPhoi model) {
-        txtMaNPP.setText(model.getMaNPP());
-        txtTenNhaPP.setText(model.getTenNPP());
-        txtNSXPP.setText(model.getNoiSX());
-        lblHinhNPP.setText(model.getHinh());
-        if (model.getHinh() != null) {
-            Image img = XImage.readLogo(model.getHinh()).getImage().getScaledInstance(lblHinhNPP.getWidth(), lblHinhNPP.getHeight(), Image.SCALE_SMOOTH);
+    void setForm(NhaPhanPhoi modelNPP) {
+        txtMaNPP.setText(modelNPP.getMaNPP());
+        txtTenNhaPP.setText(modelNPP.getTenNPP());
+        txtNSXPP.setText(modelNPP.getNoiSX());
+        lblHinhNPP.setText(modelNPP.getHinh());
+        if (modelNPP.getHinh() != null) {
+            Image img = XImage.readLogo(modelNPP.getHinh()).getImage().getScaledInstance(lblHinhNPP.getWidth(), lblHinhNPP.getHeight(), Image.SCALE_SMOOTH);
             lblHinhNPP.setIcon(new ImageIcon(img));
         }
     }
 
     NhaPhanPhoi getForm() {
-        NhaPhanPhoi model = new NhaPhanPhoi();
-        model.setMaNPP(txtMaNPP.getText());
-        model.setTenNPP(txtTenNhaPP.getText());
-        model.setNoiSX(txtNSXPP.getText());
-        model.setHinh(lblHinhNPP.getToolTipText());
-        return model;
+        NhaPhanPhoi modelNPP = new NhaPhanPhoi();
+        modelNPP.setMaNPP(txtMaNPP.getText());
+        modelNPP.setTenNPP(txtTenNhaPP.getText());
+        modelNPP.setNoiSX(txtNSXPP.getText());
+        modelNPP.setHinh(lblHinhNPP.getToolTipText());
+        return modelNPP;
     }
 
     void editNPP() {
@@ -835,6 +851,66 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e);
         }
+    }
+
+    void insertNPP() {
+        if (valiNPP()) {
+            NhaPhanPhoi modelNPP = getForm();
+            try {
+                daoNPP.insert(modelNPP);
+                this.fillTableNhaPP();
+                JOptionPane.showMessageDialog(this, "Thêm mới thành công!");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Thêm mới thất bại!");
+            }
+        }
+    }
+
+    void updateNPP() {
+        NhaPhanPhoi modelNPP = getForm();
+        try {
+            daoNPP.update(modelNPP);
+            this.fillTableNhaPP();
+            JOptionPane.showMessageDialog(this, "Cập nhật thành công!");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Cập nhật thất bại!");
+        }
+
+    }
+
+    void deleteNPP() {
+        int answer = JOptionPane.showConfirmDialog(this, "Bạn có thực sự muốn xóa nhà phân phối này ?", "Delete", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (answer == JOptionPane.YES_OPTION) {
+            String manpp = txtMaNPP.getText();
+            try {
+                daoNPP.delete(manpp);
+                this.fillTableNhaPP();
+                JOptionPane.showMessageDialog(this, "Xóa thành công!");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Xóa thất bại!");
+            }
+        }
+    }
+
+    void clearNPP() {
+        this.setForm(new NhaPhanPhoi());
+        this.updateStatusNPP();
+        row = - 1;
+        updateStatusNPP();
+    }
+
+    void selectImageNPP() {
+        if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            File file = fileChooser.getSelectedFile();
+            if (XImage.saveLogo(file)) {
+                Image img = XImage.readLogo(file.getName()).getImage().getScaledInstance(lblHinhNPP.getWidth(), lblHinhNPP.getHeight(), Image.SCALE_SMOOTH);
+                lblHinhNPP.setIcon(new ImageIcon(img));
+                lblHinhNPP.setToolTipText(file.getName());
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Bạn chưa chọn ảnh");
+        }
+
     }
 
     void firstNPP() {
@@ -880,45 +956,6 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         btnLastPP.setEnabled(edit && !last);
     }
 
-    void insertNPP() {
-        if (valiNPP()) {
-            NhaPhanPhoi model = getForm();
-            try {
-                daoNPP.insert(model);
-                this.fillTableNhaPP();
-                JOptionPane.showMessageDialog(this, "Thêm mới thành công!");
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Thêm mới thất bại!");
-            }
-        }
-    }
-
-    void updateNPP() {
-        NhaPhanPhoi model = getForm();
-        try {
-            daoNPP.update(model);
-            this.fillTableNhaPP();
-            JOptionPane.showMessageDialog(this, "Cập nhật thành công!");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Cập nhật thất bại!");
-        }
-
-    }
-
-    void deleteNPP() {
-        int answer = JOptionPane.showConfirmDialog(this, "Bạn có thực sự muốn xóa nhà phân phối này ?", "Delete", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-        if (answer == JOptionPane.YES_OPTION) {
-            String manpp = txtMaNPP.getText();
-            try {
-                daoNPP.delete(manpp);
-                this.fillTableNhaPP();
-                JOptionPane.showMessageDialog(this, "Xóa thành công!");
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Xóa thất bại!");
-            }
-        }
-    }
-
     public boolean valiNPP() {
         if (txtMaNPP.getText().equalsIgnoreCase("")) {
             JOptionPane.showMessageDialog(this, "Không được để trống mã nhà phân phối !");
@@ -938,30 +975,9 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         return true;
     }
 
-    void clearNPP() {
-        this.setForm(new NhaPhanPhoi());
-        this.updateStatusNPP();
-        row = - 1;
-        updateStatusNPP();
-    }
-
-    void selectImageNPP() {
-        if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-            File file = fileChooser.getSelectedFile();
-            if (XImage.saveLogo(file)) {
-                Image img = XImage.readLogo(file.getName()).getImage().getScaledInstance(lblHinhNPP.getWidth(), lblHinhNPP.getHeight(), Image.SCALE_SMOOTH);
-                lblHinhNPP.setIcon(new ImageIcon(img));
-                lblHinhNPP.setToolTipText(file.getName());
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "Bạn chưa chọn ảnh");
-        }
-
-    }
-
     void fillTableSP() {
-        DefaultTableModel model = (DefaultTableModel) tblSanPham.getModel();
-        model.setRowCount(0);
+        DefaultTableModel modelSP = (DefaultTableModel) tblSanPham.getModel();
+        modelSP.setRowCount(0);
         try {
             String keyword = txtFindSP.getText();
             List<SanPham> list = daoSP.selectByKeyword(keyword);
@@ -978,45 +994,46 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
                     sp.getHinh(),
                     sp.isTinhTrang() ? "Còn hàng" : "Hết hàng"
                 };
-                model.addRow(rows);
+                modelSP.addRow(rows);
             }
         } catch (Exception e) {
-            System.out.println("" + e);
+            JOptionPane.showMessageDialog(this, "Đổ dữ liệu thất bại");
         }
     }
 
-    void setFormSP(SanPham model) {
-        txtMaSP.setText(model.getMaSP());
-        txtTenSP.setText(model.getTenSP());
-        NhaPhanPhoi npp = daoNPP.findById(model.getMaNPP());
+    void setFormSP(SanPham modelSP) {
+        txtMaSP.setText(modelSP.getMaSP());
+        txtTenSP.setText(modelSP.getTenSP());
+        NhaPhanPhoi npp = daoNPP.findById(modelSP.getMaNPP());
         cboNhaPhanPhoi.setSelectedItem(npp);
-        txtMaNV.setText(model.getMaNV());
-        txtSoLuongSP.setText(String.valueOf(model.getSoLuong()));
-        txtDonGiaSP.setText(String.valueOf(model.getDonGia()));
-        cboLoai.setSelectedItem(model.getLoai());
-        taMoTa.setText(model.getMoTa());
-        lblHinhSP.setText(model.getHinh());
-        if (model.getHinh() != null) {
-            Image img = XImage.readLogo(model.getHinh()).getImage().getScaledInstance(lblHinhNPP.getWidth(), lblHinhNPP.getHeight(), Image.SCALE_SMOOTH);
+        txtMaNV.setText(modelSP.getMaNV());
+        txtSoLuongSP.setText(modelSP.getSoLuong() + "");
+        txtDonGiaSP.setText(modelSP.getDonGia() + "");
+        cboLoai.setSelectedItem(modelSP.getLoai());
+        taMoTa.setText(modelSP.getMoTa());
+        lblHinhSP.setText(modelSP.getHinh());
+        if (modelSP.getHinh() != null) {
+            Image img = XImage.readLogo(modelSP.getHinh()).getImage().getScaledInstance(lblHinhNPP.getWidth(), lblHinhNPP.getHeight(), Image.SCALE_SMOOTH);
             lblHinhNPP.setIcon(new ImageIcon(img));
         }
-        rdoConHang.setSelected(model.isTinhTrang());
-        rdoHetHang.setSelected(!model.isTinhTrang());
+        rdoConHang.setSelected(modelSP.isTinhTrang());
+        rdoHetHang.setSelected(!modelSP.isTinhTrang());
     }
 
     SanPham getFormSP() {
-        SanPham model = new SanPham();
-        model.setMaSP(txtMaSP.getText());
-        model.setTenSP(txtTenSP.getText());
+        SanPham modelSP = new SanPham();
+        modelSP.setMaSP(txtMaSP.getText());
+        modelSP.setTenSP(txtTenSP.getText());
         NhaPhanPhoi npp = (NhaPhanPhoi) cboNhaPhanPhoi.getSelectedItem();
-        model.setMaNPP(npp.getMaNPP());
-        model.setMaNV(txtMaNV.getText());
-        model.setSoLuong(Integer.parseInt(txtSoLuongSP.getText()));
-        model.setDonGia(Double.parseDouble(txtDonGiaSP.getText()));
-        model.setMoTa(taMoTa.getText());
-        model.setHinh(lblHinhSP.getText());
-        model.setTinhTrang(rdoConHang.isSelected());
-        return model;
+        modelSP.setMaNPP(npp.getMaNPP());
+        modelSP.setMaNV(txtMaNV.getText());
+        modelSP.setSoLuong(Integer.parseInt(txtSoLuongSP.getText()));
+        modelSP.setDonGia(Long.parseLong(txtDonGiaSP.getText()));
+        modelSP.setLoai(cboLoai.getSelectedItem() + "");
+        modelSP.setMoTa(taMoTa.getText());
+        modelSP.setHinh(lblHinhSP.getToolTipText());
+        modelSP.setTinhTrang(rdoConHang.isSelected());
+        return modelSP;
     }
 
     void editSP() {
@@ -1029,6 +1046,65 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e);
+        }
+    }
+
+    void insertSP() {
+        if (valiSP()) {
+            SanPham modelSP = getFormSP();
+            try {
+                daoSP.insert(modelSP);
+                this.fillTableSP();
+                JOptionPane.showMessageDialog(this, "Thêm mới thành công!");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Thêm mới thất bại");
+            }
+        }
+    }
+
+    void updateSP() {
+        SanPham modelSP = getFormSP();
+        try {
+            daoSP.update(modelSP);
+            this.fillTableSP();
+            JOptionPane.showMessageDialog(this, "Cập nhật thành công!");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Cập nhật thất bại!");
+        }
+
+    }
+
+    void deleteSP() {
+        int answer = JOptionPane.showConfirmDialog(this, "Bạn có thực sự muốn xóa sản phẩm này ?", "Delete", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (answer == JOptionPane.YES_OPTION) {
+            String masp = txtMaSP.getText();
+            try {
+                daoSP.delete(masp);
+                this.fillTableSP();
+                JOptionPane.showMessageDialog(this, "Xóa thành công!");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Xóa thất bại!");
+            }
+        }
+    }
+
+    void clearSP() {
+        this.setFormSP(new SanPham());
+        cboNhaPhanPhoi.setSelectedIndex(0);
+        buttonGroup1.clearSelection();
+        this.updateStatusSP();
+        row = - 1;
+        updateStatusSP();
+    }
+
+    void selectImageSP() {
+        if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION);
+        File file = fileChooser.getSelectedFile();
+        if (XImage.saveLogo(file)) {
+            Image img = XImage.readLogo(file.getName()).getImage().getScaledInstance(lblHinhSP.getWidth(), lblHinhSP.getHeight(), Image.SCALE_SMOOTH);
+            lblHinhSP.setIcon(new ImageIcon(img));
+        } else {
+            JOptionPane.showMessageDialog(this, "Bạn chưa chọn ảnh");
         }
     }
 
@@ -1074,51 +1150,6 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         btnPrevSP.setEnabled(edit && !first);
         btnNextSP.setEnabled(edit && !last);
         btnLastSP.setEnabled(edit && !last);
-    }
-
-    void insertSP() {
-        if (valiSP()) {
-            SanPham modelSP = getFormSP();
-            try {
-                daoSP.insert(modelSP);
-                this.fillTableSP();
-                List<SanPham> list = daoSP.select();
-                for (SanPham sp : list) {
-                    if (txtMaSP.getText().equalsIgnoreCase(sp.getMaSP())) {
-                        JOptionPane.showMessageDialog(this, "Mã đã tồn tại, vui lòng nhập mã khác !");
-                    }
-                }
-                JOptionPane.showMessageDialog(this, "Thêm mới thành công!");
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, e);
-            }
-        }
-    }
-
-    void updateSP() {
-        SanPham modelSP = getFormSP();
-        try {
-            daoSP.update(modelSP);
-            this.fillTableSP();
-            JOptionPane.showMessageDialog(this, "Cập nhật thành công!");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Cập nhật thất bại!");
-        }
-
-    }
-
-    void deleteSP() {
-        int answer = JOptionPane.showConfirmDialog(this, "Bạn có thực sự muốn xóa sản phẩm này ?", "Delete", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-        if (answer == JOptionPane.YES_OPTION) {
-            String masp = txtMaSP.getText();
-            try {
-                daoSP.delete(masp);
-                this.fillTableSP();
-                JOptionPane.showMessageDialog(this, "Xóa thành công!");
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Xóa thất bại!");
-            }
-        }
     }
 
     public boolean valiSP() {
@@ -1173,24 +1204,6 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         return true;
     }
 
-    void clearSP() {
-        this.setFormSP(new SanPham());
-        cboNhaPhanPhoi.setSelectedIndex(0);
-        buttonGroup1.clearSelection();
-        this.updateStatusSP();
-        row = - 1;
-        updateStatusSP();
-    }
-
-    void selectImageSP() {
-        if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION);
-        File file = fileChooser.getSelectedFile();
-        if (XImage.saveLogo(file)) {
-            Image img = XImage.readLogo(file.getName()).getImage().getScaledInstance(lblHinhNPP.getWidth(), lblHinhNPP.getHeight(), Image.SCALE_SMOOTH);
-            lblHinhNPP.setIcon(new ImageIcon(img));
-        }
-    }
-
     void fillComBoBox() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboNhaPhanPhoi.getModel();
         model.removeAllElements();
@@ -1203,4 +1216,5 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Lỗi truy vẫn dữ liệu");;
         }
     }
+
 }

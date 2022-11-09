@@ -7,7 +7,10 @@ package UI;
 import DAO.NhanVienDAO;
 import ENTITY.NhanVien;
 import Helper.XDate;
+import Helper.XImage;
+import java.awt.Image;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
@@ -53,8 +56,8 @@ public class NhanVienForm extends javax.swing.JInternalFrame {
         tbllistNV = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
         txtMatKhau = new javax.swing.JTextField();
-        radNam = new javax.swing.JRadioButton();
-        radNu = new javax.swing.JRadioButton();
+        rdoNam = new javax.swing.JRadioButton();
+        rdoNu = new javax.swing.JRadioButton();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         txtLuong = new javax.swing.JTextField();
@@ -64,8 +67,8 @@ public class NhanVienForm extends javax.swing.JInternalFrame {
         jLabel11 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         lblPicture = new javax.swing.JLabel();
-        radQuanLy = new javax.swing.JRadioButton();
-        radNhanVien = new javax.swing.JRadioButton();
+        rdoQuanLy = new javax.swing.JRadioButton();
+        rdoNhanVien = new javax.swing.JRadioButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -134,13 +137,13 @@ public class NhanVienForm extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 220, 80, 30));
         getContentPane().add(txtMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 220, 220, 30));
 
-        btggioitinh.add(radNam);
-        radNam.setText("Nam");
-        getContentPane().add(radNam, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, 60, 30));
+        btggioitinh.add(rdoNam);
+        rdoNam.setText("Nam");
+        getContentPane().add(rdoNam, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, 60, 30));
 
-        btggioitinh.add(radNu);
-        radNu.setText("Nữ");
-        getContentPane().add(radNu, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 170, 50, 30));
+        btggioitinh.add(rdoNu);
+        rdoNu.setText("Nữ");
+        getContentPane().add(rdoNu, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 170, 50, 30));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setText("Lương:");
@@ -176,13 +179,13 @@ public class NhanVienForm extends javax.swing.JInternalFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 70, 140, 190));
 
-        btgvaitro.add(radQuanLy);
-        radQuanLy.setText("Quản Lý");
-        getContentPane().add(radQuanLy, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 130, -1, 30));
+        btgvaitro.add(rdoQuanLy);
+        rdoQuanLy.setText("Quản Lý");
+        getContentPane().add(rdoQuanLy, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 130, -1, 30));
 
-        btgvaitro.add(radNhanVien);
-        radNhanVien.setText("Nhân Viên");
-        getContentPane().add(radNhanVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 130, -1, 30));
+        btgvaitro.add(rdoNhanVien);
+        rdoNhanVien.setText("Nhân Viên");
+        getContentPane().add(rdoNhanVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 130, -1, 30));
 
         jPanel4.setBackground(new java.awt.Color(0, 102, 102));
 
@@ -358,18 +361,22 @@ public class NhanVienForm extends javax.swing.JInternalFrame {
 
     private void btnFirstNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstNVActionPerformed
         // TODO add your handling code here:
+        this.First();
     }//GEN-LAST:event_btnFirstNVActionPerformed
 
     private void btnPrevNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevNVActionPerformed
         // TODO add your handling code here:
+        this.Prev();
     }//GEN-LAST:event_btnPrevNVActionPerformed
 
     private void btnNextNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextNVActionPerformed
         // TODO add your handling code here:
+        this.Next();
     }//GEN-LAST:event_btnNextNVActionPerformed
 
     private void btnLastNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastNVActionPerformed
         // TODO add your handling code here:
+        this.Last();
     }//GEN-LAST:event_btnLastNVActionPerformed
 
 
@@ -401,10 +408,10 @@ public class NhanVienForm extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblPicture;
-    private javax.swing.JRadioButton radNam;
-    private javax.swing.JRadioButton radNhanVien;
-    private javax.swing.JRadioButton radNu;
-    private javax.swing.JRadioButton radQuanLy;
+    private javax.swing.JRadioButton rdoNam;
+    private javax.swing.JRadioButton rdoNhanVien;
+    private javax.swing.JRadioButton rdoNu;
+    private javax.swing.JRadioButton rdoQuanLy;
     private javax.swing.JTable tbllistNV;
     private javax.swing.JTextField txtLuong;
     private javax.swing.JTextField txtMatKhau;
@@ -444,14 +451,14 @@ public class NhanVienForm extends javax.swing.JInternalFrame {
     void setForm(NhanVien model) {
         txtmaNv.setText(model.getMaNV());
         txtTen.setText(model.getTenNV());
-        radNam.setSelected(model.isGioiTinh());
-        radNu.setSelected(!model.isGioiTinh());
+        rdoNam.setSelected(model.isGioiTinh());
+        rdoNu.setSelected(!model.isGioiTinh());
         txtmail.setText(model.getEmail());
         txtsdt.setText(model.getSDT());
-        txtLuong.setText(model.getLuong());
+        txtLuong.setText(model.getLuong()+"");
         txtdaichi.setText(model.getDiaChi());
-        radQuanLy.setSelected(model.isVaiTro());
-        radNhanVien.setSelected(!model.isVaiTro());
+        rdoQuanLy.setSelected(model.isVaiTro());
+        rdoNhanVien.setSelected(!model.isVaiTro());
         lblPicture.setText(model.getImage());
         txtMatKhau.setText(model.getMatKhau());
     }
@@ -460,26 +467,33 @@ public class NhanVienForm extends javax.swing.JInternalFrame {
         NhanVien model = new NhanVien();
         model.setMaNV(txtmaNv.getText());
         model.setTenNV(txtTen.getText());
-        radNam.setSelected(model.isGioiTinh());
-        radNu.setSelected(!model.isGioiTinh());
-        txtmail.setText(model.getEmail());
-        txtsdt.setText(model.getSDT());
-        txtLuong.setText(model.getLuong());
-        txtdaichi.setText(model.getDiaChi());
-        radQuanLy.setSelected(model.isVaiTro());
-        radNhanVien.setSelected(!model.isVaiTro());
-        lblPicture.setText(model.getImage());
-        txtMatKhau.setText(model.getMatKhau());
+        model.setGioiTinh(rdoNam.isSelected());
+        model.setEmail(txtmail.getText());
+        model.setSDT(txtsdt.getText());
+        model.setLuong(Double.parseDouble(txtLuong.getText()));
+        model.setDiaChi(txtdaichi.getText());
+        model.setVaiTro(rdoQuanLy.isSelected());
+        if (model.getImage()!= null) {
+            Image img = XImage.readLogo(model.getImage()).getImage().getScaledInstance(lblPicture.getWidth(), lblPicture.getHeight(), Image.SCALE_SMOOTH);
+            lblPicture.setIcon(new ImageIcon(img));
+        }
+        model.setMatKhau(txtMatKhau.getText());
         return model;
     }
 
     void updateStatus() {
         boolean edit = this.row >= 0;
+        boolean first = this.row == 0;
+        boolean last = this.row == tbllistNV.getRowCount() - 1;
         txtmaNv.setEditable(!edit);
         btnAddNV.setEnabled(!edit);
         btnUpdateNV.setEnabled(edit);
         btnDeleteNV.setEnabled(edit);
         btnNewNV.setEnabled(edit);
+        btnFirstNV.setEnabled(edit && !first);
+        btnPrevNV.setEnabled(edit && !first);
+        btnNextNV.setEnabled(edit && !last);
+        btnLastNV.setEnabled(edit && !last);
     }
 
     public boolean vali() {
@@ -520,11 +534,6 @@ public class NhanVienForm extends javax.swing.JInternalFrame {
         }
         if (btgvaitro.isSelected(null)) {
             JOptionPane.showMessageDialog(this, "Mời bạn check Vai Trò !");
-            return false;
-        }
-        if (lblPicture.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Mời bạn Hình !");
-            lblPicture.requestFocus();
             return false;
         }
         if (txtMatKhau.getText().equals("")) {
@@ -597,5 +606,33 @@ public class NhanVienForm extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e);
         }
+    }
+    
+    void First() {
+        row = 0;
+        tbllistNV.setRowSelectionInterval(row, row);
+        edit();
+    }
+
+    void Prev() {
+        if (row > 0) {
+            row--;
+            tbllistNV.setRowSelectionInterval(row, row);
+            edit();
+        }
+    }
+
+    void Next() {
+        if (row < tbllistNV.getRowCount() - 1) {
+            row++;
+            tbllistNV.setRowSelectionInterval(row, row);
+            edit();
+        }
+    }
+
+    void Last() {
+        row = tbllistNV.getRowCount() - 1;
+        tbllistNV.setRowSelectionInterval(row, row);
+        edit();
     }
 }
