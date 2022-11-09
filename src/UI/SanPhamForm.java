@@ -532,10 +532,10 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         buttonGroup1.add(rdoHetHang);
         rdoHetHang.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         rdoHetHang.setText("Hết hàng");
+        rdoHetHang.setEnabled(false);
         jPanel2.add(rdoHetHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 270, -1, -1));
 
         lblHinhSP.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblHinhSP.setText("Hình");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -798,6 +798,7 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
                 };
                 model.addRow(row);
             }
+            fillComBoBox();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -965,7 +966,7 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
             String keyword = txtFindSP.getText();
             List<SanPham> list = daoSP.selectByKeyword(keyword);
             for (SanPham sp : list) {
-                Object[] row = {
+                Object[] rows = {
                     sp.getMaSP(),
                     sp.getTenSP(),
                     sp.getMaNPP(),
@@ -977,10 +978,10 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
                     sp.getHinh(),
                     sp.isTinhTrang() ? "Còn hàng" : "Hết hàng"
                 };
-                model.addRow(row);
+                model.addRow(rows);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("" + e);
         }
     }
 
@@ -1065,6 +1066,7 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         boolean last = this.row == tblSanPham.getRowCount() - 1;
         txtMaSP.setEditable(!edit);
         btnThemSP.setEnabled(!edit);
+        rdoHetHang.setEnabled(edit);
         btnUpdateSP.setEnabled(edit);
         btnDelSP.setEnabled(edit);
 
@@ -1080,9 +1082,15 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
             try {
                 daoSP.insert(modelSP);
                 this.fillTableSP();
+                List<SanPham> list = daoSP.select();
+                for (SanPham sp : list) {
+                    if (txtMaSP.getText().equalsIgnoreCase(sp.getMaSP())) {
+                        JOptionPane.showMessageDialog(this, "Mã đã tồn tại, vui lòng nhập mã khác !");
+                    }
+                }
                 JOptionPane.showMessageDialog(this, "Thêm mới thành công!");
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Thêm mới thất bại!");
+                JOptionPane.showMessageDialog(this, e);
             }
         }
     }
@@ -1114,19 +1122,52 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
     }
 
     public boolean valiSP() {
-        if (txtMaNPP.getText().equalsIgnoreCase("")) {
-            JOptionPane.showMessageDialog(this, "Không được để trống mã nhà phân phối !");
-            txtMaNPP.requestFocus();
+        if (txtMaSP.getText().equalsIgnoreCase("")) {
+            JOptionPane.showMessageDialog(this, "Không được để trống mã sản phẩm !");
+            txtMaSP.requestFocus();
             return false;
         }
-        if (txtTenNhaPP.getText().equalsIgnoreCase("")) {
-            JOptionPane.showMessageDialog(this, "Không được để trống tên nhà phân phối !");
-            txtTenNhaPP.requestFocus();
+        if (txtTenSP.getText().equalsIgnoreCase("")) {
+            JOptionPane.showMessageDialog(this, "Không được để trống tên sản phẩm !");
+            txtTenSP.requestFocus();
             return false;
         }
-        if (txtNSXPP.getText().equalsIgnoreCase("")) {
-            JOptionPane.showMessageDialog(this, "Không được để trống nơi sản xuất !");
-            txtNSXPP.requestFocus();
+        if (txtSoLuongSP.getText().equalsIgnoreCase("")) {
+            JOptionPane.showMessageDialog(this, "Không được để trống số lượng !");
+            txtSoLuongSP.requestFocus();
+            return false;
+        }
+        try {
+            int soluong = Integer.parseInt(txtSoLuongSP.getText());
+            if (soluong <= 0) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập số lượng lớn hơn 0 !");
+                return false;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Số lượng vui lòng nhập số !");
+            return false;
+        }
+        if (txtDonGiaSP.getText().equalsIgnoreCase("")) {
+            JOptionPane.showMessageDialog(this, "Không được để trống đơn giá !");
+            txtDonGiaSP.requestFocus();
+            return false;
+        }
+        try {
+            double dongia = Double.parseDouble(txtDonGiaSP.getText());
+            if (dongia <= 0) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập đơn giá lớn hơn 0 !");
+                return false;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Đơn giá vui lòng nhập số !");
+            return false;
+        }
+        if (cboLoai.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn loại hàng !");
+            return false;
+        }
+        if (rdoConHang.isSelected() == false && rdoHetHang.isSelected() == false) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn tình trạng hàng !");
             return false;
         }
         return true;
@@ -1134,6 +1175,8 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
 
     void clearSP() {
         this.setFormSP(new SanPham());
+        cboNhaPhanPhoi.setSelectedIndex(0);
+        buttonGroup1.clearSelection();
         this.updateStatusSP();
         row = - 1;
         updateStatusSP();
