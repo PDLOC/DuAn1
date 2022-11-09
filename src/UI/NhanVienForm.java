@@ -9,8 +9,10 @@ import ENTITY.NhanVien;
 import Helper.XDate;
 import Helper.XImage;
 import java.awt.Image;
+import java.io.File;
 import java.util.List;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
@@ -43,6 +45,7 @@ public class NhanVienForm extends javax.swing.JInternalFrame {
 
         btggioitinh = new javax.swing.ButtonGroup();
         btgvaitro = new javax.swing.ButtonGroup();
+        fileChooser = new javax.swing.JFileChooser();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -165,19 +168,28 @@ public class NhanVienForm extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, -1, 30));
 
         lblPicture.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lblPicture.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblPictureMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblPicture, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblPicture, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblPicture, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblPicture, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 70, 140, 190));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 70, 160, 190));
 
         btgvaitro.add(rdoQuanLy);
         rdoQuanLy.setText("Quản Lý");
@@ -379,6 +391,11 @@ public class NhanVienForm extends javax.swing.JInternalFrame {
         this.Last();
     }//GEN-LAST:event_btnLastNVActionPerformed
 
+    private void lblPictureMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPictureMouseClicked
+        // TODO add your handling code here:
+        this.selectImage();
+    }//GEN-LAST:event_lblPictureMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup btggioitinh;
@@ -392,6 +409,7 @@ public class NhanVienForm extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnPrevNV;
     private javax.swing.JButton btnTimLKiem;
     private javax.swing.JButton btnUpdateNV;
+    private javax.swing.JFileChooser fileChooser;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -439,7 +457,7 @@ public class NhanVienForm extends javax.swing.JInternalFrame {
                     nv.getLuong(),
                     nv.getDiaChi(),
                     nv.isVaiTro() ? "Quản Lý" : "Nhân Viên",
-                    nv.getImage(),
+                    nv.getHinh(),
                     nv.getMatKhau()};
                 model.addRow(row);
             }
@@ -455,11 +473,15 @@ public class NhanVienForm extends javax.swing.JInternalFrame {
         rdoNu.setSelected(!model.isGioiTinh());
         txtmail.setText(model.getEmail());
         txtsdt.setText(model.getSDT());
-        txtLuong.setText(model.getLuong()+"");
+        txtLuong.setText(model.getLuong() + "");
         txtdaichi.setText(model.getDiaChi());
         rdoQuanLy.setSelected(model.isVaiTro());
         rdoNhanVien.setSelected(!model.isVaiTro());
-        lblPicture.setText(model.getImage());
+        lblPicture.setText(model.getHinh());
+        if (model.getHinh() != null) {
+            Image img = XImage.readLogo(model.getHinh()).getImage().getScaledInstance(lblPicture.getWidth(), lblPicture.getHeight(), Image.SCALE_SMOOTH);
+            lblPicture.setIcon(new ImageIcon(img));
+        }
         txtMatKhau.setText(model.getMatKhau());
     }
 
@@ -473,10 +495,7 @@ public class NhanVienForm extends javax.swing.JInternalFrame {
         model.setLuong(Double.parseDouble(txtLuong.getText()));
         model.setDiaChi(txtdaichi.getText());
         model.setVaiTro(rdoQuanLy.isSelected());
-        if (model.getImage()!= null) {
-            Image img = XImage.readLogo(model.getImage()).getImage().getScaledInstance(lblPicture.getWidth(), lblPicture.getHeight(), Image.SCALE_SMOOTH);
-            lblPicture.setIcon(new ImageIcon(img));
-        }
+        model.setHinh(lblPicture.getToolTipText());
         model.setMatKhau(txtMatKhau.getText());
         return model;
     }
@@ -607,7 +626,7 @@ public class NhanVienForm extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, e);
         }
     }
-    
+
     void First() {
         row = 0;
         tbllistNV.setRowSelectionInterval(row, row);
@@ -634,5 +653,18 @@ public class NhanVienForm extends javax.swing.JInternalFrame {
         row = tbllistNV.getRowCount() - 1;
         tbllistNV.setRowSelectionInterval(row, row);
         edit();
+    }
+
+    void selectImage() {
+        if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION);
+        File file = fileChooser.getSelectedFile();
+        if (XImage.saveLogo(file)) {
+            Image img = XImage.readLogo(file.getName()).getImage().getScaledInstance(lblPicture.getWidth(), lblPicture.getHeight(), Image.SCALE_SMOOTH);
+            lblPicture.setIcon(new ImageIcon(img));
+            lblPicture.setToolTipText(file.getName());
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Bạn chưa chọn ảnh");
+        }
     }
 }

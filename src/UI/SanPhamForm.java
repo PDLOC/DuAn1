@@ -44,7 +44,7 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         fillComBoBox();
         fillTableNhaPP();
         fillTableSP();
-        
+
     }
 
     /**
@@ -535,7 +535,6 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         rdoHetHang.setEnabled(false);
         jPanel2.add(rdoHetHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 270, -1, -1));
 
-        lblHinhSP.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblHinhSP.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         lblHinhSP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -547,18 +546,14 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addComponent(lblHinhSP, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(lblHinhSP, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addComponent(lblHinhSP, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(lblHinhSP, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
         );
 
-        jPanel2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 100, 150, 180));
+        jPanel2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 90, 160, 180));
 
         taMoTa.setColumns(20);
         taMoTa.setRows(5);
@@ -992,8 +987,7 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
                     sp.getLoai(),
                     sp.getMoTa(),
                     sp.getHinh(),
-                    sp.isTinhTrang() ? "Còn hàng" : "Hết hàng"
-                };
+                    sp.isTinhTrang() ? "Còn hàng" : "Hết hàng"};
                 modelSP.addRow(rows);
             }
         } catch (Exception e) {
@@ -1011,10 +1005,10 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         txtDonGiaSP.setText(modelSP.getDonGia() + "");
         cboLoai.setSelectedItem(modelSP.getLoai());
         taMoTa.setText(modelSP.getMoTa());
-        lblHinhSP.setText(modelSP.getHinh());
+        lblHinhSP.setToolTipText(modelSP.getHinh());
         if (modelSP.getHinh() != null) {
-            Image img = XImage.readLogo(modelSP.getHinh()).getImage().getScaledInstance(lblHinhNPP.getWidth(), lblHinhNPP.getHeight(), Image.SCALE_SMOOTH);
-            lblHinhNPP.setIcon(new ImageIcon(img));
+            Image img = XImage.readLogo(modelSP.getHinh()).getImage().getScaledInstance(lblHinhSP.getWidth(), lblHinhSP.getHeight(), Image.SCALE_SMOOTH);
+            lblHinhSP.setIcon(new ImageIcon(img));
         }
         rdoConHang.setSelected(modelSP.isTinhTrang());
         rdoHetHang.setSelected(!modelSP.isTinhTrang());
@@ -1055,9 +1049,15 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
             try {
                 daoSP.insert(modelSP);
                 this.fillTableSP();
+                List<SanPham> list = daoSP.select();
+                for (SanPham sp : list) {
+                    if (txtMaSP.getText().equalsIgnoreCase(sp.getMaSP())) {
+                        JOptionPane.showMessageDialog(this, "Mã đã tồn tại, vui lòng nhập mã khác !");
+                    }
+                }
                 JOptionPane.showMessageDialog(this, "Thêm mới thành công!");
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Thêm mới thất bại");
+                JOptionPane.showMessageDialog(this, e);
             }
         }
     }
@@ -1092,6 +1092,7 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         this.setFormSP(new SanPham());
         cboNhaPhanPhoi.setSelectedIndex(0);
         buttonGroup1.clearSelection();
+        lblHinhSP.setIcon(null);
         this.updateStatusSP();
         row = - 1;
         updateStatusSP();
@@ -1103,6 +1104,8 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         if (XImage.saveLogo(file)) {
             Image img = XImage.readLogo(file.getName()).getImage().getScaledInstance(lblHinhSP.getWidth(), lblHinhSP.getHeight(), Image.SCALE_SMOOTH);
             lblHinhSP.setIcon(new ImageIcon(img));
+            lblHinhSP.setToolTipText(file.getName());
+
         } else {
             JOptionPane.showMessageDialog(this, "Bạn chưa chọn ảnh");
         }

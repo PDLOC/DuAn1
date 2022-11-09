@@ -28,7 +28,7 @@ public class NhanVienDAO {
                 model.getLuong(),
                 model.getDiaChi(),
                 model.isVaiTro(),
-                model.getImage(),
+                model.getHinh(),
                 model.getMatKhau());
     }
 
@@ -42,7 +42,7 @@ public class NhanVienDAO {
                 model.getLuong(),
                 model.getDiaChi(),
                 model.isVaiTro(),
-                model.getImage(),
+                model.getHinh(),
                 model.getMatKhau(),
                 model.getMaNV());
     }
@@ -101,7 +101,7 @@ public class NhanVienDAO {
         model.setLuong(rs.getDouble("Luong"));
         model.setDiaChi(rs.getString("DiaChi"));
         model.setVaiTro(rs.getBoolean("VaiTro"));
-        model.setImage(rs.getString("Hinh"));
+        model.setHinh(rs.getString("Hinh"));
         model.setMatKhau(rs.getString("Password"));
         model.setCode(rs.getString("code"));
         return model;

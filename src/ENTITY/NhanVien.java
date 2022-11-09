@@ -18,14 +18,14 @@ public class NhanVien {
     private double Luong;
     private String DiaChi;
     private boolean VaiTro;
-    private String image;
+    private String Hinh;
     private String MatKhau;
     private String Code;
 
     public NhanVien() {
     }
 
-    public NhanVien(String MaNV, String TenNV, boolean GioiTinh, String Email, String SDT, double Luong, String DiaChi, boolean VaiTro, String image, String MatKhau) {
+    public NhanVien(String MaNV, String TenNV, boolean GioiTinh, String Email, String SDT, double Luong, String DiaChi, boolean VaiTro, String Hinh, String MatKhau) {
         this.MaNV = MaNV;
         this.TenNV = TenNV;
         this.GioiTinh = GioiTinh;
@@ -34,7 +34,7 @@ public class NhanVien {
         this.Luong = Luong;
         this.DiaChi = DiaChi;
         this.VaiTro = VaiTro;
-        this.image = image;
+        this.Hinh = Hinh;
         this.MatKhau = MatKhau;
     }
 
@@ -102,12 +102,12 @@ public class NhanVien {
         this.VaiTro = VaiTro;
     }
 
-    public String getImage() {
-        return image;
+    public String getHinh() {
+        return Hinh;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setHinh(String Hinh) {
+        this.Hinh = Hinh;
     }
 
     public String getMatKhau() {
