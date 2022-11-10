@@ -16,7 +16,6 @@ import java.util.List;
  * @author Admin
  */
 public class SanPhamDAO {
-
     public void insert(SanPham model) {
         String sql = "INSERT INTO SanPham (MaSP, TenSP, MaNPP, MaNV, SoLuong, DonGia, Loai, MoTa, Hinh, TinhTrangHoatDong) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         XJdbc.executeUpdate(sql,
@@ -30,6 +29,7 @@ public class SanPhamDAO {
                 model.getMoTa(),
                 model.getHinh(),
                 model.isTinhTrang());
+                
     }
 
     public void update(SanPham model) {
@@ -58,13 +58,13 @@ public class SanPhamDAO {
     }
     
     public SanPham findById(String masp) {
-        String sql = "SELECT * FROM SanPham WHERE MaSP=?";
+        String sql = "SELECT * FROM SanPham WHERE MaSP = ?";
         List<SanPham> list = select(sql, masp);
         return list.size() > 0 ? list.get(0) : null;
     }
 
     public List<SanPham> selectByKeyword(String keyword) {
-        String sql = "SELECT * FROM SanPham WHERE TenSP LIKE ? ";
+        String sql = "SELECT * FROM SanPham WHERE MaSP LIKE ? ";
         return select(sql, "%" + keyword + "%");
     }
 

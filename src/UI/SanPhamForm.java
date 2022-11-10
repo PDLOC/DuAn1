@@ -8,11 +8,13 @@ import DAO.NhaPhanPhoiDAO;
 import DAO.SanPhamDAO;
 import ENTITY.NhaPhanPhoi;
 import ENTITY.SanPham;
+import Helper.Auth;
 import Helper.XDate;
 import Helper.XImage;
 import java.awt.Image;
 import java.io.File;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.Icon;
@@ -57,7 +59,8 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        fileChooser = new javax.swing.JFileChooser();
+        fileChooserNPP = new javax.swing.JFileChooser();
+        fileChooserSP = new javax.swing.JFileChooser();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -347,16 +350,7 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
 
         tblSanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "MÃ SẢN PHẨM", "TÊN SẢN PHẨM", "MÃ NHÀ PHÂN PHỐI", "MÃ NHÂN VIÊN", "SỐ LƯỢNG", "ĐƠN GIÁ", "LOẠI", "MÔ TẢ", "HÌNH", "TÌNH TRẠNG"
@@ -555,14 +549,14 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblHinhSP, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+            .addComponent(lblHinhSP, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lblHinhSP, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
         );
 
-        jPanel2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 90, 160, 180));
+        jPanel2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 90, 170, 180));
 
         taMoTa.setColumns(20);
         taMoTa.setRows(5);
@@ -577,6 +571,8 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
 
         cboNhaPhanPhoi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jPanel2.add(cboNhaPhanPhoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 180, 30));
+
+        txtMaNV.setEditable(false);
         jPanel2.add(txtMaNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 50, 200, 30));
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -701,14 +697,6 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         this.selectImageNPP();
     }//GEN-LAST:event_lblHinhNPPMouseClicked
 
-    private void tblSanPhamMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMousePressed
-        // TODO add your handling code here:
-        this.row = tblSanPham.rowAtPoint(evt.getPoint());
-        if (this.row >= 0) {
-            this.editSP();
-        }
-    }//GEN-LAST:event_tblSanPhamMousePressed
-
     private void btnThemSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemSPActionPerformed
         // TODO add your handling code here:
         this.insertSP();
@@ -734,6 +722,14 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         this.selectImageSP();
     }//GEN-LAST:event_lblHinhSPMouseClicked
 
+    private void tblSanPhamMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMousePressed
+        // TODO add your handling code here:
+        this.row = tblSanPham.rowAtPoint(evt.getPoint());
+        if (this.row >= 0) {
+            this.editSP();
+        }
+    }//GEN-LAST:event_tblSanPhamMousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClearPP;
@@ -757,7 +753,8 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cboLoai;
     private javax.swing.JComboBox<String> cboNhaPhanPhoi;
-    private javax.swing.JFileChooser fileChooser;
+    private javax.swing.JFileChooser fileChooserNPP;
+    private javax.swing.JFileChooser fileChooserSP;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -904,8 +901,8 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
     }
 
     void selectImageNPP() {
-        if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-            File file = fileChooser.getSelectedFile();
+        if (fileChooserNPP.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            File file = fileChooserNPP.getSelectedFile();
             if (XImage.saveLogo(file)) {
                 Image img = XImage.readLogo(file.getName()).getImage().getScaledInstance(lblHinhNPP.getWidth(), lblHinhNPP.getHeight(), Image.SCALE_SMOOTH);
                 lblHinhNPP.setIcon(new ImageIcon(img));
@@ -986,7 +983,7 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
             String keyword = txtFindSP.getText();
             List<SanPham> list = daoSP.selectByKeyword(keyword);
             for (SanPham sp : list) {
-                Object[] rows = {
+                Object[] row = {
                     sp.getMaSP(),
                     sp.getTenSP(),
                     sp.getMaNPP(),
@@ -996,8 +993,9 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
                     sp.getLoai(),
                     sp.getMoTa(),
                     sp.getHinh(),
-                    sp.isTinhTrang() ? "Còn hàng" : "Hết hàng"};
-                modelSP.addRow(rows);
+                    sp.isTinhTrang() ? "Còn hàng" : "Hết hàng"
+                };
+                modelSP.addRow(row);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Đổ dữ liệu thất bại");
@@ -1009,18 +1007,18 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         txtTenSP.setText(modelSP.getTenSP());
         NhaPhanPhoi npp = daoNPP.findById(modelSP.getMaNPP());
         cboNhaPhanPhoi.setSelectedItem(npp);
-        txtMaNV.setText(modelSP.getMaNV());
+        txtMaNV.setText(Auth.user.getTenNV());
         txtSoLuongSP.setText(modelSP.getSoLuong() + "");
         txtDonGiaSP.setText(modelSP.getDonGia() + "");
         cboLoai.setSelectedItem(modelSP.getLoai());
         taMoTa.setText(modelSP.getMoTa());
-        lblHinhSP.setText(modelSP.getHinh());
-        if (modelSP.getHinh() != null) {
-            Image img = XImage.readLogo(modelSP.getHinh()).getImage().getScaledInstance(lblHinhSP.getWidth(), lblHinhSP.getHeight(), Image.SCALE_SMOOTH);
-            lblHinhSP.setIcon(new ImageIcon(img));
-        }
         rdoConHang.setSelected(modelSP.isTinhTrang());
         rdoHetHang.setSelected(!modelSP.isTinhTrang());
+        lblHinhSP.setText(modelSP.getHinh());
+        if (modelSP.getHinh() != null) {
+            Image imgSP = XImage.readLogo(modelSP.getHinh()).getImage().getScaledInstance(170, 180, Image.SCALE_SMOOTH);
+            lblHinhSP.setIcon(new ImageIcon(imgSP));
+        }
     }
 
     SanPham getFormSP() {
@@ -1057,15 +1055,8 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
             SanPham modelSP = getFormSP();
             try {
                 daoSP.insert(modelSP);
-                List<SanPham> list = daoSP.select();
-                for (SanPham sp : list) {
-                    if (txtMaSP.getText().equalsIgnoreCase(sp.getMaSP())) {
-                        JOptionPane.showMessageDialog(this, "Mã đã tồn tại, vui lòng nhập mã khác !");
-                        return;
-                    }
-                }
-                fillTableSP();
-                JOptionPane.showMessageDialog(this, "Thêm mới thành công!");
+                this.fillTableSP();
+                JOptionPane.showMessageDialog(this, "Thêm thành công !");
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, e);
             }
@@ -1100,7 +1091,9 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
 
     void clearSP() {
         this.setFormSP(new SanPham());
+        txtMaNV.setText("");
         cboNhaPhanPhoi.setSelectedIndex(0);
+        cboLoai.setSelectedIndex(0);
         buttonGroup1.clearSelection();
         lblHinhSP.setIcon(null);
         this.updateStatusSP();
@@ -1109,11 +1102,11 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
     }
 
     void selectImageSP() {
-        if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-            File file = fileChooser.getSelectedFile();
+        if (fileChooserNPP.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            File file = fileChooserNPP.getSelectedFile();
             if (XImage.saveLogo(file)) {
-                Image img = XImage.readLogo(file.getName()).getImage().getScaledInstance(lblHinhSP.getWidth(), lblHinhSP.getHeight(), Image.SCALE_SMOOTH);
-                lblHinhSP.setIcon(new ImageIcon(img));
+                Image imgSP = XImage.readLogo(file.getName()).getImage().getScaledInstance(lblHinhSP.getWidth(), lblHinhSP.getHeight(), Image.SCALE_SMOOTH);
+                lblHinhSP.setIcon(new ImageIcon(imgSP));
                 lblHinhSP.setToolTipText(file.getName());
             }
         } else {

@@ -166,6 +166,11 @@ public class LoginForm extends javax.swing.JDialog {
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel10.setText("Forget Password?");
         jLabel10.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel10MousePressed(evt);
+            }
+        });
         jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 230, 130, 40));
 
         btnLogin.setBackground(new java.awt.Color(255, 255, 255));
@@ -243,6 +248,11 @@ public class LoginForm extends javax.swing.JDialog {
         Show.setVisible(true);
         Show.setEnabled(true);
     }//GEN-LAST:event_DisableMouseClicked
+
+    private void jLabel10MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MousePressed
+        // TODO add your handling code here:
+        new QuenMatKhau(null, true).setVisible(true);
+    }//GEN-LAST:event_jLabel10MousePressed
 
     /**
      * @param args the command line arguments

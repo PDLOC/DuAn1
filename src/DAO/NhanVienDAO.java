@@ -106,4 +106,14 @@ public class NhanVienDAO {
         model.setCode(rs.getString("code"));
         return model;
     }
+
+    public void updateCode(String code, String manv) {
+        String sql = "UPDATE NHANVIEN SET CODE = ? WHERE MANV LIKE ?";
+        XJdbc.executeUpdate(sql, code, manv);
+    }
+
+    public void resetPassword(String pass, String MaNV) {
+        String sql = "UPDATE NHANVIEN SET PASSWORD = ? WHERE MANV LIKE ?";
+        XJdbc.executeUpdate(sql, pass, MaNV);
+    }
 }

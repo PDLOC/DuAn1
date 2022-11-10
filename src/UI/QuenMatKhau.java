@@ -4,18 +4,26 @@
  */
 package UI;
 
+import DAO.NhanVienDAO;
+import ENTITY.NhanVien;
+import Helper.EmailService;
+import Helper.ResetPassword;
+import java.awt.Cursor;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Admin
  */
 public class QuenMatKhau extends javax.swing.JDialog {
-
+    NhanVienDAO dao = new NhanVienDAO();
     /**
      * Creates new form QuenMatKhau
      */
     public QuenMatKhau(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -42,7 +50,7 @@ public class QuenMatKhau extends javax.swing.JDialog {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Quên mật khẩu");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, -1, 30));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, -1, 30));
 
         lblUsername.setText("Username");
         jPanel1.add(lblUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, 20));
@@ -58,10 +66,15 @@ public class QuenMatKhau extends javax.swing.JDialog {
                 btnConfirmActionPerformed(evt);
             }
         });
-        jPanel1.add(btnConfirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, -1, 30));
+        jPanel1.add(btnConfirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, -1, 30));
 
         btnLogin.setText("Exit");
-        jPanel1.add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 130, -1, 30));
+        btnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnLoginMousePressed(evt);
+            }
+        });
+        jPanel1.add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 150, -1, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -78,8 +91,13 @@ public class QuenMatKhau extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
-
+        this.confirm();
     }//GEN-LAST:event_btnConfirmActionPerformed
+
+    private void btnLoginMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMousePressed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_btnLoginMousePressed
 
     /**
      * @param args the command line arguments
@@ -133,4 +151,56 @@ public class QuenMatKhau extends javax.swing.JDialog {
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
+    void confirm() {
+        String username = txtUsername.getText();
+        String email = txtEmail.getText();
+        if (username.isBlank()) {
+            JOptionPane.showMessageDialog(this, "Please enter your username!");
+            txtUsername.requestFocus();
+            return;
+        }
+        if (email.isBlank()) {
+            JOptionPane.showMessageDialog(this, "Please enter your Email!");
+            txtEmail.requestFocus();
+            return;
+        }
+//        User user = LoginController.getUser(username);
+        NhanVien nv = dao.selectById(username);
+
+        if (nv == null) {
+            JOptionPane.showMessageDialog(this, "Username is invalid!");
+            txtUsername.requestFocus();
+            return;
+        } else {
+            if (!nv.getEmail().equals(email)) {
+                JOptionPane.showMessageDialog(this, "Email is Invalid!");
+                txtEmail.requestFocus();
+                return;
+            } else {
+                String code = ResetPassword.createCode();
+                dao.updateCode(code, username);
+                ResetPassword.userName = username;
+                setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        sendCode(email, code);
+                    }
+                }).start();
+            }
+        }
+
+    }
+
+    void sendCode(String recieve, String code) {
+        try {
+            EmailService.sendCode(recieve, code);
+            JOptionPane.showMessageDialog(this, "Một mã xác thực đã được gửi tới email của bạn. Vui lòng kiểm tra email.");
+            dispose();
+            new XacNhanPassword(null, true).setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Gửi mail thất bại");
+        }
+        setCursor(Cursor.getDefaultCursor());
+    }
 }
