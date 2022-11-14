@@ -110,12 +110,14 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
         chkbang = new javax.swing.JRadioButton();
         chkbieudo = new javax.swing.JRadioButton();
         jLabel9 = new javax.swing.JLabel();
+        rdoEST = new javax.swing.JRadioButton();
         pnlthongke = new javax.swing.JPanel();
         pnlThongkebieudo = new javax.swing.JPanel();
         pnlthongketrong = new javax.swing.JPanel();
         lbldtsp = new javax.swing.JLabel();
         doanhthu = new javax.swing.JScrollPane();
         tblDoanhThu = new javax.swing.JTable();
+        pnlEST = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -178,6 +180,10 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
         jLabel9.setText("Lựa Chọn Hiển Thị");
         jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
 
+        buttonGroup1.add(rdoEST);
+        rdoEST.setText("EST");
+        jPanel3.add(rdoEST, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
+
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 250, 330));
 
         pnlthongke.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION)));
@@ -227,6 +233,17 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
                     .addContainerGap()))
         );
 
+        javax.swing.GroupLayout pnlESTLayout = new javax.swing.GroupLayout(pnlEST);
+        pnlEST.setLayout(pnlESTLayout);
+        pnlESTLayout.setHorizontalGroup(
+            pnlESTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 666, Short.MAX_VALUE)
+        );
+        pnlESTLayout.setVerticalGroup(
+            pnlESTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 326, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout pnlthongkeLayout = new javax.swing.GroupLayout(pnlthongke);
         pnlthongke.setLayout(pnlthongkeLayout);
         pnlthongkeLayout.setHorizontalGroup(
@@ -234,6 +251,8 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
             .addComponent(pnlthongketrong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(pnlthongkeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(pnlThongkebieudo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(pnlthongkeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(pnlEST, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlthongkeLayout.setVerticalGroup(
             pnlthongkeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -242,6 +261,8 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
                 .addGap(0, 10, Short.MAX_VALUE))
             .addGroup(pnlthongkeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(pnlThongkebieudo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(pnlthongkeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(pnlEST, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.add(pnlthongke, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 670, 330));
@@ -450,9 +471,11 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblsohoadon;
     private javax.swing.JLabel lblsosanpham;
     private javax.swing.JLabel lbltongkhachhang;
+    private javax.swing.JPanel pnlEST;
     private javax.swing.JPanel pnlThongkebieudo;
     private javax.swing.JPanel pnlthongke;
     private javax.swing.JPanel pnlthongketrong;
+    private javax.swing.JRadioButton rdoEST;
     private javax.swing.JTable tblDoanhThu;
     private javax.swing.JTabbedPane tbpdoanhthu;
     // End of variables declaration//GEN-END:variables
@@ -574,9 +597,17 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
 //            doanhthu.setVisible(true);
             pnlthongketrong.setVisible(true);
 //            pnlthongke.setVisible(true);
+            pnlThongkebieudo.setVisible(false);
+            pnlEST.setVisible(false);
         }else if (chkbieudo.isSelected()){
+            pnlEST.setVisible(false);
             pnlthongketrong.setVisible(false);
+            pnlThongkebieudo.setVisible(true);
 //            ThongKeEST();
+        }else if (rdoEST.isSelected()) {
+            pnlEST.setVisible(true);
+            pnlthongketrong.setVisible(false);
+            pnlThongkebieudo.setVisible(false);
         }
     }
     
@@ -596,8 +627,8 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
 //        p3 = new JPanel();
 //        TL3 = new JLabel("Sản Phẩm Có Doanh Thu Nhiều Nhất");
 //        l3 = new JLabel("");
-        pnlthongke.add(p1,p2);
-        
+        pnlEST.add(p1,p2);
+        pnlEST.updateUI();
     }
 //    public void FillDoanhThu() {
 //        for (danhsach ds : ListDS) {
