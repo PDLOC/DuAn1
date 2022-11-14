@@ -35,7 +35,8 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
     NhaPhanPhoiDAO daoNPP = new NhaPhanPhoiDAO();
     int row = -1;
     SanPhamDAO daoSP = new SanPhamDAO();
-
+    DefaultTableModel modelSP = null;
+    ArrayList<SanPham> list = null;
     /**
      * Creates new form SanPhamForm
      */
@@ -47,6 +48,7 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         fillComBoBox();
         fillTableNhaPP();
         fillTableSP();
+        getFirsttableSP();
     }
 
     /**
@@ -1000,11 +1002,11 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
     }
 
     void fillTableSP() {
-        DefaultTableModel modelSP = (DefaultTableModel) tblSanPham.getModel();
+        modelSP = (DefaultTableModel) tblSanPham.getModel();
         modelSP.setRowCount(0);
         try {
             String keyword = txtFindSP.getText();
-            List<SanPham> list = daoSP.selectByKeyword(keyword);
+            list = (ArrayList<SanPham>) daoSP.selectByKeyword(keyword);
             for (SanPham sp : list) {
                 Object[] row = {
                     sp.getMaSP(),
@@ -1249,5 +1251,27 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Không fill lên được ComboBox");;
         }
+    }
+    
+    public void getFirsttableSP(){
+        modelSP = (DefaultTableModel) tblSanPham.getModel();
+        tblSanPham.setRowSelectionInterval(0, 0);
+        int index = tblSanPham.getSelectedRow();
+        txtMaSP.setText(list.get(index).getMaSP());
+        txtTenSP.setText(list.get(index).getTenSP());
+        txtSoLuongSP.setText(String.valueOf(list.get(index).getSoLuong()));
+        txtDonGiaSP.setText(String.valueOf(list.get(index).getDonGia()));
+        for (int i = 0; i < cboLoai.getItemCount(); i++) {
+            if (tblSanPham.getValueAt(0, 6).equals(cboLoai.getItemAt(i))) {
+                cboLoai.setSelectedIndex(i);
+            }
+        }
+        boolean tt = tblSanPham.getValueAt(0, 9).equals("Còn hàng")?true:false;
+        if (tt==true) {
+            rdoConHang.setSelected(tt);
+        }else{
+            rdoHetHang.setSelected(tt);
+        }
+        taMoTa.setText((String) tblSanPham.getValueAt(0, 7));
     }
 }

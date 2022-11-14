@@ -51,7 +51,7 @@ public class Main extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         lblUsername = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lblDoiMatKhau = new javax.swing.JLabel();
         ShowKhachHang = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -107,12 +107,17 @@ public class Main extends javax.swing.JFrame {
         lblUsername.setText("jLabel1");
         jPanel2.add(lblUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 240, 40));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel2.setText("Đổi mật khẩu");
-        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 100, -1));
+        lblDoiMatKhau.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblDoiMatKhau.setForeground(new java.awt.Color(255, 255, 255));
+        lblDoiMatKhau.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblDoiMatKhau.setText("Đổi mật khẩu");
+        lblDoiMatKhau.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblDoiMatKhau.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblDoiMatKhauMousePressed(evt);
+            }
+        });
+        jPanel2.add(lblDoiMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 100, -1));
 
         ShowKhachHang.setBackground(new java.awt.Color(0, 153, 153));
         ShowKhachHang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -654,6 +659,12 @@ public class Main extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ShowNhanVienMouseClicked
 
+    private void lblDoiMatKhauMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDoiMatKhauMousePressed
+        // TODO add your handling code here:
+        this.dispose();
+        new DoiMatKhau(this, true).setVisible(true);
+    }//GEN-LAST:event_lblDoiMatKhauMousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -705,7 +716,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -715,6 +725,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lblDoiMatKhau;
     private javax.swing.JLabel lblDongHo;
     private javax.swing.JLabel lblUsername;
     private javax.swing.JPanel pnlHoaDon;
