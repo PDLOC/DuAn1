@@ -51,6 +51,12 @@ public class NhaPhanPhoiDAO {
         return list.size() > 0 ? list.get(0) : null;
     }
     
+    public NhaPhanPhoi findByName(String tennpp){
+        String sql="SELECT * FROM NhaPhanPhoi WHERE TenNPP=?";
+        List<NhaPhanPhoi> list = select(sql, tennpp);
+        return list.size() > 0 ? list.get(0) : null;
+    }
+    
     public List<NhaPhanPhoi> selectByKeyword(String keyword){
         String sql="SELECT * FROM NhaPhanPhoi WHERE TenNPP LIKE ? ";
         return select(sql, "%"+keyword+"%");

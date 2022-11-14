@@ -170,10 +170,9 @@ public class CTHoaDonForm extends javax.swing.JDialog {
      HoaDonChiTietDAO dao = new HoaDonChiTietDAO();
 
     void fillTable() {
- DefaultTableModel modelct = (DefaultTableModel) tblDanhSach.getModel();
-            modelct.setRowCount(0);
+        DefaultTableModel modelct = (DefaultTableModel) tblDanhSach.getModel();
+        modelct.setRowCount(0);
         try {
-           
             String keyword = txtma.getText();
             List<ChiTietHoaDon> list = dao.selectByKeyword(keyword);
             for (ChiTietHoaDon ct : list) {
@@ -185,7 +184,6 @@ public class CTHoaDonForm extends javax.swing.JDialog {
                 };
                 modelct.addRow(row);
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }

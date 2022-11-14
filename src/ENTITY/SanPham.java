@@ -12,7 +12,7 @@ public class SanPham {
     private String MaSP;
     private String TenSP;
     private String MaNPP;
-    private String MaNV;
+    private String TenNPP;
     private int SoLuong;
     private long DonGia;
     private String Loai;
@@ -23,11 +23,11 @@ public class SanPham {
     public SanPham() {
     }
 
-    public SanPham(String MaSP, String TenSP, String MaNPP, String MaNV, int SoLuong, long DonGia, String Loai, String MoTa, String Hinh, boolean TinhTrang) {
+    public SanPham(String MaSP, String TenSP, String MaNPP, String TenNPP, int SoLuong, long DonGia, String Loai, String MoTa, String Hinh, boolean TinhTrang) {
         this.MaSP = MaSP;
         this.TenSP = TenSP;
         this.MaNPP = MaNPP;
-        this.MaNV = MaNV;
+        this.TenNPP = TenNPP;
         this.SoLuong = SoLuong;
         this.DonGia = DonGia;
         this.Loai = Loai;
@@ -60,12 +60,12 @@ public class SanPham {
         this.MaNPP = MaNPP;
     }
 
-    public String getMaNV() {
-        return MaNV;
+    public String getTenNPP() {
+        return TenNPP;
     }
 
-    public void setMaNV(String MaNV) {
-        this.MaNV = MaNV;
+    public void setTenNPP(String TenNPP) {
+        this.TenNPP = TenNPP;
     }
 
     public int getSoLuong() {

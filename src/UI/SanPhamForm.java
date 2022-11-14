@@ -4,6 +4,7 @@
  */
 package UI;
 
+import java.sql.*;
 import DAO.NhaPhanPhoiDAO;
 import DAO.SanPhamDAO;
 import ENTITY.NhaPhanPhoi;
@@ -46,7 +47,6 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         fillComBoBox();
         fillTableNhaPP();
         fillTableSP();
-
     }
 
     /**
@@ -61,6 +61,8 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         fileChooserNPP = new javax.swing.JFileChooser();
         fileChooserSP = new javax.swing.JFileChooser();
+        jLabel13 = new javax.swing.JLabel();
+        txtMaPP = new javax.swing.JTextField();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -119,12 +121,16 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         taMoTa = new javax.swing.JTextArea();
         jLabel16 = new javax.swing.JLabel();
-        cboNhaPhanPhoi = new javax.swing.JComboBox<>();
-        txtMaNV = new javax.swing.JTextField();
-        jLabel13 = new javax.swing.JLabel();
+        cboNhaPP = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel13.setText("Mã phân phối:");
+
+        txtMaPP.setEditable(false);
 
         setPreferredSize(new java.awt.Dimension(990, 690));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -339,21 +345,21 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Mô tả");
-        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 20, 80, 30));
-        jPanel2.add(txtMaSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, 180, 30));
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 0, 80, 30));
+        jPanel2.add(txtMaSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 180, 30));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel9.setText("Tình trạng:");
-        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 100, 30));
-        jPanel2.add(txtDonGiaSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, 150, 30));
+        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 100, 30));
+        jPanel2.add(txtDonGiaSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 170, 150, 30));
 
         tblSanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "MÃ SẢN PHẨM", "TÊN SẢN PHẨM", "MÃ NHÀ PHÂN PHỐI", "MÃ NHÂN VIÊN", "SỐ LƯỢNG", "ĐƠN GIÁ", "LOẠI", "MÔ TẢ", "HÌNH", "TÌNH TRẠNG"
+                "MÃ SẢN PHẨM", "TÊN SẢN PHẨM", "MÃ NHÀ PHÂN PHỐI", "TÊN NHÀ PHÂN PHỐI", "SỐ LƯỢNG", "ĐƠN GIÁ", "LOẠI", "MÔ TẢ", "HÌNH", "TÌNH TRẠNG"
             }
         ));
         tblSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -363,27 +369,27 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(tblSanPham);
 
-        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 960, 230));
+        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 960, 240));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel10.setText("Tên sản phẩm:");
-        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 100, 30));
+        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 100, 30));
 
         cboLoai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chọn loại", "Laptop", "Tai nghe", "Chuột", "Bàn phím" }));
-        jPanel2.add(cboLoai, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 180, 30));
+        jPanel2.add(cboLoai, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 210, 180, 30));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel11.setText("Nhà phân phối:");
-        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 110, 30));
+        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 110, 30));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel12.setText("Số lượng:");
-        jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 100, 30));
-        jPanel2.add(txtTenSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 180, 30));
-        jPanel2.add(txtSoLuongSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, 180, 30));
+        jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 100, 30));
+        jPanel2.add(txtTenSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 50, 180, 30));
+        jPanel2.add(txtSoLuongSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 180, 30));
 
         jPanel5.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
         jPanel5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -459,13 +465,13 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 50, 170, 220));
+        jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 30, 170, 220));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("Tìm kiếm:");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, 90, 30));
-        jPanel2.add(txtFindSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 310, 470, 30));
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 90, 30));
+        jPanel2.add(txtFindSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 300, 470, 30));
 
         btnFindSP.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnFindSP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/search.png"))); // NOI18N
@@ -475,7 +481,7 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
                 btnFindSPActionPerformed(evt);
             }
         });
-        jPanel2.add(btnFindSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 300, 120, 40));
+        jPanel2.add(btnFindSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 290, 120, 40));
 
         btnFirstSP.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnFirstSP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/first.png"))); // NOI18N
@@ -485,7 +491,7 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
                 btnFirstSPActionPerformed(evt);
             }
         });
-        jPanel2.add(btnFirstSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 300, 40, 40));
+        jPanel2.add(btnFirstSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 290, 40, 40));
 
         btnPrevSP.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnPrevSP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/prev.png"))); // NOI18N
@@ -495,7 +501,7 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
                 btnPrevSPActionPerformed(evt);
             }
         });
-        jPanel2.add(btnPrevSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 300, 40, 40));
+        jPanel2.add(btnPrevSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 290, 40, 40));
 
         btnNextSP.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnNextSP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/next.png"))); // NOI18N
@@ -505,7 +511,7 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
                 btnNextSPActionPerformed(evt);
             }
         });
-        jPanel2.add(btnNextSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 300, 40, 40));
+        jPanel2.add(btnNextSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 290, 40, 40));
 
         btnLastSP.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnLastSP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/last.png"))); // NOI18N
@@ -515,28 +521,28 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
                 btnLastSPActionPerformed(evt);
             }
         });
-        jPanel2.add(btnLastSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 300, 40, 40));
+        jPanel2.add(btnLastSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 290, 40, 40));
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel14.setText("Mã sản phẩm:");
-        jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 100, 30));
+        jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 100, 30));
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel15.setText("Đơn giá:");
-        jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 100, 30));
+        jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 100, 30));
 
         buttonGroup1.add(rdoConHang);
         rdoConHang.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         rdoConHang.setText("Còn hàng");
-        jPanel2.add(rdoConHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, -1, -1));
+        jPanel2.add(rdoConHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 250, -1, -1));
 
         buttonGroup1.add(rdoHetHang);
         rdoHetHang.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         rdoHetHang.setText("Hết hàng");
         rdoHetHang.setEnabled(false);
-        jPanel2.add(rdoHetHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 270, -1, -1));
+        jPanel2.add(rdoHetHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 250, -1, -1));
 
         lblHinhSP.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         lblHinhSP.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -553,36 +559,33 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblHinhSP, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+            .addComponent(lblHinhSP, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
         );
 
-        jPanel2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 90, 170, 180));
+        jPanel2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 30, 170, 170));
 
         taMoTa.setColumns(20);
         taMoTa.setRows(5);
         jScrollPane3.setViewportView(taMoTa);
 
-        jPanel2.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 50, 230, 220));
+        jPanel2.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 30, 230, 220));
 
         jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel16.setText("Loại:");
-        jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 100, 30));
+        jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 100, 30));
 
-        cboNhaPhanPhoi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel2.add(cboNhaPhanPhoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 180, 30));
-
-        txtMaNV.setEditable(false);
-        jPanel2.add(txtMaNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 50, 200, 30));
-
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel13.setText("Nhân viên");
-        jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, 140, 30));
+        cboNhaPP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboNhaPP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboNhaPPActionPerformed(evt);
+            }
+        });
+        jPanel2.add(cboNhaPP, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, 180, 30));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel5.setText("VNĐ");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 190, 30, 30));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 170, 30, 30));
 
         jTabbedPane1.addTab("SẢN PHẨM", jPanel2);
 
@@ -614,55 +617,113 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnLastPPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastPPActionPerformed
+    private void lblHinhSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHinhSPMouseClicked
         // TODO add your handling code here:
-        this.LastNPP();
-    }//GEN-LAST:event_btnLastPPActionPerformed
+        this.selectImageSP();
+    }//GEN-LAST:event_lblHinhSPMouseClicked
 
-    private void btnFindPPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindPPActionPerformed
+    private void btnLastSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastSPActionPerformed
         // TODO add your handling code here:
-        this.fillTableNhaPP();
-    }//GEN-LAST:event_btnFindPPActionPerformed
-
-    private void btnFirstPPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstPPActionPerformed
-        // TODO add your handling code here:
-        this.firstNPP();
-    }//GEN-LAST:event_btnFirstPPActionPerformed
-
-    private void btnPrevPPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevPPActionPerformed
-        // TODO add your handling code here:
-        this.PrevNPP();
-    }//GEN-LAST:event_btnPrevPPActionPerformed
-
-    private void btnNextPPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextPPActionPerformed
-        // TODO add your handling code here:
-        this.NextNPP();
-    }//GEN-LAST:event_btnNextPPActionPerformed
-
-    private void btnFindSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindSPActionPerformed
-        // TODO add your handling code here:
-        this.fillTableSP();
-    }//GEN-LAST:event_btnFindSPActionPerformed
-
-    private void btnFirstSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstSPActionPerformed
-        // TODO add your handling code here:
-        this.firstSP();
-    }//GEN-LAST:event_btnFirstSPActionPerformed
-
-    private void btnPrevSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevSPActionPerformed
-        // TODO add your handling code here:
-        this.PrevSP();
-    }//GEN-LAST:event_btnPrevSPActionPerformed
+        this.LastSP();
+    }//GEN-LAST:event_btnLastSPActionPerformed
 
     private void btnNextSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextSPActionPerformed
         // TODO add your handling code here:
         this.NextSP();
     }//GEN-LAST:event_btnNextSPActionPerformed
 
-    private void btnLastSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastSPActionPerformed
+    private void btnPrevSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevSPActionPerformed
         // TODO add your handling code here:
-        this.LastSP();
-    }//GEN-LAST:event_btnLastSPActionPerformed
+        this.PrevSP();
+    }//GEN-LAST:event_btnPrevSPActionPerformed
+
+    private void btnFirstSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstSPActionPerformed
+        // TODO add your handling code here:
+        this.firstSP();
+    }//GEN-LAST:event_btnFirstSPActionPerformed
+
+    private void btnFindSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindSPActionPerformed
+        // TODO add your handling code here:
+        this.fillTableSP();
+    }//GEN-LAST:event_btnFindSPActionPerformed
+
+    private void btnClearSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearSPActionPerformed
+        // TODO add your handling code here:
+        this.clearSP();
+    }//GEN-LAST:event_btnClearSPActionPerformed
+
+    private void btnDelSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelSPActionPerformed
+        // TODO add your handling code here:
+        this.deleteSP();
+    }//GEN-LAST:event_btnDelSPActionPerformed
+
+    private void btnUpdateSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateSPActionPerformed
+        // TODO add your handling code here:
+        this.updateSP();
+    }//GEN-LAST:event_btnUpdateSPActionPerformed
+
+    private void btnThemSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemSPActionPerformed
+        // TODO add your handling code here:
+        this.insertSP();
+    }//GEN-LAST:event_btnThemSPActionPerformed
+
+    private void tblSanPhamMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMousePressed
+        // TODO add your handling code here:
+        this.row = tblSanPham.rowAtPoint(evt.getPoint());
+        if (this.row >= 0) {
+            this.editSP();
+        }
+    }//GEN-LAST:event_tblSanPhamMousePressed
+
+    private void btnClearPPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearPPActionPerformed
+        // TODO add your handling code here:
+        this.clearNPP();
+    }//GEN-LAST:event_btnClearPPActionPerformed
+
+    private void btnDelPPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelPPActionPerformed
+        // TODO add your handling code here:
+        this.deleteNPP();
+    }//GEN-LAST:event_btnDelPPActionPerformed
+
+    private void btnUpdatePPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdatePPActionPerformed
+        // TODO add your handling code here:
+        this.updateNPP();
+    }//GEN-LAST:event_btnUpdatePPActionPerformed
+
+    private void btnThemPPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemPPActionPerformed
+        // TODO add your handling code here:
+        this.insertNPP();
+    }//GEN-LAST:event_btnThemPPActionPerformed
+
+    private void btnLastPPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastPPActionPerformed
+        // TODO add your handling code here:
+        this.LastNPP();
+    }//GEN-LAST:event_btnLastPPActionPerformed
+
+    private void btnNextPPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextPPActionPerformed
+        // TODO add your handling code here:
+        this.NextNPP();
+    }//GEN-LAST:event_btnNextPPActionPerformed
+
+    private void btnPrevPPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevPPActionPerformed
+        // TODO add your handling code here:
+        this.PrevNPP();
+    }//GEN-LAST:event_btnPrevPPActionPerformed
+
+    private void btnFirstPPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstPPActionPerformed
+        // TODO add your handling code here:
+        this.firstNPP();
+    }//GEN-LAST:event_btnFirstPPActionPerformed
+
+    private void btnFindPPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindPPActionPerformed
+        // TODO add your handling code here:
+        this.fillTableNhaPP();
+    }//GEN-LAST:event_btnFindPPActionPerformed
+
+    private void lblHinhNPPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHinhNPPMouseClicked
+        // TODO add your handling code here:
+        this.selectImageNPP();
+    }//GEN-LAST:event_lblHinhNPPMouseClicked
 
     private void tblNhaPhanPhoiMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNhaPhanPhoiMousePressed
         // TODO add your handling code here:
@@ -672,63 +733,23 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_tblNhaPhanPhoiMousePressed
 
-    private void btnThemPPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemPPActionPerformed
+    private void cboNhaPPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboNhaPPActionPerformed
         // TODO add your handling code here:
-        this.insertNPP();
-    }//GEN-LAST:event_btnThemPPActionPerformed
-
-    private void btnUpdatePPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdatePPActionPerformed
-        // TODO add your handling code here:
-        this.updateNPP();
-    }//GEN-LAST:event_btnUpdatePPActionPerformed
-
-    private void btnDelPPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelPPActionPerformed
-        // TODO add your handling code here:
-        this.deleteNPP();
-    }//GEN-LAST:event_btnDelPPActionPerformed
-
-    private void btnClearPPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearPPActionPerformed
-        // TODO add your handling code here:
-        this.clearNPP();
-    }//GEN-LAST:event_btnClearPPActionPerformed
-
-    private void lblHinhNPPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHinhNPPMouseClicked
-        // TODO add your handling code here:
-        this.selectImageNPP();
-    }//GEN-LAST:event_lblHinhNPPMouseClicked
-
-    private void btnThemSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemSPActionPerformed
-        // TODO add your handling code here:
-        this.insertSP();
-    }//GEN-LAST:event_btnThemSPActionPerformed
-
-    private void btnUpdateSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateSPActionPerformed
-        // TODO add your handling code here:
-        this.updateSP();
-    }//GEN-LAST:event_btnUpdateSPActionPerformed
-
-    private void btnDelSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelSPActionPerformed
-        // TODO add your handling code here:
-        this.deleteSP();
-    }//GEN-LAST:event_btnDelSPActionPerformed
-
-    private void btnClearSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearSPActionPerformed
-        // TODO add your handling code here:
-        this.clearSP();
-    }//GEN-LAST:event_btnClearSPActionPerformed
-
-    private void lblHinhSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHinhSPMouseClicked
-        // TODO add your handling code here:
-        this.selectImageSP();
-    }//GEN-LAST:event_lblHinhSPMouseClicked
-
-    private void tblSanPhamMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMousePressed
-        // TODO add your handling code here:
-        this.row = tblSanPham.rowAtPoint(evt.getPoint());
-        if (this.row >= 0) {
-            this.editSP();
+        int vitri = cboNhaPP.getSelectedIndex();
+        if (vitri == 0) {
+            txtMaPP.setText("NPP1");
+        } else if (vitri == 1) {
+            txtMaPP.setText("NPP2");
+        } else if (vitri == 2) {
+            txtMaPP.setText("NPP3");
+        } else if (vitri == 3) {
+            txtMaPP.setText("NPP4");
+        } else if (vitri == 4) {
+            txtMaPP.setText("NPP5");
+        } else if (vitri == 5) {
+            txtMaPP.setText("NPP6");
         }
-    }//GEN-LAST:event_tblSanPhamMousePressed
+    }//GEN-LAST:event_cboNhaPPActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -752,7 +773,7 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnUpdateSP;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cboLoai;
-    private javax.swing.JComboBox<String> cboNhaPhanPhoi;
+    private javax.swing.JComboBox<String> cboNhaPP;
     private javax.swing.JFileChooser fileChooserNPP;
     private javax.swing.JFileChooser fileChooserSP;
     private javax.swing.JLabel jLabel1;
@@ -793,7 +814,7 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtFindNPP;
     private javax.swing.JTextField txtFindSP;
     private javax.swing.JTextField txtMaNPP;
-    private javax.swing.JTextField txtMaNV;
+    private javax.swing.JTextField txtMaPP;
     private javax.swing.JTextField txtMaSP;
     private javax.swing.JTextField txtNSXPP;
     private javax.swing.JTextField txtSoLuongSP;
@@ -829,6 +850,8 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         if (modelNPP.getHinh() != null) {
             Image img = XImage.readLogo(modelNPP.getHinh()).getImage().getScaledInstance(lblHinhNPP.getWidth(), lblHinhNPP.getHeight(), Image.SCALE_SMOOTH);
             lblHinhNPP.setIcon(new ImageIcon(img));
+        } else {
+            lblHinhNPP.setIcon(null);
         }
     }
 
@@ -987,7 +1010,7 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
                     sp.getMaSP(),
                     sp.getTenSP(),
                     sp.getMaNPP(),
-                    sp.getMaNV(),
+                    sp.getTenNPP(),
                     sp.getSoLuong(),
                     sp.getDonGia(),
                     sp.getLoai(),
@@ -1006,8 +1029,8 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         txtMaSP.setText(modelSP.getMaSP());
         txtTenSP.setText(modelSP.getTenSP());
         NhaPhanPhoi npp = daoNPP.findById(modelSP.getMaNPP());
-        cboNhaPhanPhoi.setSelectedItem(npp);
-        txtMaNV.setText(Auth.user.getTenNV());
+        cboNhaPP.setSelectedItem(npp.getTenNPP());
+        txtMaPP.setText(npp.getMaNPP());
         txtSoLuongSP.setText(modelSP.getSoLuong() + "");
         txtDonGiaSP.setText(modelSP.getDonGia() + "");
         cboLoai.setSelectedItem(modelSP.getLoai());
@@ -1018,6 +1041,8 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         if (modelSP.getHinh() != null) {
             Image imgSP = XImage.readLogo(modelSP.getHinh()).getImage().getScaledInstance(170, 180, Image.SCALE_SMOOTH);
             lblHinhSP.setIcon(new ImageIcon(imgSP));
+        } else {
+            lblHinhSP.setIcon(null);
         }
     }
 
@@ -1025,9 +1050,8 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         SanPham modelSP = new SanPham();
         modelSP.setMaSP(txtMaSP.getText());
         modelSP.setTenSP(txtTenSP.getText());
-        NhaPhanPhoi npp = (NhaPhanPhoi) cboNhaPhanPhoi.getSelectedItem();
-        modelSP.setMaNPP(npp.getMaNPP());
-        modelSP.setMaNV(txtMaNV.getText());
+        modelSP.setTenNPP(cboNhaPP.getSelectedItem()+ "");
+        modelSP.setMaNPP(txtMaPP.getText());
         modelSP.setSoLuong(Integer.parseInt(txtSoLuongSP.getText()));
         modelSP.setDonGia(Long.parseLong(txtDonGiaSP.getText()));
         modelSP.setLoai(cboLoai.getSelectedItem() + "");
@@ -1090,12 +1114,16 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
     }
 
     void clearSP() {
-        this.setFormSP(new SanPham());
-        txtMaNV.setText("");
-        cboNhaPhanPhoi.setSelectedIndex(0);
+        txtMaSP.setText("");
+        txtTenSP.setText("");
+        cboNhaPP.setSelectedIndex(0);
+        txtSoLuongSP.setText("0");
+        txtDonGiaSP.setText("0");
         cboLoai.setSelectedIndex(0);
         buttonGroup1.clearSelection();
         lblHinhSP.setIcon(null);
+        lblHinhSP.setText(null);
+        taMoTa.setText("");
         this.updateStatusSP();
         row = - 1;
         updateStatusSP();
@@ -1211,16 +1239,15 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
     }
 
     void fillComBoBox() {
-        DefaultComboBoxModel model = (DefaultComboBoxModel) cboNhaPhanPhoi.getModel();
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cboNhaPP.getModel();
         model.removeAllElements();
         try {
             List<NhaPhanPhoi> list = daoNPP.select();
             for (NhaPhanPhoi npp : list) {
-                model.addElement(npp);
+                model.addElement(npp.getTenNPP());
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Lỗi truy vẫn dữ liệu");;
+            JOptionPane.showMessageDialog(this, "Không fill lên được ComboBox");;
         }
     }
-
 }

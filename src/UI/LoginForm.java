@@ -9,6 +9,7 @@ import DAO.NhanVienDAO;
 import ENTITY.NhanVien;
 import ENTITY.RememberAccount;
 import Helper.Auth;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 /**
@@ -111,7 +112,13 @@ public class LoginForm extends javax.swing.JDialog {
         jPanel2.add(lblUserName, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
 
         txtUser.setForeground(new java.awt.Color(255, 255, 255));
+        txtUser.setText("NV01");
         txtUser.setBorder(null);
+        txtUser.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtUserKeyPressed(evt);
+            }
+        });
         jPanel2.add(txtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 280, 20));
 
         lblPassWord.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -120,7 +127,13 @@ public class LoginForm extends javax.swing.JDialog {
         jPanel2.add(lblPassWord, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 82, -1));
 
         txtPass.setForeground(new java.awt.Color(255, 255, 255));
+        txtPass.setText("123456");
         txtPass.setBorder(null);
+        txtPass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPassKeyPressed(evt);
+            }
+        });
         jPanel2.add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 280, 20));
 
         Disable.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -253,6 +266,70 @@ public class LoginForm extends javax.swing.JDialog {
         // TODO add your handling code here:
         new QuenMatKhau(null, true).setVisible(true);
     }//GEN-LAST:event_jLabel10MousePressed
+
+    private void txtPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPassKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String user = txtUser.getText();
+            String pass = new String(txtPass.getPassword());
+            NhanVien nv = dao.selectById(user);
+            if (user.equalsIgnoreCase("")) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập tài khoản");
+            } else if (pass.equalsIgnoreCase("")) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập mật khẩu");
+            } else if (nv == null) {
+                JOptionPane.showMessageDialog(this, "Tài khoản hoặc mật khẩu không tồn tại");
+            } else {
+                if (nv.getMaNV().equalsIgnoreCase(user) && nv.getMatKhau().equalsIgnoreCase(pass)) {
+                    if (isRemember) {
+                        AccountDAO.updateRememberAccount(nv.getMaNV(), nv.getMatKhau());
+                    } else {
+                        AccountDAO.updateRememberAccount("", "");
+                    }
+                    Auth.user = nv;
+                    String vaitro = nv.isVaiTro() ? "Quản lý" : "Nhân viên";
+                    String ten = nv.getTenNV();
+                    JOptionPane.showMessageDialog(this, "" + vaitro.toUpperCase() + " " + ten.toUpperCase() + " ĐÃ ĐĂNG NHẬP");
+                    this.dispose();
+                    new LoadingForm(null, true).setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Tài khoản hoặc mật khẩu không đúng");
+                }
+            }
+        }
+    }//GEN-LAST:event_txtPassKeyPressed
+
+    private void txtUserKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUserKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String user = txtUser.getText();
+            String pass = new String(txtPass.getPassword());
+            NhanVien nv = dao.selectById(user);
+            if (user.equalsIgnoreCase("")) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập tài khoản");
+            } else if (pass.equalsIgnoreCase("")) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập mật khẩu");
+            } else if (nv == null) {
+                JOptionPane.showMessageDialog(this, "Tài khoản hoặc mật khẩu không tồn tại");
+            } else {
+                if (nv.getMaNV().equalsIgnoreCase(user) && nv.getMatKhau().equalsIgnoreCase(pass)) {
+                    if (isRemember) {
+                        AccountDAO.updateRememberAccount(nv.getMaNV(), nv.getMatKhau());
+                    } else {
+                        AccountDAO.updateRememberAccount("", "");
+                    }
+                    Auth.user = nv;
+                    String vaitro = nv.isVaiTro() ? "Quản lý" : "Nhân viên";
+                    String ten = nv.getTenNV();
+                    JOptionPane.showMessageDialog(this, "" + vaitro.toUpperCase() + " " + ten.toUpperCase() + " ĐÃ ĐĂNG NHẬP");
+                    this.dispose();
+                    new LoadingForm(null, true).setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Tài khoản hoặc mật khẩu không đúng");
+                }
+            }
+        }
+    }//GEN-LAST:event_txtUserKeyPressed
 
     /**
      * @param args the command line arguments

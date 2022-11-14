@@ -41,7 +41,7 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
     public JTextField txt1, txt2;
     DefaultTableModel tblModel, tblModelDanhSach, tblModelHD;
     int index = -1;
-      SimpleDateFormat ft = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+    SimpleDateFormat ft = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
     Connection cnn;
     Statement st;
 
@@ -273,10 +273,8 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
 
     private void tblSP1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSP1MousePressed
         // TODO add your handling code here:
-
         try {
             index = tblSP1.getSelectedRow();
-
             String sql = "select MAX(STTHD) from HoaDon";
             Statement st = cnn.createStatement();
             ResultSet rs = st.executeQuery(sql);
@@ -288,9 +286,7 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
                     stt++;
                     txtMaHD.setText("HD" + stt);
                 }
-
             }
-
             insert(index);
             LoadDataToTableHoaDonChiTiet();
             tongtien();
@@ -301,11 +297,9 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
 
     private void txtMaKHCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtMaKHCaretUpdate
         // TODO add your handling code here:
-
         try {
             String sql = ("select Tenkh from khachhang where MaKH=?");
             PreparedStatement ps = cnn.prepareStatement(sql);
-
             ps.setString(1, txtMaKH.getText());
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -376,9 +370,9 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
                 System.out.println("loi" + ex);
             }
         }
-             
+
         try {
-          
+
             Date now = new Date();
             Writer bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("History//" + txtMaHD.getText().trim() + ".txt")));
             bw.write("\t\t\tLAPTOP VN\r\n\r\n");
@@ -399,30 +393,20 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
                 int size = (int) tblModel.getValueAt(i, 2);
                 String price = String.valueOf(tblModel.getValueAt(i, 3));
                 String quantity = String.valueOf(tblModel.getValueAt(i, 4));
-            
                 bw.write((i + 1) + ". " + name + "\r\n\n");
-                bw.write(id + "\t" + size + "\t\t" + quantity + "\t\t" + price + "\t" +  "\r\n\r\n");
+                bw.write(id + "\t" + size + "\t\t" + quantity + "\t\t" + price + "\t" + "\r\n\r\n");
                 quantotal += Integer.parseInt(quantity);
             }
             bw.write("------------------------------------------------------------\r\n");
-          
-
-          
             bw.write("\t\tThành tiền:\t\t\t" + txtThanhTien.getText() + " VNĐ\r\n");
-           
-         
             bw.write("------------------------------------------------------------\r\n");
-           
-           
             bw.write("------------------------------------------------------------\r\n");
             bw.write("Mật khẩu Wifi: motdentam\r\n");
             bw.write("---------------------CÁM ƠN QUÝ KHÁCH!----------------------");
             bw.close();
             //update số ly và chiết khấu vào bảng customer
-            
-            
         } catch (Exception e) {
-            System.out.println("loi in"+e);
+            System.out.println("Lỗi in" + e);
         }
         //Mở file txt
         Runtime run = Runtime.getRuntime();
@@ -532,34 +516,26 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
 
     void insert(int i) {
         try {
-
             String sql = "insert into GioHang values(?,?,?,?,?)";
             PreparedStatement ps = cnn.prepareStatement(sql);
             int line = tblSP1.getRowCount();
-            String soluong1 = JOptionPane.showInputDialog("So luong: ");
-
-            MaSP = tblSP1.getValueAt(tblSP1.getSelectedRow(), 0).toString();
-
+            String soluong1 = JOptionPane.showInputDialog("Số lượng: ");
+            MaSP = tblSP1.getValueAt(tblSP1.getSelectedRow(),0).toString();
             String tensp = (String) tblSP1.getValueAt(i, 1);
             long giasp = (long) tblSP1.getValueAt(i, 2);
-
             ps.setString(1, MaSP);
             ps.setString(2, tensp);
             int soluong = Integer.parseInt(soluong1);
             ps.setInt(3, soluong);
-
             ps.setDouble(4, giasp);
             double thanhtien = giasp * soluong;
             ps.setDouble(5, thanhtien);
             int result = ps.executeUpdate();
             if (result > 0) {
-
-            } else {
-
+                System.out.println("Đã thêm");
             }
-
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Lỗi load table" + ex);
+            
         }
 
     }

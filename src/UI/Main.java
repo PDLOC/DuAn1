@@ -32,9 +32,10 @@ public class Main extends javax.swing.JFrame {
         panelClick = new Color(102, 255, 204);
         init();
         background();
-        NhanVienForm nv = new NhanVienForm();
+        SanPhamForm sp = new SanPhamForm();
         lblUsername.setText(Auth.user.getTenNV());
-        jDesktopPane1.add(nv).setVisible(true);
+        jDesktopPane1.add(sp).setVisible(true);
+        pnlSanPham.setBackground(panelClick);
     }
 
     /**
@@ -98,20 +99,20 @@ public class Main extends javax.swing.JFrame {
                 jLabel1MouseClicked(evt);
             }
         });
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 80, -1));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 80, -1));
 
         lblUsername.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblUsername.setForeground(new java.awt.Color(51, 255, 255));
         lblUsername.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblUsername.setText("jLabel1");
-        jPanel2.add(lblUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 220, 40));
+        jPanel2.add(lblUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 240, 40));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Đổi mật khẩu");
         jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 100, -1));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 100, -1));
 
         ShowKhachHang.setBackground(new java.awt.Color(0, 153, 153));
         ShowKhachHang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -258,25 +259,21 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(pnlHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         ShowHoaDonLayout.setVerticalGroup(
             ShowHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ShowHoaDonLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ShowHoaDonLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(ShowHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(ShowHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(ShowHoaDonLayout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(ShowHoaDonLayout.createSequentialGroup()
-                        .addGroup(ShowHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(ShowHoaDonLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(pnlHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(20, 20, 20))))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(pnlHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(20, 20, 20))
         );
 
         jPanel2.add(ShowHoaDon, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 220, 60));
@@ -460,26 +457,26 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(pnlNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(23, 23, 23))
         );
         ShowNhanVienLayout.setVerticalGroup(
             ShowNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(ShowNhanVienLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ShowNhanVienLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(ShowNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(ShowNhanVienLayout.createSequentialGroup()
+                .addGroup(ShowNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, ShowNhanVienLayout.createSequentialGroup()
                         .addComponent(pnlNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
         jPanel2.add(ShowNhanVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, -1, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 240, 690));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 240, 710));
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -571,15 +568,19 @@ public class Main extends javax.swing.JFrame {
         pnlSanPham.setBackground(panelDefault);
         pnlKhachHang.setBackground(panelDefault);
         pnlHoaDon.setBackground(panelDefault);
-
         pnlThongKe.setBackground(panelClick);
         pnlKetThuc.setBackground(panelDefault);
     }//GEN-LAST:event_ShowThongKeMousePressed
 
     private void ShowThongKeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ShowThongKeMouseClicked
         // TODO add your handling code here:
-        ThongKeForm tk = new ThongKeForm();
-        jDesktopPane1.add(tk).setVisible(true);
+        if (!Auth.isManager()) {
+            JOptionPane.showMessageDialog(this, "Nhân viên không thể xem mục này");
+            pnlThongKe.setBackground(panelDefault);
+        } else {
+            ThongKeForm tk = new ThongKeForm();
+            jDesktopPane1.add(tk).setVisible(true);
+        }
     }//GEN-LAST:event_ShowThongKeMouseClicked
 
     private void ShowKhuyenMaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ShowKhuyenMaiMouseClicked
@@ -614,7 +615,6 @@ public class Main extends javax.swing.JFrame {
         pnlSanPham.setBackground(panelDefault);
         pnlKhachHang.setBackground(panelDefault);
         pnlHoaDon.setBackground(panelDefault);
-
         pnlThongKe.setBackground(panelDefault);
         pnlKetThuc.setBackground(panelClick);
     }//GEN-LAST:event_KetThucMousePressed
@@ -639,15 +639,19 @@ public class Main extends javax.swing.JFrame {
         pnlSanPham.setBackground(panelDefault);
         pnlKhachHang.setBackground(panelDefault);
         pnlHoaDon.setBackground(panelDefault);
-
         pnlThongKe.setBackground(panelDefault);
         pnlKetThuc.setBackground(panelDefault);
     }//GEN-LAST:event_ShowNhanVienMousePressed
 
     private void ShowNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ShowNhanVienMouseClicked
         // TODO add your handling code here:
-        NhanVienForm nv = new NhanVienForm();
-        jDesktopPane1.add(nv).setVisible(true);
+        if (!Auth.isManager()) {
+            JOptionPane.showMessageDialog(this, "Nhân viên không thể xem mục này");
+            pnlNhanVien.setBackground(panelDefault);
+        } else {
+            NhanVienForm nv = new NhanVienForm();
+            jDesktopPane1.add(nv).setVisible(true);
+        }
     }//GEN-LAST:event_ShowNhanVienMouseClicked
 
     /**
@@ -726,7 +730,6 @@ public class Main extends javax.swing.JFrame {
         pnlSanPham.setBackground(panelDefault);
         pnlKhachHang.setBackground(panelDefault);
         pnlHoaDon.setBackground(panelDefault);
-
         pnlThongKe.setBackground(panelDefault);
         pnlKetThuc.setBackground(panelDefault);
     }

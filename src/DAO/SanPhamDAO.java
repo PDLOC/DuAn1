@@ -17,12 +17,12 @@ import java.util.List;
  */
 public class SanPhamDAO {
     public void insert(SanPham model) {
-        String sql = "INSERT INTO SanPham (MaSP, TenSP, MaNPP, MaNV, SoLuong, DonGia, Loai, MoTa, Hinh, TinhTrangHoatDong) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO SanPham (MaSP, TenSP, MaNPP, TenNPP , SoLuong, DonGia, Loai, MoTa, Hinh, TinhTrangHoatDong) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         XJdbc.executeUpdate(sql,
                 model.getMaSP(),
                 model.getTenSP(),
                 model.getMaNPP(),
-                model.getMaNV(),
+                model.getTenNPP(),
                 model.getSoLuong(),
                 model.getDonGia(),
                 model.getLoai(),
@@ -33,11 +33,11 @@ public class SanPhamDAO {
     }
 
     public void update(SanPham model) {
-        String sql = "UPDATE SanPham SET TenSP = ?, MaNPP = ?, MaNV = ?, SoLuong = ?, DonGia = ?, Loai = ?, MoTa = ?, Hinh = ?, TinhTrangHoatDong = ? WHERE MaSP=?";
+        String sql = "UPDATE SanPham SET TenSP = ?, MaNPP = ?, TenNPP = ?, SoLuong = ?, DonGia = ?, Loai = ?, MoTa = ?, Hinh = ?, TinhTrangHoatDong = ? WHERE MaSP=?";
         XJdbc.executeUpdate(sql,
                 model.getTenSP(),
                 model.getMaNPP(),
-                model.getMaNV(),
+                model.getTenNPP(),
                 model.getSoLuong(),
                 model.getDonGia(),
                 model.getLoai(),
@@ -92,7 +92,7 @@ public class SanPhamDAO {
         model.setMaSP(rs.getString("MaSP"));
         model.setTenSP(rs.getString("TenSP"));
         model.setMaNPP(rs.getString("Manpp"));
-        model.setMaNV(rs.getString("MaNV"));
+        model.setTenNPP(rs.getString("TenNPP"));
         model.setSoLuong(rs.getInt("SoLuong"));
         model.setDonGia(rs.getLong("DonGia"));
         model.setLoai(rs.getString("Loai"));

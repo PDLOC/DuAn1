@@ -27,7 +27,7 @@ public class NhaPhanPhoi {
     
     @Override
     public String toString() {
-        return this.TenNPP;
+        return this.MaNPP;
     }
     
     public String getMaNPP() {
