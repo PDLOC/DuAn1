@@ -5,11 +5,14 @@
 package UI;
 
 import DAO.HoaDonChiTietDAO;
+import DAO.hdct1DAO;
 import ENTITY.ChiTietHoaDon;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import ENTITY.HoaDon;
+import java.sql.*;
+import java.text.NumberFormat;
+
 import java.util.List;
+import java.util.Locale;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -20,6 +23,9 @@ import javax.swing.table.DefaultTableModel;
 public class CTHoaDonForm extends javax.swing.JDialog {
 
     DefaultTableModel tblModel;
+    Connection cnn;
+    Statement st;
+    HoaDonChiTietDAO dao1 = new HoaDonChiTietDAO();
 
     /**
      * Creates new form
@@ -29,7 +35,17 @@ public class CTHoaDonForm extends javax.swing.JDialog {
         initComponents();
 
         setLocationRelativeTo(null);
-        fillTable();
+
+        try {
+
+            String url = "jdbc:sqlserver://localhost:1433;databaseName=duan1;encrypt=true;trustServerCertificate=true;";
+            String user = "edu";
+            String pass = "123";
+            cnn = DriverManager.getConnection(url, user, pass);
+            fillTable();
+        } catch (SQLException ex) {
+            System.out.println("loi kn");
+        }
     }
 
     /**
@@ -70,15 +86,20 @@ public class CTHoaDonForm extends javax.swing.JDialog {
 
         tblDanhSach.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Mã Hóa Đơn", "Tên Sản Phẩm", "Số Lượng", "Tổng Tiền"
+                "Mã Hóa Đơn", "Tên Nhân Viên", "Tên Khách Hàng", "Tổng Tiền", "Ngày Lập Hóa Đơn"
             }
         ));
+        tblDanhSach.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblDanhSachMousePressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblDanhSach);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -118,6 +139,44 @@ public class CTHoaDonForm extends javax.swing.JDialog {
         fillTable();
     }//GEN-LAST:event_btntimActionPerformed
 
+    private void tblDanhSachMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDanhSachMousePressed
+        // TODO add your handling code here:
+
+//      int npp=1;
+
+		
+	// tạo 1 NumberFormat để định dạng tiền tệ theo tiêu chuẩn của Việt Nam
+	// đơn vị tiền tệ của Việt Nam là đồng
+	Locale localeVN = new Locale("vi", "VN");
+	NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
+	
+        try {
+            int i = tblDanhSach.getSelectedRow();
+            String mahd = (String) tblDanhSach.getValueAt(i, 0);
+            List<ChiTietHoaDon> list = dao1.selectByKeyword(mahd);
+            String str3 = "Hóa Đơn Chi Tiết", str = "";
+            int str1 = 0;
+            long str2 = 0;
+            for (ChiTietHoaDon ct : list) {
+
+                str+= ct.getTenSP();
+                str1+= ct.getSoLuong();
+                str2+= ct.getTongtien();
+            }
+            JOptionPane.showMessageDialog(null, "Tổng Sản Phẩm Đã :\t " 
+                    + str1 
+                    + "\n" + "Sản Phẩm:\n"
+                    + str + "Tổng Giá Tiền:\t" 
+                    +currencyVN.format(str2),str3,-1);
+          
+      
+        } catch (Exception e) {
+            System.out.println(e);;
+        }
+
+
+    }//GEN-LAST:event_tblDanhSachMousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -151,6 +210,14 @@ public class CTHoaDonForm extends javax.swing.JDialog {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -167,25 +234,28 @@ public class CTHoaDonForm extends javax.swing.JDialog {
     private javax.swing.JTable tblDanhSach;
     private javax.swing.JTextField txtma;
     // End of variables declaration//GEN-END:variables
-     HoaDonChiTietDAO dao = new HoaDonChiTietDAO();
+     hdct1DAO dao = new hdct1DAO();
 
     void fillTable() {
         DefaultTableModel modelct = (DefaultTableModel) tblDanhSach.getModel();
         modelct.setRowCount(0);
         try {
+
             String keyword = txtma.getText();
-            List<ChiTietHoaDon> list = dao.selectByKeyword(keyword);
-            for (ChiTietHoaDon ct : list) {
+            List<HoaDon> list = dao.selectByKeyword(keyword);
+            for (HoaDon ct : list) {
                 Object[] row = {
-                    ct.getMaHD(),
-                    ct.getTenSP(),
-                    ct.getTongtien(),
-                    ct.getNgayTG()
+                    ct.getMahd(),
+                    ct.getTennv(),
+                    ct.getTenkh(),
+                    ct.getThanhtien(),
+                    ct.getNgaymua()
                 };
                 modelct.addRow(row);
             }
+
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e);;
         }
     }
 }

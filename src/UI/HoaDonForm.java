@@ -340,19 +340,19 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
             ps.setString(6, txtThanhTien.getText());
 
             int result = ps.executeUpdate();
-//            if (result > 0) {
-//                JOptionPane.showMessageDialog(this, "Thêm thành công");
-//            }
+            if (result > 0) {
+                JOptionPane.showMessageDialog(this, "Thêm thành công");
+            }
 
         } catch (SQLException ex) {
             System.out.println("" + ex);
         }
         int line = tblDanhSach.getRowCount();
         for (int i = 0; i < line; i++) {
-            String IDProduct = (String) tblSP1.getValueAt(i, 0);
-            String tensp = (String) tblSP1.getValueAt(i, 1);
-            String quantity = String.valueOf(tblModel.getValueAt(i, 4));
-            String soluong = String.valueOf(tblModel.getValueAt(i, 2));
+            String IDProduct = (String) tblDanhSach.getValueAt(i, 0);
+            String tensp = (String) tblDanhSach.getValueAt(i, 1);
+            String quantity = String.valueOf(tblDanhSach.getValueAt(i, 4));
+            String soluong = String.valueOf(tblDanhSach.getValueAt(i, 2));
             try {
                 // TODO add your handling code here:
                 String sql = "insert into HoaDonChiTiet values (?,?,?,?,?,GETDATE())";
@@ -520,7 +520,7 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
             PreparedStatement ps = cnn.prepareStatement(sql);
             int line = tblSP1.getRowCount();
             String soluong1 = JOptionPane.showInputDialog("Số lượng: ");
-            MaSP = tblSP1.getValueAt(tblSP1.getSelectedRow(),0).toString();
+            MaSP = tblSP1.getValueAt(tblSP1.getSelectedRow(), 0).toString();
             String tensp = (String) tblSP1.getValueAt(i, 1);
             long giasp = (long) tblSP1.getValueAt(i, 2);
             ps.setString(1, MaSP);
@@ -535,7 +535,7 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
                 System.out.println("Đã thêm");
             }
         } catch (Exception ex) {
-            
+
         }
 
     }

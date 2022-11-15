@@ -17,41 +17,47 @@ import java.util.List;
  * @author Admin
  */
 public class HoaDonChiTietDAO {
-    
-    public List<ChiTietHoaDon> select() {
-        String sql = "SELECT * FROM HoaDonChiTiet";
+  
+    public List<ChiTietHoaDon> select(){
+        String sql="select*from HoaDonChiTiet";
         return select(sql);
     }
     
-
-    public List<ChiTietHoaDon> selectByKeyword(String keyword) {
-        String sql = "SELECT * FROM HoaDonChiTiet WHERE  MaHD like ? ";
-        return select(sql, "%" + keyword + "%");
+//    public ChiTietHoaDon findById(String manpp){
+//        String sql="SELECT * FROM HoaDonChiTiet WHERE MaHD=?";
+//        List<ChiTietHoaDon> list = select(sql, manpp);
+//        return list.size() > 0 ? list.get(0) : null;
+//    }
+    
+    public List<ChiTietHoaDon> selectByKeyword(String keyword){
+        String sql="select*from HoaDonChiTiet WHERE mahd LIKE ? ";
+        return select(sql,"%"+keyword+"%");
     }
     
-    private List<ChiTietHoaDon> select(String sql, Object... args) {
+    private List<ChiTietHoaDon> select(String sql, Object...args){
         List<ChiTietHoaDon> list = new ArrayList<>();
         try {
             ResultSet rs = null;
             try {
                 rs = XJdbc.executeQuery(sql, args);
-                while (rs.next()) {
-                    ChiTietHoaDon model = readFromResultSet(rs);
-                    list.add(model);                    
+                while(rs.next()){
+                    ChiTietHoaDon model=readFromResultSet(rs);
+                    list.add(model);        
                 }
-            } finally {
+            } 
+            finally{
                 rs.getStatement().getConnection().close();
             }
-        } catch (SQLException ex) {
+        } 
+        catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
         return list;
     }
     
-    private ChiTietHoaDon readFromResultSet(ResultSet rs) throws SQLException {
-        ChiTietHoaDon model = new ChiTietHoaDon();
+    private ChiTietHoaDon readFromResultSet(ResultSet rs) throws SQLException{
+        ChiTietHoaDon model=new ChiTietHoaDon();
         model.setMaHD(rs.getString("MaHD"));
-        model.setMaSP(rs.getString("Masp"));
         model.setTenSP(rs.getString("tensp"));
         model.setSoLuong(rs.getInt("Soluong"));
         model.setTongtien(rs.getLong("tongtien"));

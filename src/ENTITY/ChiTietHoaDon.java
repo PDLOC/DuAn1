@@ -40,7 +40,7 @@ public class ChiTietHoaDon {
     }
 
     public String getMaSP() {
-        return MaSP;
+       return MaSP+"\n";
     }
 
     public void setMaSP(String MaSP) {
@@ -48,7 +48,7 @@ public class ChiTietHoaDon {
     }
 
     public String getTenSP() {
-        return TenSP;
+       return TenSP+"\n";
     }
 
     public void setTenSP(String TenSP) {
