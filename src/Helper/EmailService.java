@@ -1,12 +1,12 @@
 package Helper;
 
 import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import java.io.UnsupportedEncodingException;
 import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.Properties;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 public class EmailService {
     
@@ -24,12 +24,11 @@ public class EmailService {
         props.put("mail.smtp.starttls.enable", "true"); //enable STARTTLS
         props.put("mail.smtp.ssl.protocols", "TLSv1.2");
 
-        Authenticator auth = new Authenticator() {
+        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(fromEmail, password);
             }
-        };
-        Session session = Session.getInstance(props, auth);
+        });
 
         MimeMessage msg = new MimeMessage(session);
         //set message headers

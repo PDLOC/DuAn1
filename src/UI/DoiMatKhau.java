@@ -84,7 +84,7 @@ public class DoiMatKhau extends javax.swing.JDialog {
 
         btnChange.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnChange.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/replace_42px.png"))); // NOI18N
-        btnChange.setText("Confirm");
+        btnChange.setText("Change");
         btnChange.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnChangeActionPerformed(evt);
