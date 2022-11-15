@@ -39,6 +39,7 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
     ArrayList<SanPham> listSP = null;
     DefaultTableModel modelNPP = null;
     ArrayList<NhaPhanPhoi> listNPP = null;
+
     /**
      * Creates new form SanPhamForm
      */
@@ -50,8 +51,6 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         fillComBoBox();
         fillTableNhaPP();
         fillTableSP();
-        getFirsttableNPP();
-        getFirsttableSP();
     }
 
     /**
@@ -68,6 +67,8 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         fileChooserSP = new javax.swing.JFileChooser();
         jLabel13 = new javax.swing.JLabel();
         txtMaPP = new javax.swing.JTextField();
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        mniGiamGiaSP = new javax.swing.JMenuItem();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -136,6 +137,14 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         jLabel13.setText("Mã phân phối:");
 
         txtMaPP.setEditable(false);
+
+        mniGiamGiaSP.setText("Giảm giá từng sản phẩm");
+        mniGiamGiaSP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniGiamGiaSPActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(mniGiamGiaSP);
 
         setPreferredSize(new java.awt.Dimension(990, 690));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -367,6 +376,7 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
                 "MÃ SẢN PHẨM", "TÊN SẢN PHẨM", "MÃ NHÀ PHÂN PHỐI", "TÊN NHÀ PHÂN PHỐI", "SỐ LƯỢNG", "ĐƠN GIÁ", "LOẠI", "MÔ TẢ", "HÌNH", "TÌNH TRẠNG"
             }
         ));
+        tblSanPham.setComponentPopupMenu(jPopupMenu1);
         tblSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 tblSanPhamMousePressed(evt);
@@ -756,6 +766,27 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_cboNhaPPActionPerformed
 
+    private void mniGiamGiaSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniGiamGiaSPActionPerformed
+        // TODO add your handling code here:
+        int index = tblSanPham.getSelectedRow();
+        long oldPrice;
+        double giamgia;
+        long newPrice;
+        String discount = JOptionPane.showInputDialog(this, "Giảm giá theo %", "Giảm giá", JOptionPane.QUESTION_MESSAGE);
+        giamgia = Double.parseDouble(discount) / 100;
+        oldPrice = (long) tblSanPham.getValueAt(index, 5);
+        newPrice = (long) (oldPrice - (oldPrice * giamgia));
+        txtDonGiaSP.setText(newPrice + "");
+        SanPham modelSP = getFormSP();
+        try {
+            daoSP.updateGia(modelSP);
+            this.fillTableSP();
+            JOptionPane.showMessageDialog(this, "Cập nhật thành công!");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Cập nhật thất bại!");
+        }
+    }//GEN-LAST:event_mniGiamGiaSPActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClearPP;
@@ -803,12 +834,14 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblHinhNPP;
     private javax.swing.JLabel lblHinhSP;
+    private javax.swing.JMenuItem mniGiamGiaSP;
     private javax.swing.JPanel pnlChucNangPP;
     private javax.swing.JRadioButton rdoConHang;
     private javax.swing.JRadioButton rdoHetHang;
@@ -1004,21 +1037,20 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         return true;
     }
 
-    public void getFirsttableNPP(){
-        modelNPP = (DefaultTableModel) tblNhaPhanPhoi.getModel();
-        tblNhaPhanPhoi.setRowSelectionInterval(0, 0);
-        int index = tblNhaPhanPhoi.getSelectedRow();
-        txtMaNPP.setText((String)tblNhaPhanPhoi.getValueAt(0, 0));
-        txtTenNhaPP.setText((String)tblNhaPhanPhoi.getValueAt(0, 1));
-        txtNSXPP.setText((String)tblNhaPhanPhoi.getValueAt(0, 2));
-        String hinh = (String) tblNhaPhanPhoi.getValueAt(0, 3);
-        lblHinhNPP.setText(hinh);
-        if (hinh != null) {
-            Image imgSP = XImage.readLogo(hinh).getImage().getScaledInstance(150, 180, Image.SCALE_SMOOTH);
-            lblHinhNPP.setIcon(new ImageIcon(imgSP));
-        }
-    }
-    
+//    public void getFirsttableNPP(){
+//        modelNPP = (DefaultTableModel) tblNhaPhanPhoi.getModel();
+//        tblNhaPhanPhoi.setRowSelectionInterval(0, 0);
+//        int index = tblNhaPhanPhoi.getSelectedRow();
+//        txtMaNPP.setText((String)tblNhaPhanPhoi.getValueAt(0, 0));
+//        txtTenNhaPP.setText((String)tblNhaPhanPhoi.getValueAt(0, 1));
+//        txtNSXPP.setText((String)tblNhaPhanPhoi.getValueAt(0, 2));
+//        String hinh = (String) tblNhaPhanPhoi.getValueAt(0, 3);
+//        lblHinhNPP.setText(hinh);
+//        if (hinh != null) {
+//            Image imgSP = XImage.readLogo(hinh).getImage().getScaledInstance(150, 180, Image.SCALE_SMOOTH);
+//            lblHinhNPP.setIcon(new ImageIcon(imgSP));
+//        }
+//    }
     void fillTableSP() {
         modelSP = (DefaultTableModel) tblSanPham.getModel();
         modelSP.setRowCount(0);
@@ -1070,7 +1102,7 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         SanPham modelSP = new SanPham();
         modelSP.setMaSP(txtMaSP.getText());
         modelSP.setTenSP(txtTenSP.getText());
-        modelSP.setTenNPP(cboNhaPP.getSelectedItem()+ "");
+        modelSP.setTenNPP(cboNhaPP.getSelectedItem() + "");
         modelSP.setMaNPP(txtMaPP.getText());
         modelSP.setSoLuong(Integer.parseInt(txtSoLuongSP.getText()));
         modelSP.setDonGia(Long.parseLong(txtDonGiaSP.getText()));
@@ -1116,7 +1148,6 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Cập nhật thất bại!");
         }
-
     }
 
     void deleteSP() {
@@ -1270,32 +1301,32 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Không fill lên được ComboBox");;
         }
     }
-    
-    public void getFirsttableSP(){
-        modelSP = (DefaultTableModel) tblSanPham.getModel();
-        tblSanPham.setRowSelectionInterval(0, 0);
-        int index = tblSanPham.getSelectedRow();
-        txtMaSP.setText(listSP.get(index).getMaSP());
-        txtTenSP.setText(listSP.get(index).getTenSP());
-        txtSoLuongSP.setText(String.valueOf(listSP.get(index).getSoLuong()));
-        txtDonGiaSP.setText(String.valueOf(listSP.get(index).getDonGia()));
-        for (int i = 0; i < cboLoai.getItemCount(); i++) {
-            if (tblSanPham.getValueAt(0, 6).equals(cboLoai.getItemAt(i))) {
-                cboLoai.setSelectedIndex(i);
-            }
-        }
-        boolean tt = tblSanPham.getValueAt(0, 9).equals("Còn hàng")?true:false;
-        if (tt==true) {
-            rdoConHang.setSelected(tt);
-        }else{
-            rdoHetHang.setSelected(tt);
-        }
-        String hinh = (String) tblSanPham.getValueAt(0, 8);
-        lblHinhSP.setText(hinh);
-        if (hinh != null) {
-            Image imgSP = XImage.readLogo(hinh).getImage().getScaledInstance(170, 180, Image.SCALE_SMOOTH);
-            lblHinhSP.setIcon(new ImageIcon(imgSP));
-        }
-        taMoTa.setText((String) tblSanPham.getValueAt(0, 7));
-    }
+
+//    public void getFirsttableSP(){
+//        modelSP = (DefaultTableModel) tblSanPham.getModel();
+//        tblSanPham.setRowSelectionInterval(0, 0);
+//        int index = tblSanPham.getSelectedRow();
+//        txtMaSP.setText(listSP.get(index).getMaSP());
+//        txtTenSP.setText(listSP.get(index).getTenSP());
+//        txtSoLuongSP.setText(String.valueOf(listSP.get(index).getSoLuong()));
+//        txtDonGiaSP.setText(String.valueOf(listSP.get(index).getDonGia()));
+//        for (int i = 0; i < cboLoai.getItemCount(); i++) {
+//            if (tblSanPham.getValueAt(0, 6).equals(cboLoai.getItemAt(i))) {
+//                cboLoai.setSelectedIndex(i);
+//            }
+//        }
+//        boolean tt = tblSanPham.getValueAt(0, 9).equals("Còn hàng")?true:false;
+//        if (tt==true) {
+//            rdoConHang.setSelected(tt);
+//        }else{
+//            rdoHetHang.setSelected(tt);
+//        }
+//        String hinh = (String) tblSanPham.getValueAt(0, 8);
+//        lblHinhSP.setText(hinh);
+//        if (hinh != null) {
+//            Image imgSP = XImage.readLogo(hinh).getImage().getScaledInstance(170, 180, Image.SCALE_SMOOTH);
+//            lblHinhSP.setIcon(new ImageIcon(imgSP));
+//        }
+//        taMoTa.setText((String) tblSanPham.getValueAt(0, 7));
+//    }
 }
