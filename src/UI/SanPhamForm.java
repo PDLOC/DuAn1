@@ -36,7 +36,9 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
     int row = -1;
     SanPhamDAO daoSP = new SanPhamDAO();
     DefaultTableModel modelSP = null;
-    ArrayList<SanPham> list = null;
+    ArrayList<SanPham> listSP = null;
+    DefaultTableModel modelNPP = null;
+    ArrayList<NhaPhanPhoi> listNPP = null;
     /**
      * Creates new form SanPhamForm
      */
@@ -48,6 +50,7 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         fillComBoBox();
         fillTableNhaPP();
         fillTableSP();
+        getFirsttableNPP();
         getFirsttableSP();
     }
 
@@ -824,7 +827,7 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtTenSP;
     // End of variables declaration//GEN-END:variables
     void fillTableNhaPP() {
-        DefaultTableModel modelNPP = (DefaultTableModel) tblNhaPhanPhoi.getModel();
+        modelNPP = (DefaultTableModel) tblNhaPhanPhoi.getModel();
         modelNPP.setRowCount(0);
         try {
             String keyword = txtFindNPP.getText();
@@ -1001,13 +1004,28 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         return true;
     }
 
+    public void getFirsttableNPP(){
+        modelNPP = (DefaultTableModel) tblNhaPhanPhoi.getModel();
+        tblNhaPhanPhoi.setRowSelectionInterval(0, 0);
+        int index = tblNhaPhanPhoi.getSelectedRow();
+        txtMaNPP.setText((String)tblNhaPhanPhoi.getValueAt(0, 0));
+        txtTenNhaPP.setText((String)tblNhaPhanPhoi.getValueAt(0, 1));
+        txtNSXPP.setText((String)tblNhaPhanPhoi.getValueAt(0, 2));
+        String hinh = (String) tblNhaPhanPhoi.getValueAt(0, 3);
+        lblHinhNPP.setText(hinh);
+        if (hinh != null) {
+            Image imgSP = XImage.readLogo(hinh).getImage().getScaledInstance(150, 180, Image.SCALE_SMOOTH);
+            lblHinhNPP.setIcon(new ImageIcon(imgSP));
+        }
+    }
+    
     void fillTableSP() {
         modelSP = (DefaultTableModel) tblSanPham.getModel();
         modelSP.setRowCount(0);
         try {
             String keyword = txtFindSP.getText();
-            list = (ArrayList<SanPham>) daoSP.selectByKeyword(keyword);
-            for (SanPham sp : list) {
+            listSP = (ArrayList<SanPham>) daoSP.selectByKeyword(keyword);
+            for (SanPham sp : listSP) {
                 Object[] row = {
                     sp.getMaSP(),
                     sp.getTenSP(),
@@ -1257,10 +1275,10 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         modelSP = (DefaultTableModel) tblSanPham.getModel();
         tblSanPham.setRowSelectionInterval(0, 0);
         int index = tblSanPham.getSelectedRow();
-        txtMaSP.setText(list.get(index).getMaSP());
-        txtTenSP.setText(list.get(index).getTenSP());
-        txtSoLuongSP.setText(String.valueOf(list.get(index).getSoLuong()));
-        txtDonGiaSP.setText(String.valueOf(list.get(index).getDonGia()));
+        txtMaSP.setText(listSP.get(index).getMaSP());
+        txtTenSP.setText(listSP.get(index).getTenSP());
+        txtSoLuongSP.setText(String.valueOf(listSP.get(index).getSoLuong()));
+        txtDonGiaSP.setText(String.valueOf(listSP.get(index).getDonGia()));
         for (int i = 0; i < cboLoai.getItemCount(); i++) {
             if (tblSanPham.getValueAt(0, 6).equals(cboLoai.getItemAt(i))) {
                 cboLoai.setSelectedIndex(i);
@@ -1271,6 +1289,12 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
             rdoConHang.setSelected(tt);
         }else{
             rdoHetHang.setSelected(tt);
+        }
+        String hinh = (String) tblSanPham.getValueAt(0, 8);
+        lblHinhSP.setText(hinh);
+        if (hinh != null) {
+            Image imgSP = XImage.readLogo(hinh).getImage().getScaledInstance(170, 180, Image.SCALE_SMOOTH);
+            lblHinhSP.setIcon(new ImageIcon(imgSP));
         }
         taMoTa.setText((String) tblSanPham.getValueAt(0, 7));
     }

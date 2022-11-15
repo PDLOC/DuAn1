@@ -661,8 +661,11 @@ public class Main extends javax.swing.JFrame {
 
     private void lblDoiMatKhauMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDoiMatKhauMousePressed
         // TODO add your handling code here:
-        this.dispose();
-        new DoiMatKhau(this, true).setVisible(true);
+        int choice = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn đổi mật khẩu ?", "Đổi mật khẩu", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (choice == JOptionPane.YES_OPTION) {
+            this.dispose();
+            new DoiMatKhau(this, true).setVisible(true);
+        }
     }//GEN-LAST:event_lblDoiMatKhauMousePressed
 
     /**

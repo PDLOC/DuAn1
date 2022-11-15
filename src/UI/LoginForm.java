@@ -30,6 +30,7 @@ public class LoginForm extends javax.swing.JDialog {
         initComponents();
         txtUser.setBackground(new java.awt.Color(0, 0, 0, 1));
         txtPass.setBackground(new java.awt.Color(0, 0, 0, 1));
+        loadRememberAccount();
     }
 
     /**
@@ -112,7 +113,6 @@ public class LoginForm extends javax.swing.JDialog {
         jPanel2.add(lblUserName, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
 
         txtUser.setForeground(new java.awt.Color(255, 255, 255));
-        txtUser.setText("NV01");
         txtUser.setBorder(null);
         txtUser.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -127,7 +127,6 @@ public class LoginForm extends javax.swing.JDialog {
         jPanel2.add(lblPassWord, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 82, -1));
 
         txtPass.setForeground(new java.awt.Color(255, 255, 255));
-        txtPass.setText("123456");
         txtPass.setBorder(null);
         txtPass.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
