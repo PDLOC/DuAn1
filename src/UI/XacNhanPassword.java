@@ -10,13 +10,16 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import Helper.ResetPassword;
+import java.awt.event.KeyEvent;
 
 /**
  *
- * @author 
+ * @author
  */
 public class XacNhanPassword extends javax.swing.JDialog {
+
     NhanVienDAO dao = new NhanVienDAO();
+
     /**
      * Creates new form VerifyJDialog
      */
@@ -29,21 +32,30 @@ public class XacNhanPassword extends javax.swing.JDialog {
     private void changePassword() {
         String manv = ResetPassword.userName;
         String password = new String(txtNewPass.getPassword());
-        String conPassword = new String(txtConfirmPass.getPassword());
+        String confPassword = new String(txtConfirmPass.getPassword());
         String code = new String(txtCode.getPassword());
 //        User us = LoginController.getUser(manv);
         NhanVien nv = dao.selectById(manv);
-        if (nv == null) {
+        if (txtNewPass.getText().equalsIgnoreCase("")) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập PASS mới !");
+        } else if (txtConfirmPass.getText().equalsIgnoreCase("")) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập PASS !");
+        } else if (txtCode.getText().equalsIgnoreCase("")) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập CODE !");
+        } else if (nv == null) {
             JOptionPane.showMessageDialog(this, "Lỗi");
-        } else {
+        } else if (txtNewPass.getText().equalsIgnoreCase(txtConfirmPass.getText())) {
             if (nv.getCode().equals(code)) {
 //                LoginController.resetPassword(password, manv);
                 dao.resetPassword(password, manv);
+                JOptionPane.showMessageDialog(this, "Xác nhận thành công !");
                 this.dispose();
-                new LoginForm(null,true).setVisible(true);
+                new Main().setVisible(true);
             } else {
-                JOptionPane.showMessageDialog(this, "Code sai");
+                JOptionPane.showMessageDialog(this, "Code sai !");
             }
+        } else {
+            JOptionPane.showMessageDialog(this, "Không trùng PASS mới tạo!");
         }
     }
 
@@ -56,51 +68,41 @@ public class XacNhanPassword extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         lblNewPass = new javax.swing.JLabel();
-        txtNewPass = new javax.swing.JPasswordField();
         lblConfirmPass = new javax.swing.JLabel();
         txtConfirmPass = new javax.swing.JPasswordField();
+        btnExit = new javax.swing.JButton();
+        btnConfirm = new javax.swing.JButton();
+        txtNewPass = new javax.swing.JPasswordField();
         lblConfirmPass1 = new javax.swing.JLabel();
         txtCode = new javax.swing.JPasswordField();
         jPanel4 = new javax.swing.JPanel();
         lblTitle = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        btnExit = new javax.swing.JButton();
-        btnConfirm = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("VERIFY");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblNewPass.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblNewPass.setText("New Password");
-        getContentPane().add(lblNewPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 60, 111, -1));
-        getContentPane().add(txtNewPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 382, -1));
-
-        lblConfirmPass.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblConfirmPass.setText("Confirm Password");
-        getContentPane().add(lblConfirmPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 129, 130, -1));
-        getContentPane().add(txtConfirmPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 152, 382, -1));
-
-        lblConfirmPass1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblConfirmPass1.setText("Verify Code");
-        getContentPane().add(lblConfirmPass1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 187, 111, -1));
-        getContentPane().add(txtCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 216, 382, -1));
-
-        jPanel4.setBackground(new java.awt.Color(0, 102, 102));
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        lblTitle.setForeground(new java.awt.Color(255, 255, 255));
-        lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitle.setText("Verify Code");
-        jPanel4.add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, 275, 50));
-
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 410, 50));
-
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        lblNewPass.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblNewPass.setText("New Password");
+        jPanel1.add(lblNewPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 111, 30));
+
+        lblConfirmPass.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblConfirmPass.setText("Confirm Password");
+        jPanel1.add(lblConfirmPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 130, 30));
+
+        txtConfirmPass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtConfirmPassKeyPressed(evt);
+            }
+        });
+        jPanel1.add(txtConfirmPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 382, 30));
+
+        btnExit.setBackground(new java.awt.Color(204, 204, 204));
         btnExit.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/close_40px.png"))); // NOI18N
         btnExit.setText("Exit");
@@ -109,8 +111,9 @@ public class XacNhanPassword extends javax.swing.JDialog {
                 btnExitActionPerformed(evt);
             }
         });
-        jPanel1.add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 210, -1, 40));
+        jPanel1.add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 220, -1, 40));
 
+        btnConfirm.setBackground(new java.awt.Color(204, 204, 204));
         btnConfirm.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnConfirm.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/confirm.png"))); // NOI18N
         btnConfirm.setText("Confirm");
@@ -119,9 +122,38 @@ public class XacNhanPassword extends javax.swing.JDialog {
                 btnConfirmActionPerformed(evt);
             }
         });
-        jPanel1.add(btnConfirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 210, 130, 40));
+        jPanel1.add(btnConfirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, 130, 40));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 420, 270));
+        txtNewPass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNewPassKeyPressed(evt);
+            }
+        });
+        jPanel1.add(txtNewPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 382, 30));
+
+        lblConfirmPass1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblConfirmPass1.setText("Verify Code");
+        jPanel1.add(lblConfirmPass1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 111, 30));
+
+        txtCode.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCodeKeyPressed(evt);
+            }
+        });
+        jPanel1.add(txtCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 382, 30));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 420, 280));
+
+        jPanel4.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblTitle.setForeground(new java.awt.Color(255, 255, 255));
+        lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitle.setText("Verify Code");
+        jPanel4.add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 275, 50));
+
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 50));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -132,7 +164,30 @@ public class XacNhanPassword extends javax.swing.JDialog {
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         // TODO add your handling code here:
+        this.dispose();
+        new Main().setVisible(true);
     }//GEN-LAST:event_btnExitActionPerformed
+
+    private void txtCodeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodeKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            changePassword();
+        }
+    }//GEN-LAST:event_txtCodeKeyPressed
+
+    private void txtNewPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNewPassKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            changePassword();
+        }
+    }//GEN-LAST:event_txtNewPassKeyPressed
+
+    private void txtConfirmPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtConfirmPassKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            changePassword();
+        }
+    }//GEN-LAST:event_txtConfirmPassKeyPressed
 
     /**
      * @param args the command line arguments

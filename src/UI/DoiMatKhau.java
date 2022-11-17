@@ -226,7 +226,6 @@ public class DoiMatKhau extends javax.swing.JDialog {
             dao.update(Auth.user);
             JOptionPane.showMessageDialog(this, "Đổi mật khẩu thành công");
             this.dispose();
-            new Main().setVisible(true);
         }
     }
     

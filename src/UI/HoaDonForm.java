@@ -239,7 +239,7 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
                 txtMaKHCaretUpdate(evt);
             }
         });
-        getContentPane().add(txtMaKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 130, 104, 20));
+        getContentPane().add(txtMaKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 130, 104, -1));
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel5.setText("Mã Khách Hàng");

@@ -68,8 +68,8 @@ public class NhanVienDAO {
     }
 
     public List<NhanVien> selectByKeyword(String keyword) {
-        String sql = "SELECT * FROM NhanVien WHERE Manv LIKE ? ";
-        return select(sql, "%" + keyword + "%");
+        String sql = "SELECT * FROM NhanVien WHERE Manv LIKE ? OR TenNV LIKE ? order by Convert( int,Substring(manv,Patindex('%[0-9]%',manv),len(manv)))";
+        return select(sql, "%" + keyword + "%", "%" + keyword + "%");
     }
 
     private List<NhanVien> select(String sql, Object... args) {

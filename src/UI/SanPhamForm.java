@@ -13,6 +13,7 @@ import Helper.Auth;
 import Helper.XDate;
 import Helper.XImage;
 import java.awt.Image;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -220,6 +221,12 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("Tìm kiếm:");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 90, 30));
+
+        txtFindNPP.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtFindNPPKeyPressed(evt);
+            }
+        });
         jPanel1.add(txtFindNPP, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 260, 470, 30));
 
         btnFindPP.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -486,6 +493,12 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("Tìm kiếm:");
         jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 90, 30));
+
+        txtFindSP.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtFindSPKeyPressed(evt);
+            }
+        });
         jPanel2.add(txtFindSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 300, 470, 30));
 
         btnFindSP.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -786,6 +799,20 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Cập nhật thất bại!");
         }
     }//GEN-LAST:event_mniGiamGiaSPActionPerformed
+
+    private void txtFindNPPKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFindNPPKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            this.fillTableNhaPP();
+        }
+    }//GEN-LAST:event_txtFindNPPKeyPressed
+
+    private void txtFindSPKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFindSPKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            this.fillTableSP();
+        }
+    }//GEN-LAST:event_txtFindSPKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

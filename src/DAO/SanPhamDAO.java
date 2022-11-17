@@ -16,6 +16,7 @@ import java.util.List;
  * @author Admin
  */
 public class SanPhamDAO {
+
     public void insert(SanPham model) {
         String sql = "INSERT INTO SanPham (MaSP, TenSP, MaNPP, TenNPP , SoLuong, DonGia, Loai, MoTa, Hinh, TinhTrangHoatDong) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         XJdbc.executeUpdate(sql,
@@ -29,7 +30,7 @@ public class SanPhamDAO {
                 model.getMoTa(),
                 model.getHinh(),
                 model.isTinhTrang());
-                
+
     }
 
     public void update(SanPham model) {
@@ -46,7 +47,7 @@ public class SanPhamDAO {
                 model.isTinhTrang(),
                 model.getMaSP());
     }
-    
+
     public void updateGia(SanPham model) {
         String sql = "UPDATE SanPham SET DonGia = ? WHERE MaSP=?";
         XJdbc.executeUpdate(sql,
@@ -60,14 +61,15 @@ public class SanPhamDAO {
     }
 
     public List<SanPham> select() {
-        String sql = "SELECT * FROM SanPham";
+        String sql = "SELECT * FROM SanPham ORDER BY Convert( int,Substring(masp,Patindex('%[0-9]%',masp),len(masp)))";
         return select(sql);
     }
+
     public List<SanPham> selectDonGia() {
         String sql = "SELECT DonGia FROM SanPham";
         return select(sql);
     }
-    
+
     public SanPham findById(String masp) {
         String sql = "SELECT * FROM SanPham WHERE MaSP = ?";
         List<SanPham> list = select(sql, masp);
@@ -75,8 +77,8 @@ public class SanPhamDAO {
     }
 
     public List<SanPham> selectByKeyword(String keyword) {
-        String sql = "SELECT * FROM SanPham WHERE MaSP LIKE ? ";
-        return select(sql, "%" + keyword + "%");
+        String sql = "SELECT * FROM SanPham WHERE MaSP LIKE ? OR TenSP LIKE ? OR Loai LIKE ? ORDER BY Convert( int,Substring(masp,Patindex('%[0-9]%',masp),len(masp)))";
+        return select(sql, "%" + keyword + "%", "%" + keyword + "%", "%" + keyword + "%");
     }
 
     private List<SanPham> select(String sql, Object... args) {
