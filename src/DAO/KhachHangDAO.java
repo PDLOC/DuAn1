@@ -44,10 +44,10 @@ public class KhachHangDAO {
         XJdbc.executeUpdate(sql, makh);
     }
 
-//    public List<KhachHang> select(){
-//        String sql="SELECT * FROM KhachHang";
-//        return select(sql);
-//    }
+    public List<KhachHang> select(){
+        String sql="SELECT * FROM KhachHang";
+        return select(sql);
+    }
     public KhachHang findById(String makh) {
         String sql = "SELECT * FROM KhachHang WHERE MaKH=?";
         List<KhachHang> list = select(sql, makh);

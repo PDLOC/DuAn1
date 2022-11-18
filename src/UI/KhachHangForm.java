@@ -7,7 +7,9 @@ package UI;
 import DAO.KhachHangDAO;
 import ENTITY.KhachHang;
 import Helper.XDate;
+import Helper.XExcel;
 import java.util.List;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
@@ -285,7 +287,7 @@ public class KhachHangForm extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnFindKHActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        export();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
@@ -533,5 +535,19 @@ public class KhachHangForm extends javax.swing.JInternalFrame {
         this.updateStatus();
         row = - 1;
         updateStatus();
+    }
+    
+     void export() {
+        JFileChooser jfc = new JFileChooser(".");
+        int returnVal = jfc.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            String path = jfc.getSelectedFile().getName();
+            try {
+                XExcel.exportExcel(path, dao.select());
+                JOptionPane.showMessageDialog(this, "Export File Success");
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Can't Export File !");
+            }
+        }
     }
 }
