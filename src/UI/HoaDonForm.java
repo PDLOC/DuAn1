@@ -156,13 +156,13 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
 
         tblSP1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Mã SP", "Tên Sản Phẩm", "Giá Sp", "Loại"
+                "Mã SP", "Tên Sản Phẩm", "Số Lượng", "Giá Sp", "Loại"
             }
         ));
         tblSP1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -332,7 +332,6 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
             String sql = "insert into hoadon values (?,?,?,?,?,?,GETDATE())";
             PreparedStatement ps = cnn.prepareStatement(sql);
             ps.setString(1, txtMaHD.getText());
-
             ps.setString(2, txtMaNV.getText());
             ps.setString(3, txtMaKH.getText());
             ps.setString(4, txtTenNV.getText());
@@ -503,6 +502,7 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
                 Object[] rows = {
                     sp.getMaSP(),
                     sp.getTenSP(),
+                    sp.getSoLuong(),
                     sp.getDonGia(),
                     sp.getLoai()
                 };
@@ -520,22 +520,29 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
             PreparedStatement ps = cnn.prepareStatement(sql);
             int line = tblSP1.getRowCount();
             String soluong1 = JOptionPane.showInputDialog("Số lượng: ");
-            MaSP = tblSP1.getValueAt(tblSP1.getSelectedRow(), 0).toString();
-            String tensp = (String) tblSP1.getValueAt(i, 1);
-            long giasp = (long) tblSP1.getValueAt(i, 2);
-            ps.setString(1, MaSP);
-            ps.setString(2, tensp);
             int soluong = Integer.parseInt(soluong1);
-            ps.setInt(3, soluong);
-            ps.setDouble(4, giasp);
-            double thanhtien = giasp * soluong;
-            ps.setDouble(5, thanhtien);
-            int result = ps.executeUpdate();
-            if (result > 0) {
-                System.out.println("Đã thêm");
+            if (soluong != 0) {
+                MaSP = tblSP1.getValueAt(tblSP1.getSelectedRow(), 0).toString();
+                String tensp = (String) tblSP1.getValueAt(i, 1);
+                long giasp = (long) tblSP1.getValueAt(i, 3);
+                int soLuongGoc = (int) tblSP1.getValueAt(i, 2);
+                ps.setString(1, MaSP);
+                ps.setString(2, tensp);
+                ps.setInt(3, soluong);
+                ps.setDouble(4, giasp);
+                double thanhtien = giasp * soluong;
+                ps.setDouble(5, thanhtien);
+                int result = ps.executeUpdate();
+                if (result > 0) {
+                    System.out.println("Đã thêm");
+                    int tongSoLuong = soLuongGoc - soluong;
+                    System.out.println(""+tongSoLuong);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập số > 0");
             }
         } catch (Exception ex) {
-
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập số !");
         }
 
     }

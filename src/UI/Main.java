@@ -516,7 +516,6 @@ public class Main extends javax.swing.JFrame {
         pnlKhachHang.setBackground(panelClick);
         pnlSanPham.setBackground(panelDefault);
         pnlHoaDon.setBackground(panelDefault);
-
         pnlThongKe.setBackground(panelDefault);
         pnlKetThuc.setBackground(panelDefault);
 

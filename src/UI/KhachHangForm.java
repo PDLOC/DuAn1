@@ -520,6 +520,12 @@ public class KhachHangForm extends javax.swing.JInternalFrame {
             return false;
 
         }
+        try {
+            int sdt = Integer.parseInt(txtSDTKH.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Số điện thoại vui lòng nhập số !");
+            return false;
+        }
         if (txtNgayTGKH.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Mời bạn điền ngày tham gia !");
             txtNgayTGKH.requestFocus();

@@ -12,12 +12,29 @@ import ENTITY.SanPham;
 import Helper.Auth;
 import Helper.XDate;
 import Helper.XImage;
+import com.google.zxing.BinaryBitmap;
+import com.google.zxing.LuminanceSource;
+import com.google.zxing.MultiFormatReader;
+import com.google.zxing.Reader;
+import com.google.zxing.Result;
+import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
+import com.google.zxing.common.HybridBinarizer;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -26,6 +43,8 @@ import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
+import net.glxn.qrgen.QRCode;
+import net.glxn.qrgen.image.ImageType;
 
 /**
  *
@@ -70,6 +89,7 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         txtMaPP = new javax.swing.JTextField();
         jPopupMenu1 = new javax.swing.JPopupMenu();
         mniGiamGiaSP = new javax.swing.JMenuItem();
+        lblQR = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -130,6 +150,7 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         jLabel16 = new javax.swing.JLabel();
         cboNhaPP = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
+        btnQR = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -146,6 +167,8 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
             }
         });
         jPopupMenu1.add(mniGiamGiaSP);
+
+        lblQR.setText("jLabel17");
 
         setPreferredSize(new java.awt.Dimension(990, 690));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -587,16 +610,16 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblHinhSP, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+            .addComponent(lblHinhSP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
         );
 
-        jPanel2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 30, 170, 170));
+        jPanel2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 20, 170, 170));
 
         taMoTa.setColumns(20);
         taMoTa.setRows(5);
         jScrollPane3.setViewportView(taMoTa);
 
-        jPanel2.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 30, 230, 220));
+        jPanel2.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 30, 230, 220));
 
         jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -614,6 +637,15 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel5.setText("VNĐ");
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 170, 30, 30));
+
+        btnQR.setText("QR");
+        btnQR.setEnabled(false);
+        btnQR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQRActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnQR, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 240, 90, -1));
 
         jTabbedPane1.addTab("SẢN PHẨM", jPanel2);
 
@@ -814,6 +846,17 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_txtFindSPKeyPressed
 
+    private void btnQRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQRActionPerformed
+        // TODO add your handling code here:
+        if (tblSanPham.getSelectedRow() != -1) {
+            writeQR();
+            readQR();
+        }else{
+//            JOptionPane.showMessageDialog(this, "Vui lòng chọn sản phẩm");
+        }
+
+    }//GEN-LAST:event_btnQRActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClearPP;
@@ -830,6 +873,7 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnNextSP;
     private javax.swing.JButton btnPrevPP;
     private javax.swing.JButton btnPrevSP;
+    private javax.swing.JButton btnQR;
     private javax.swing.JButton btnThemPP;
     private javax.swing.JButton btnThemSP;
     private javax.swing.JButton btnUpdatePP;
@@ -868,6 +912,7 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblHinhNPP;
     private javax.swing.JLabel lblHinhSP;
+    private javax.swing.JLabel lblQR;
     private javax.swing.JMenuItem mniGiamGiaSP;
     private javax.swing.JPanel pnlChucNangPP;
     private javax.swing.JRadioButton rdoConHang;
@@ -1038,7 +1083,7 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         btnThemPP.setEnabled(!edit);
         btnUpdatePP.setEnabled(edit);
         btnDelPP.setEnabled(edit);
-
+        
         btnFirstPP.setEnabled(edit && !first);
         btnPrevPP.setEnabled(edit && !first);
         btnNextPP.setEnabled(edit && !last);
@@ -1257,7 +1302,7 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         rdoHetHang.setEnabled(edit);
         btnUpdateSP.setEnabled(edit);
         btnDelSP.setEnabled(edit);
-
+        btnQR.setEnabled(edit);
         btnFirstSP.setEnabled(edit && !first);
         btnPrevSP.setEnabled(edit && !first);
         btnNextSP.setEnabled(edit && !last);
@@ -1329,31 +1374,34 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         }
     }
 
-//    public void getFirsttableSP(){
-//        modelSP = (DefaultTableModel) tblSanPham.getModel();
-//        tblSanPham.setRowSelectionInterval(0, 0);
-//        int index = tblSanPham.getSelectedRow();
-//        txtMaSP.setText(listSP.get(index).getMaSP());
-//        txtTenSP.setText(listSP.get(index).getTenSP());
-//        txtSoLuongSP.setText(String.valueOf(listSP.get(index).getSoLuong()));
-//        txtDonGiaSP.setText(String.valueOf(listSP.get(index).getDonGia()));
-//        for (int i = 0; i < cboLoai.getItemCount(); i++) {
-//            if (tblSanPham.getValueAt(0, 6).equals(cboLoai.getItemAt(i))) {
-//                cboLoai.setSelectedIndex(i);
-//            }
-//        }
-//        boolean tt = tblSanPham.getValueAt(0, 9).equals("Còn hàng")?true:false;
-//        if (tt==true) {
-//            rdoConHang.setSelected(tt);
-//        }else{
-//            rdoHetHang.setSelected(tt);
-//        }
-//        String hinh = (String) tblSanPham.getValueAt(0, 8);
-//        lblHinhSP.setText(hinh);
-//        if (hinh != null) {
-//            Image imgSP = XImage.readLogo(hinh).getImage().getScaledInstance(170, 180, Image.SCALE_SMOOTH);
-//            lblHinhSP.setIcon(new ImageIcon(imgSP));
-//        }
-//        taMoTa.setText((String) tblSanPham.getValueAt(0, 7));
-//    }
+    void writeQR() {
+        try {
+            ByteArrayOutputStream out = QRCode.from("Produtct ID: " + txtMaSP.getText()
+                    + "\n" + "Product Name: " + txtTenSP.getText()
+                    + "\n" + "Cost: " + txtDonGiaSP.getText()).to(ImageType.PNG).stream();
+            String f_name = txtMaSP.getText();
+            String path_name = "E:\\CuaHangLapTop\\DuAn1\\";
+            FileOutputStream fos = new FileOutputStream(new File(path_name + (f_name + ".PNG")));
+            fos.write(out.toByteArray());
+            fos.flush();
+        } catch (Exception e) {
+            System.out.println("" + e);
+        }
+    }
+
+    void readQR() {
+        try {
+            InputStream barcodeInputStream = new FileInputStream("E:\\CuaHangLapTop\\DuAn1\\" + txtMaSP.getText().trim() + ".PNG");
+            BufferedImage barcBufferedImage = ImageIO.read(barcodeInputStream);
+            LuminanceSource source = new BufferedImageLuminanceSource(barcBufferedImage);
+            BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
+            Reader reader = new MultiFormatReader();
+            Result result = reader.decode(bitmap);
+            ImageIcon img = new ImageIcon("E:\\CuaHangLapTop\\DuAn1\\" + txtMaSP.getText().trim() + ".PNG");
+            lblQR.setIcon(img);
+            JOptionPane.showMessageDialog(this, img, "QR", -1);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn sản phẩm");
+        }
+    }
 }

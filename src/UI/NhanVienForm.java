@@ -532,31 +532,46 @@ public class NhanVienForm extends javax.swing.JInternalFrame {
 
         }
         if (txtmail.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Mời bạn Email !");
+            JOptionPane.showMessageDialog(this, "Mời bạn nhập email !");
             txtmail.requestFocus();
             return false;
         }
         if (txtsdt.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Mời bạn SDT !");
+            JOptionPane.showMessageDialog(this, "Mời bạn nhập số điện thoại !");
             txtsdt.requestFocus();
             return false;
         }
+        try {
+            int sdt = Integer.parseInt(txtsdt.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Số điện thoại vui lòng nhập số !");
+            return false;
+        }
         if (txtLuong.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Mời bạn Lương !");
+            JOptionPane.showMessageDialog(this, "Mời bạn nhập lương !");
             txtLuong.requestFocus();
             return false;
         }
+        try {
+            int luong = Integer.parseInt(txtLuong.getText());
+            if(luong <= 0){
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập lương lớn hơn 0 !");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập lương là số");
+            return false;
+        }
         if (txtdaichi.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Mời bạn Địa Chỉ !");
+            JOptionPane.showMessageDialog(this, "Mời bạn nhập địa chỉ !");
             txtdaichi.requestFocus();
             return false;
         }
         if (btgvaitro.isSelected(null)) {
-            JOptionPane.showMessageDialog(this, "Mời bạn check Vai Trò !");
+            JOptionPane.showMessageDialog(this, "Mời bạn check vai trò !");
             return false;
         }
         if (txtMatKhau.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Mời bạn Mật Khẩu !");
+            JOptionPane.showMessageDialog(this, "Mời bạn nhập mật khẩu !");
             txtMatKhau.requestFocus();
             return false;
         }
