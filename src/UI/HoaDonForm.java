@@ -21,6 +21,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import java.util.List;
@@ -44,6 +45,8 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
     SimpleDateFormat ft = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
     Connection cnn;
     Statement st;
+    SanPham modelSP = new SanPham();
+    ArrayList<SanPham> list = new ArrayList<>();
 
     /**
      * Creates new form HoaDonForm
@@ -58,7 +61,6 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
         try {
             hdn = this;
             txt1 = txtMaKH;
-
             String url = "jdbc:sqlserver://localhost:1433;databaseName=duan1;encrypt=true;trustServerCertificate=true;";
             String user = "edu";
             String pass = "123";
@@ -88,6 +90,8 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        txtMaSP = new javax.swing.JTextField();
+        txtsl = new javax.swing.JTextField();
         pmnXoaHD = new javax.swing.JPopupMenu();
         mniXoa = new javax.swing.JMenuItem();
         mniXoaall = new javax.swing.JMenuItem();
@@ -105,13 +109,24 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         txtMaHD = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        txtThanhTien = new javax.swing.JTextField();
         btnThanhTien = new javax.swing.JButton();
         TxtTenKH = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtMaKH = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         btnChonKH = new javax.swing.JButton();
+        txtThanhTien = new javax.swing.JTextField();
+
+        txtMaSP.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtMaSPCaretUpdate(evt);
+            }
+        });
+        txtMaSP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMaSPActionPerformed(evt);
+            }
+        });
 
         mniXoa.setText("Xóa Sản Phẩm");
         mniXoa.addActionListener(new java.awt.event.ActionListener() {
@@ -172,7 +187,7 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tblSP1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 56, 620, 320));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 56, 610, 320));
 
         tblDanhSach.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -219,7 +234,6 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
         jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel7.setText("Tổng tiền");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 270, 95, -1));
-        getContentPane().add(txtThanhTien, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 290, 104, -1));
 
         btnThanhTien.setText("Thanh Toán");
         btnThanhTien.addActionListener(new java.awt.event.ActionListener() {
@@ -252,6 +266,7 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(btnChonKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 210, -1, -1));
+        getContentPane().add(txtThanhTien, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 290, 104, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -416,6 +431,28 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
         delete();
     }//GEN-LAST:event_btnThanhTienActionPerformed
 
+    private void txtMaSPCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtMaSPCaretUpdate
+        // TODO add your handling code here:
+
+        try {
+            String sql = ("select soluong from sanpham where Masp=?");
+            PreparedStatement ps = cnn.prepareStatement(sql);
+            ps.setString(1, txtMaSP.getText());
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                txtsl.setText(rs.getString(1));
+            } else {
+
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Lỗi 101:: Không thể kết nối đến máy chủ" + ex);
+        }
+    }//GEN-LAST:event_txtMaSPCaretUpdate
+
+    private void txtMaSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaSPActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMaSPActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JTextField TxtTenKH;
@@ -440,8 +477,10 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtMaHD;
     public javax.swing.JTextField txtMaKH;
     private javax.swing.JTextField txtMaNV;
+    private javax.swing.JTextField txtMaSP;
     private javax.swing.JTextField txtTenNV;
     private javax.swing.JTextField txtThanhTien;
+    private javax.swing.JTextField txtsl;
     // End of variables declaration//GEN-END:variables
      public void tongtien() {
         String sql = "select SUM(tongtien) from GioHang";
@@ -471,13 +510,20 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
 
     void delete1(int i) {
         String IDProduct = (String) tblDanhSach.getValueAt(i, 0);
-        try {
 
+        try {
             String sql = "delete  GioHang where masp = ?";
             PreparedStatement ps = cnn.prepareStatement(sql);
             ps.setString(1, IDProduct);
             int result = ps.executeUpdate();
+            txtMaSP.setText((String) tblDanhSach.getValueAt(i, 0));
+            int slo1 = (int) tblDanhSach.getValueAt(i, 2);
             if (result > 0) {
+                String soLuongGoc = txtsl.getText();
+                int soluong = Integer.parseInt(soLuongGoc);
+                int sl = soluong + slo1;
+                modelSP.setSoLuong(sl);
+                updateSoLuong2();
                 JOptionPane.showMessageDialog(this, "Xóa thành công");
             } else {
                 JOptionPane.showMessageDialog(this, "Xóa không thành công");
@@ -496,7 +542,6 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
         DefaultTableModel model = (DefaultTableModel) tblSP1.getModel();
         model.setRowCount(0);
         try {
-
             List<SanPham> list = dao.select();
             for (SanPham sp : list) {
                 Object[] rows = {
@@ -532,11 +577,13 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
                 ps.setDouble(4, giasp);
                 double thanhtien = giasp * soluong;
                 ps.setDouble(5, thanhtien);
+                txtMaSP.setText((String) tblSP1.getValueAt(i, 0));
                 int result = ps.executeUpdate();
                 if (result > 0) {
                     System.out.println("Đã thêm");
                     int tongSoLuong = soLuongGoc - soluong;
-                    System.out.println(""+tongSoLuong);
+                    modelSP.setSoLuong(tongSoLuong);
+                    updateSoLuong();
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "Vui lòng nhập số > 0");
@@ -577,4 +624,36 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
         txtTenNV.setText(userID);
     }
 
+    void updateSoLuong() {
+        try {
+            String sql = "UPDATE SANPHAM SET SOLUONG= ? WHERE MASP = ?";
+            PreparedStatement ps = cnn.prepareStatement(sql);
+            ps.setInt(1, modelSP.getSoLuong());
+            ps.setString(2, tblSP1.getValueAt(tblSP1.getSelectedRow(), 0).toString());
+            int result = ps.executeUpdate();
+            if (result > 0) {
+                fillTableSP();
+                JOptionPane.showMessageDialog(this, "Số lượng đã đổi");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "UPDATE Lỗi");
+
+        }
+    }
+
+    void updateSoLuong2() {
+        try {
+            String sql = "UPDATE SANPHAM SET SOLUONG= ? WHERE MASP = ?";
+            PreparedStatement ps = cnn.prepareStatement(sql);
+            ps.setInt(1, modelSP.getSoLuong());
+            ps.setString(2, tblDanhSach.getValueAt(tblDanhSach.getSelectedRow(), 0).toString());
+            int result = ps.executeUpdate();
+            if (result > 0) {
+                fillTableSP();
+                JOptionPane.showMessageDialog(this, "Số lượng đã đổi");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "UPDATE Lỗi");
+        }
+    }
 }
