@@ -4,8 +4,13 @@
  */
 package UI;
 
-import ENTITY.ThongKe;
-import ENTITY.ThongKeHoaDon;
+import ENTITY.*;
+import Helper.XExcel;
+import Helper.XExcelTK;
+import java.awt.Button;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -18,6 +23,7 @@ import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -32,6 +38,28 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.List;
+import javax.swing.JFileChooser;
+import org.apache.poi.hpsf.ClassID;
+
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.BorderStyle;
+import org.apache.poi.ss.usermodel.BuiltinFormats;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.DataFormat;
+import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.util.CellReference;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
@@ -46,16 +74,17 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
 //    ArrayList<SanPham> ListSP = new ArrayList<>();
     ArrayList<ThongKe> ListTK = new ArrayList<>();
     ArrayList<ThongKeHoaDon> ListTKHD = new ArrayList<>();
-        JPanel p1 = null;
-        JLabel TL1 = null;
-        JLabel l1 = null;
-        JPanel p2 = null;
-        JLabel TL2 = null;
-        JLabel l2 = null;
-        JPanel p3 = null;
-        JLabel TL3 = null;
-        JLabel l3 = null;
-    
+    ArrayList<HoaDon> ListHD = new ArrayList<>();
+
+    JPanel p1 = null;
+    JLabel TL1 = null;
+    JLabel l1 = null;
+    JPanel p2 = null;
+    JLabel TL2 = null;
+    JLabel l2 = null;
+    JPanel p3 = null;
+    JLabel TL3 = null;
+    JLabel l3 = null;
 
     /**
      * Creates new form ThongKeForm
@@ -66,12 +95,18 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
         BasicInternalFrameUI bi = (BasicInternalFrameUI) this.getUI();
         bi.setNorthPane(null);
         init();
+        Connect();
         LoadTheLoaiThongKe();
         LoadToCBOYear();
-        Connect();
+        LoadHienThongKe();
+        FillhoadonToArrayhoadon();
+        FillToTableHoaDon();
         FillDanhSachToArrayThongke();
+//        GetThongKeMail();
         FillToTable();
+        HienThiThongKeSP();
         RunBieuDo();
+//        ThongKeEST();
     }
 
     public void Connect() {
@@ -91,7 +126,11 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
         tblDoanhThu.setModel(tblModel);
         chkbang.setSelected(true);
     }
-    
+
+    public String Getnam() {
+        return (String) cboyear.getSelectedItem();
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -110,14 +149,22 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
         chkbang = new javax.swing.JRadioButton();
         chkbieudo = new javax.swing.JRadioButton();
         jLabel9 = new javax.swing.JLabel();
-        rdoEST = new javax.swing.JRadioButton();
+        jButton1 = new javax.swing.JButton();
+        btnxuatexcel = new javax.swing.JButton();
+        btnthongketop = new javax.swing.JButton();
         pnlthongke = new javax.swing.JPanel();
         pnlThongkebieudo = new javax.swing.JPanel();
         pnlthongketrong = new javax.swing.JPanel();
         lbldtsp = new javax.swing.JLabel();
         doanhthu = new javax.swing.JScrollPane();
         tblDoanhThu = new javax.swing.JTable();
-        pnlEST = new javax.swing.JPanel();
+        pnlhoadon = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblhoadon = new javax.swing.JTable();
+        jLabel6 = new javax.swing.JLabel();
+        datehoadon = new com.toedter.calendar.JDateChooser();
+        btnlochoadon = new javax.swing.JButton();
+        btnbieudohoadon = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -141,15 +188,13 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
-        setPreferredSize(new java.awt.Dimension(990, 690));
-
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tbpdoanhthu.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Năm", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         cboyear.addActionListener(new java.awt.event.ActionListener() {
@@ -180,18 +225,43 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
         jLabel9.setText("Lựa Chọn Hiển Thị");
         jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
 
-        buttonGroup1.add(rdoEST);
-        rdoEST.setText("EST");
-        jPanel3.add(rdoEST, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
+        jButton1.setText("Gửi Báo Cáo");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(149, 161, -1, 30));
+
+        btnxuatexcel.setText("Xuất Thống Kê Excel");
+        btnxuatexcel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnxuatexcelActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnxuatexcel, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 210, -1, 30));
+
+        btnthongketop.setText("Thống Kê EST");
+        btnthongketop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnthongketopActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnthongketop, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 161, 131, 31));
 
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 250, 330));
 
         pnlthongke.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION)));
+        pnlthongke.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnlThongkebieudo.setLayout(new javax.swing.BoxLayout(pnlThongkebieudo, javax.swing.BoxLayout.LINE_AXIS));
+        pnlthongke.add(pnlThongkebieudo, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 2, 666, 326));
+
+        pnlthongketrong.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lbldtsp.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lbldtsp.setText("Doanh Thu Sản Phẩm");
+        pnlthongketrong.add(lbldtsp, new org.netbeans.lib.awtextra.AbsoluteConstraints(273, 11, -1, -1));
 
         tblDoanhThu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -206,68 +276,61 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
         ));
         doanhthu.setViewportView(tblDoanhThu);
 
-        javax.swing.GroupLayout pnlthongketrongLayout = new javax.swing.GroupLayout(pnlthongketrong);
-        pnlthongketrong.setLayout(pnlthongketrongLayout);
-        pnlthongketrongLayout.setHorizontalGroup(
-            pnlthongketrongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlthongketrongLayout.createSequentialGroup()
-                .addContainerGap(273, Short.MAX_VALUE)
-                .addComponent(lbldtsp)
-                .addGap(244, 244, 244))
-            .addGroup(pnlthongketrongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(pnlthongketrongLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(doanhthu, javax.swing.GroupLayout.DEFAULT_SIZE, 646, Short.MAX_VALUE)
-                    .addContainerGap()))
-        );
-        pnlthongketrongLayout.setVerticalGroup(
-            pnlthongketrongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlthongketrongLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbldtsp)
-                .addContainerGap(288, Short.MAX_VALUE))
-            .addGroup(pnlthongketrongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlthongketrongLayout.createSequentialGroup()
-                    .addContainerGap(48, Short.MAX_VALUE)
-                    .addComponent(doanhthu, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap()))
-        );
+        pnlthongketrong.add(doanhthu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 48, 646, 257));
 
-        javax.swing.GroupLayout pnlESTLayout = new javax.swing.GroupLayout(pnlEST);
-        pnlEST.setLayout(pnlESTLayout);
-        pnlESTLayout.setHorizontalGroup(
-            pnlESTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 666, Short.MAX_VALUE)
-        );
-        pnlESTLayout.setVerticalGroup(
-            pnlESTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 326, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout pnlthongkeLayout = new javax.swing.GroupLayout(pnlthongke);
-        pnlthongke.setLayout(pnlthongkeLayout);
-        pnlthongkeLayout.setHorizontalGroup(
-            pnlthongkeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlthongketrong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(pnlthongkeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(pnlThongkebieudo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(pnlthongkeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(pnlEST, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        pnlthongkeLayout.setVerticalGroup(
-            pnlthongkeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlthongkeLayout.createSequentialGroup()
-                .addComponent(pnlthongketrong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 10, Short.MAX_VALUE))
-            .addGroup(pnlthongkeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(pnlThongkebieudo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(pnlthongkeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(pnlEST, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        pnlthongke.add(pnlthongketrong, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 2, -1, -1));
 
         jPanel2.add(pnlthongke, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 670, 330));
 
         tbpdoanhthu.addTab("Doanh Thu", jPanel2);
+
+        pnlhoadon.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tblhoadon.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "MaHD", "MaNV", "MaKH", "TenNV", "TenKH", "Thành Tiền", "Ngày Mua"
+            }
+        ));
+        jScrollPane1.setViewportView(tblhoadon);
+
+        pnlhoadon.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 52, 825, 268));
+
+        jLabel6.setText("NGÀY");
+        pnlhoadon.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 14, -1, 20));
+
+        datehoadon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                datehoadonMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                datehoadonMousePressed(evt);
+            }
+        });
+        pnlhoadon.add(datehoadon, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 14, 111, -1));
+
+        btnlochoadon.setText("Lọc");
+        btnlochoadon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnlochoadonActionPerformed(evt);
+            }
+        });
+        pnlhoadon.add(btnlochoadon, new org.netbeans.lib.awtextra.AbsoluteConstraints(254, 11, -1, -1));
+
+        btnbieudohoadon.setText("Biểu Đồ");
+        btnbieudohoadon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnbieudohoadonActionPerformed(evt);
+            }
+        });
+        pnlhoadon.add(btnbieudohoadon, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 10, -1, -1));
+
+        tbpdoanhthu.addTab("Hóa Đơn", pnlhoadon);
 
         jPanel1.add(tbpdoanhthu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 940, 380));
 
@@ -285,7 +348,7 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
         jPanel6.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 190, -1));
 
         lbldoanhthu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbldoanhthu.setText("10000");
+        lbldoanhthu.setText("0");
         jPanel6.add(lbldoanhthu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 190, -1));
 
         jPanel5.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 190, 90));
@@ -299,20 +362,20 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setText("Loại Thời Gian");
-        jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
+        jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, 20));
 
         lblngaybatdau.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblngaybatdau.setText("Ngày Bắt Đầu");
-        jPanel5.add(lblngaybatdau, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 150, -1, -1));
+        jPanel5.add(lblngaybatdau, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 150, -1, 20));
 
         lblngayketthuc.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblngayketthuc.setText("Ngày Kết Thúc");
-        jPanel5.add(lblngayketthuc, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 150, -1, -1));
+        jPanel5.add(lblngayketthuc, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 150, -1, 20));
         jPanel5.add(dateketthuc, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 150, 111, -1));
         jPanel5.add(datebatdau, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 150, 111, -1));
 
         btntimkiem.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btntimkiem.setText("Tìm Kiếm");
+        btntimkiem.setText("Thống Kê");
         btntimkiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btntimkiemActionPerformed(evt);
@@ -326,7 +389,7 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
         jLabel2.setBackground(new java.awt.Color(0, 153, 153));
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Số Hóa Đơn");
+        jLabel2.setText("Tổng Hóa Đơn");
         jPanel7.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 180, -1));
 
         lblsohoadon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -410,8 +473,19 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
 
     private void cboyearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboyearActionPerformed
         // TODO add your handling code here:
-        timthongketheonam();
-        FillToTable();
+        if (String.valueOf(cboyear.getSelectedItem()).equalsIgnoreCase(" ")) {
+            FillDanhSachToArrayThongke();
+            FillToTable();
+            RunBieuDo();
+        } else {
+            timthongketheonam();
+            FillToTable();
+            RunBieuDo();
+        }
+
+//        GetESTKhachHang();
+//        GetESTNhanVien();
+//        GetESTSanPham();
     }//GEN-LAST:event_cboyearActionPerformed
 
     private void cboloaithongkeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboloaithongkeActionPerformed
@@ -437,22 +511,107 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
         HienThiThongKeSP();
     }//GEN-LAST:event_chkbieudoActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        GuiBaoCaoTK bctk = new GuiBaoCaoTK();
+        bctk.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnthongketopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnthongketopActionPerformed
+        // TODO add your handling code here:
+        ThongKeEST tkest = new ThongKeEST((String) cboyear.getSelectedItem());
+        tkest.setLocationRelativeTo(null);
+        tkest.setVisible(true);
+    }//GEN-LAST:event_btnthongketopActionPerformed
+
+    private void btnxuatexcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnxuatexcelActionPerformed
+        // TODO add your handling code here:
+        export();
+    }//GEN-LAST:event_btnxuatexcelActionPerformed
+
+    private void btnlochoadonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlochoadonActionPerformed
+        // TODO add your handling code here:
+        
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String dhd = String.valueOf(sdf.format(datehoadon.getDate()));
+            ThongKeHoadon(dhd);
+        
+
+    }//GEN-LAST:event_btnlochoadonActionPerformed
+
+    private void datehoadonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_datehoadonMouseClicked
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_datehoadonMouseClicked
+
+    private void datehoadonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_datehoadonMousePressed
+        // TODO add your handling code here:
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String dhd = String.valueOf(sdf.format(datehoadon.getDate()));
+        ThongKeHoadon(dhd);
+    }//GEN-LAST:event_datehoadonMousePressed
+
+    private void btnbieudohoadonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbieudohoadonActionPerformed
+        // TODO add your handling code here:
+        BieuDoHoaDon();
+
+    }//GEN-LAST:event_btnbieudohoadonActionPerformed
+
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new ThongKeForm().setVisible(true);
+            }
+        });
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnbieudohoadon;
+    private javax.swing.JButton btnlochoadon;
+    private javax.swing.JButton btnthongketop;
     private javax.swing.JButton btntimkiem;
+    private javax.swing.JButton btnxuatexcel;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cboloaithongke;
     private javax.swing.JComboBox<String> cboyear;
     private javax.swing.JRadioButton chkbang;
     private javax.swing.JRadioButton chkbieudo;
     private com.toedter.calendar.JDateChooser datebatdau;
+    private com.toedter.calendar.JDateChooser datehoadon;
     private com.toedter.calendar.JDateChooser dateketthuc;
     private javax.swing.JScrollPane doanhthu;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -464,6 +623,7 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbldoanhthu;
     private javax.swing.JLabel lbldtsp;
     private javax.swing.JLabel lblngaybatdau;
@@ -471,30 +631,30 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblsohoadon;
     private javax.swing.JLabel lblsosanpham;
     private javax.swing.JLabel lbltongkhachhang;
-    private javax.swing.JPanel pnlEST;
     private javax.swing.JPanel pnlThongkebieudo;
+    private javax.swing.JPanel pnlhoadon;
     private javax.swing.JPanel pnlthongke;
     private javax.swing.JPanel pnlthongketrong;
-    private javax.swing.JRadioButton rdoEST;
     private javax.swing.JTable tblDoanhThu;
+    private javax.swing.JTable tblhoadon;
     private javax.swing.JTabbedPane tbpdoanhthu;
     // End of variables declaration//GEN-END:variables
 
     public void LoadTheLoaiThongKe() {
         try {
-            String[] thang = {"Hôm Nay","Theo Ngày"};
+            String[] thang = {"Hôm Nay", "Theo Ngày"};
             for (String s : thang) {
                 cboloaithongke.addItem(s);
             }
         } catch (Exception e) {
-            System.out.println(e+"5555");
+            System.out.println(e + "5555");
         }
     }
 
     public void LoadHienThongKe() {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            if (cboloaithongke.getSelectedItem().equals("Hôm Nay")) {
+            if (String.valueOf(cboloaithongke.getSelectedItem()).equals("Hôm Nay")) {
                 String bd = String.valueOf(sdf.format(new Date()));
                 String kt = String.valueOf(sdf.format(new Date()));
                 LoadThongKe(bd, kt);
@@ -503,7 +663,7 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
                 datebatdau.setVisible(false);
                 dateketthuc.setVisible(false);
                 btntimkiem.setVisible(false);
-            }else{
+            } else {
                 lblngaybatdau.setVisible(true);
                 lblngayketthuc.setVisible(true);
                 datebatdau.setVisible(true);
@@ -511,11 +671,9 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
                 btntimkiem.setVisible(true);
             }
         } catch (Exception e) {
-            System.out.println(e+"lỗi nè");
+            System.out.println(e + "lỗi nè");
         }
     }
-
-
 
     public void FillDanhSachToArrayThongke() {
         try {
@@ -523,6 +681,7 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
                     + "group by Masp,tensp";
             Statement st = cnn.createStatement();
             ResultSet rs = st.executeQuery(sql);
+            ListTK.clear();
             while (rs.next()) {
                 String masp = rs.getString(1);
                 String tensp = rs.getString(2);
@@ -536,14 +695,14 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
             rs.close();
             st.close();
         } catch (SQLException ex) {
-            System.out.println(ex+" gi vay ak");
+            System.out.println(ex + " gi vay ak");
             JOptionPane.showMessageDialog(this, "Không tìm thấy dữ liệu");
         }
     }
 
-    public void LoadThongKe(String nbd,String nkt) {
+    public void LoadThongKe(String nbd, String nkt) {
         try {
-            
+
             String sql = "{call sp_ThongKeDoanhThuall (?,?)}";
             PreparedStatement ps = cnn.prepareStatement(sql);
             ps.setString(1, nbd);
@@ -564,7 +723,7 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
                     sokh++;
                 }
                 int sl = rs.getInt(3);
-                soluong+= sl;
+                soluong += sl;
                 long tongtien = rs.getLong(4);
                 kqtt += tongtien;
                 ThongKeHoaDon tk = new ThongKeHoaDon(sohd, sokh, soluong, kqtt);
@@ -575,61 +734,94 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
             rs.close();
 
         } catch (Exception e) {
-            System.out.println(e+"12345");
+            System.out.println(e + "12345");
         }
     }
-    
-    public void FillThongKeHD(){
+
+    public void FillThongKeHD() {
         for (ThongKeHoaDon tk : ListTKHD) {
-            lbldoanhthu.setText(String.valueOf(tk.getTongtien())+" VND");
+            lbldoanhthu.setText(String.valueOf(tk.getTongtien()) + " VND");
             lblsohoadon.setText(String.valueOf(tk.getMahd()));
             lblsosanpham.setText(String.valueOf(tk.getSoluong()));
             lbltongkhachhang.setText(String.valueOf(tk.getMasp()));
         }
     }
 
-    
-    public void HienThiThongKeSP(){
+    public void HienThiThongKeSP() {
         tblModel = (DefaultTableModel) tblDoanhThu.getModel();
         if (chkbang.isSelected()) {
-//            lbldtsp.setVisible(true);
-//            tblDoanhThu.setVisible(true);
-//            doanhthu.setVisible(true);
             pnlthongketrong.setVisible(true);
-//            pnlthongke.setVisible(true);
             pnlThongkebieudo.setVisible(false);
-            pnlEST.setVisible(false);
-        }else if (chkbieudo.isSelected()){
-            pnlEST.setVisible(false);
+//            pnlEST.setVisible(false);
+        } else if (chkbieudo.isSelected()) {
+//            pnlEST.setVisible(false);
             pnlthongketrong.setVisible(false);
             pnlThongkebieudo.setVisible(true);
-//            ThongKeEST();
-        }else if (rdoEST.isSelected()) {
-            pnlEST.setVisible(true);
-            pnlthongketrong.setVisible(false);
-            pnlThongkebieudo.setVisible(false);
         }
+//        else if (rdoEST.isSelected()) {
+//            
+//            pnlEST.setVisible(true);
+//            pnlthongketrong.setVisible(false);
+//            pnlThongkebieudo.setVisible(false);
+//            GetESTKhachHang();
+//            GetESTSanPham();
+//            GetESTNhanVien();
+//        }
     }
-    
-    public void ThongKeEST(){
-        p1 = new JPanel();
-        
-        TL1 = new JLabel("Khách Hàng Mua Nhiều Nhất");
-        l1 = new JLabel("");
-        p1.add(TL1,l1);
-        p1.setLayout(new FlowLayout(20));
-        p1.setVisible(true);
-        p2 = new JPanel();
-        TL2 = new JLabel("Sản Phẩm Có Doanh Thu Nhiều Nhất");
-        l2 = new JLabel("");
-        p2.add(TL2,l2);
-        p2.setVisible(true);
+
+//    public void ThongKeEST() {
+//        //panel 1
+//        p1 = new JPanel();
+//        
+//        p1.setBackground(Color.GRAY);
+//        p1.setSize(100, 500);
+//        TL1 = new JLabel("Khách Hàng Mua Nhiều Nhất");
+//        
+//        TL1.setAlignmentX(Component.CENTER_ALIGNMENT);
+//        TL1.setSize(1000, 1000);
+//        l1 = new JLabel("EST 1");
+//        l1.setAlignmentX(Component.CENTER_ALIGNMENT);
+//
+//        p1.setLayout(new BoxLayout(p1, BoxLayout.Y_AXIS));
+//        p1.add(TL1);
+//        p1.add(l1);
+//        p1.setPreferredSize(new Dimension(200, 100));
+//
+////        p1.setAlignmentX(Component.CENTER_ALIGNMENT);
+//        //panel 2
+//        p2 = new JPanel();
+//        p2.setBackground(Color.RED);
+//        
+//        TL2 = new JLabel("Sản Phẩm Có Doanh Thu Nhiều Nhất");
+//        TL2.setAlignmentX(Component.CENTER_ALIGNMENT);
+//        l2 = new JLabel("EST 2");
+//        l2.setAlignmentX(Component.CENTER_ALIGNMENT);
+//        
+//        p2.setLayout(new BoxLayout(p2, BoxLayout.Y_AXIS));
+//        p2.add(TL2);
+//        p2.add(l2);
+//        p2.setPreferredSize(new Dimension(200, 100));
+//
+//        //panel 3
 //        p3 = new JPanel();
-//        TL3 = new JLabel("Sản Phẩm Có Doanh Thu Nhiều Nhất");
-//        l3 = new JLabel("");
-        pnlEST.add(p1,p2);
-        pnlEST.updateUI();
-    }
+//        p3.setBackground(Color.PINK);
+//        
+//        TL3 = new JLabel("Nhân Viên Bán Nhiều Nhất");
+//        TL3.setAlignmentX(Component.CENTER_ALIGNMENT);
+//        l3 = new JLabel("EST 3");
+//        l3.setAlignmentX(Component.CENTER_ALIGNMENT);
+//        
+//        p3.setLayout(new BoxLayout(p3, BoxLayout.Y_AXIS));
+//        p3.add(TL3);
+//        p3.add(l3);
+//        p3.setPreferredSize(new Dimension(200, 100));
+//        pnlEST.removeAll();
+//        pnlEST.add(p1);
+//        pnlEST.add(p2);
+//        pnlEST.add(p3);
+//        pnlEST.setLayout(new FlowLayout(10, 10, 80));
+//        pnlEST.updateUI();
+//    }
 //    public void FillDoanhThu() {
 //        for (danhsach ds : ListDS) {
 //            lbldoanhthu.setText(String.valueOf(ds.getThanhtien()));
@@ -653,18 +845,17 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
 //            System.out.println(e);
 //        }
 //    }
-    
     public void FillToTable() {
         try {
-        tblModel = (DefaultTableModel) tblDoanhThu.getModel();
-        tblModel.setRowCount(0);
-        for (ThongKe TE : ListTK) {
-            tblModel.addRow(new Object[]{
-                TE.getMaSP(), TE.getTensp(), TE.getSoluong(), TE.getThanhtien()
-            });
-        }
+            tblModel = (DefaultTableModel) tblDoanhThu.getModel();
+            tblModel.setRowCount(0);
+            for (ThongKe TE : ListTK) {
+                tblModel.addRow(new Object[]{
+                    TE.getMaSP(), TE.getTensp(), TE.getSoluong(), TE.getThanhtien()
+                });
+            }
         } catch (Exception e) {
-            System.out.println(e+"alo");
+            System.out.println(e + "alo");
         }
     }
 
@@ -675,7 +866,7 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
                 cboyear.addItem(string);
             }
         } catch (Exception e) {
-            System.out.println(e+" kkkkkk");
+            System.out.println(e + " kkkkkk");
         }
     }
 
@@ -697,10 +888,10 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
             stmt.close();
             rs.close();
         } catch (Exception e) {
-            System.out.println(e+" 987654");
+            System.out.println(e + " 987654");
         }
     }
-    
+
     //Biểu Đồ Thống Kê
     public JFreeChart createChart() {
         JFreeChart barChart = ChartFactory.createBarChart3D(
@@ -710,11 +901,12 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
         return barChart;
     }
 
-    public int getcounttable(){
+    public int getcounttable() {
         tblModel = (DefaultTableModel) tblDoanhThu.getModel();
         int count = tblModel.getRowCount();
         return count;
-    }    
+    }
+
     public CategoryDataset createDataset() {
         tblModel = (DefaultTableModel) tblDoanhThu.getModel();
         int count = tblModel.getRowCount();
@@ -724,8 +916,8 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
         }
         return dataset;
     }
-    
-    public void RunBieuDo(){
+
+    public void RunBieuDo() {
 //        ChartPanel chartPanel = new ChartPanel(createChart());
 //        chartPanel.setPreferredSize(new java.awt.Dimension(540, 300));
 //        chartPanel.setVisible(true);
@@ -742,7 +934,7 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
 //        td.add(chartPanel);
 //        pnlthongke.add(chartPanel);
 //        tbpdoanhthu.add(chartPanel);
-        
+
 //        JFrame frame = new JFrame();
 //        frame.add(chartPanel);
 //        frame.setTitle("Biểu đồ JFreeChart trong Java Swing");
@@ -751,5 +943,213 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
 //        frame.setResizable(false);
 //        frame.setVisible(true);
 //        return chartPanel;
+    }
+
+//    public void GetESTKhachHang() {
+//        
+//        try {
+//            String sql = "{call sp_ESTKhachMua(?)}";
+//            PreparedStatement st = cnn.prepareStatement(sql);
+//            st.setString(1, (String) cboyear.getSelectedItem());
+//            ResultSet rs = st.executeQuery();
+//            String tenkh = null;
+//            String slkm = null;
+//            while (rs.next()) {
+//                tenkh = rs.getString(1);
+//                slkm = rs.getString(2);
+//                break;
+//            }
+//            if (tenkh==null) {
+//                l1.setText("không có dữ liệu");
+//            } else {
+//                l1.setText(tenkh);
+//            }
+////            pnlEST.updateUI();
+//            rs.close();
+//            st.close();
+//            
+//        } catch (Exception e) {
+//            System.out.println(e);
+//        }
+//        
+//    }
+//    
+//    public void GetESTSanPham() {
+//        try {
+//            String sql = "{call sp_ESTSanPham(?)}";
+//            PreparedStatement st = cnn.prepareStatement(sql);
+//            st.setString(1, (String) cboyear.getSelectedItem());
+//            ResultSet rs = st.executeQuery();
+//            String tensp = null;
+//            String slsp = null;
+//            while (rs.next()) {
+//                tensp = rs.getString(1);
+//                slsp = rs.getString(2);
+//                break;
+//            }
+//            if (tensp==null) {
+//                l2.setText("không có dữ liệu");
+//            } else {
+//                l2.setText(tensp);
+//            }
+////            pnlEST.updateUI();
+//            rs.close();
+//            st.close();
+//            
+//        } catch (Exception e) {
+//            System.out.println(e);
+//        }
+//    }
+//    
+//    public void GetESTNhanVien(){
+//        try {
+//            String sql = "{call sp_ESTNhanVien(?)}";
+//            PreparedStatement st = cnn.prepareStatement(sql);
+//            st.setString(1, (String) cboyear.getSelectedItem());
+//            ResultSet rs = st.executeQuery();
+//            String tennv = null;
+//            String slnv = null;
+//            while (rs.next()) {
+//                tennv = rs.getString(1);
+//                slnv = rs.getString(2);
+//                break;
+//            }
+//            if (tennv==null) {
+//                l3.setText("không có dữ liệu");
+//            } else {
+//                l3.setText(tennv);
+//            }
+////            pnlEST.updateUI();
+//            rs.close();
+//            st.close();
+//        } catch (Exception e) {
+//            System.out.println(e);
+//        }
+//    }
+//    public void GetThongKeMail(){
+//        String thanhtien = lbldoanhthu.getText();
+//        String hd = lblsohoadon.getText();
+//        String sp = lblsosanpham.getText();
+//        String kh = lbltongkhachhang.getText();
+//    }
+    //EXPORT FILE EXCEL
+    public void export() {
+        JFileChooser jfc = new JFileChooser(".");
+        int returnVal = jfc.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            String path = jfc.getSelectedFile().getName();
+            try {
+                XExcelTK.exportExcel(path, ListTK, ListHD);
+                JOptionPane.showMessageDialog(this, "Export File Success");
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Can't Export File !");
+            }
+        }
+    }
+
+    //CTHOADON
+    public void FillhoadonToArrayhoadon() {
+        try {
+            String sql = "select MaHD,MaNV,MaKH,Tennv,Tenkh,Thanhtien,Ngaytaodon from HoaDon";
+            Statement st = cnn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                String mahd = rs.getString(1);
+
+                String manv = rs.getString(2);
+
+                String makh = rs.getString(3);
+
+                String tennv = rs.getString(4);
+
+                String tenkh = rs.getString(5);
+
+                long tt = rs.getLong(6);
+
+                Date d = rs.getDate(7);
+
+                HoaDon hd = new HoaDon(mahd, makh, manv, tennv, tenkh, tt, d);
+                ListHD.add(hd);
+            }
+            rs.close();
+            st.close();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            JOptionPane.showMessageDialog(this, "Không tìm thấy dữ liệu");
+        }
+    }
+
+    public void ThongKeHoadon(String nbd) {
+        try {
+
+            String sql = "{call sp_ThongKehoadonall (?)}";
+            PreparedStatement ps = cnn.prepareStatement(sql);
+            ps.setString(1, nbd);
+            ResultSet rs = ps.executeQuery();
+            ListHD.clear();
+            while (rs.next()) {
+                String mahd = rs.getString(1);
+
+                String manv = rs.getString(2);
+
+                String makh = rs.getString(3);
+
+                String tennv = rs.getString(4);
+
+                String tenkh = rs.getString(5);
+
+                long tt = rs.getLong(6);
+
+                Date d = rs.getDate(7);
+
+                HoaDon hd = new HoaDon(mahd, makh, manv, tennv, tenkh, tt, d);
+                ListHD.add(hd);
+            }
+            FillToTableHoaDon();
+            ps.close();
+            rs.close();
+        } catch (Exception e) {
+            System.out.println(e + "12345");
+        }
+    }
+
+    public void FillToTableHoaDon() {
+        try {
+            tblModel = (DefaultTableModel) tblhoadon.getModel();
+            tblModel.setRowCount(0);
+            for (HoaDon hd : ListHD) {
+                tblModel.addRow(new Object[]{
+                    hd.getMahd(), hd.getManv(), hd.getMakh(), hd.getTennv(), hd.getTenkh(), hd.getThanhtien(), hd.getNgaymua()
+                });
+            }
+        } catch (Exception e) {
+            System.out.println(e + "alo");
+        }
+    }
+
+    public void BieuDoHoaDon() {
+        tblModel = (DefaultTableModel) tblhoadon.getModel();
+        int c = tblModel.getRowCount();
+
+        int count = tblModel.getRowCount();
+        final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        for (int i = 0; i < c; i++) {
+            dataset.addValue((Number) tblModel.getValueAt(i, 5), "SỐ LƯỢNG", (Comparable) tblModel.getValueAt(i, 0));
+        }
+
+        JFreeChart barChart = ChartFactory.createBarChart(
+                "BIỂU ĐỒ THỐNG KÊ HÓA ĐƠN",
+                "Năm", "Số hóa đơn",
+                dataset, PlotOrientation.VERTICAL, false, false, false);
+
+        ChartPanel chartPanel = new ChartPanel(barChart);
+        chartPanel.setPreferredSize(new java.awt.Dimension(560, 367));
+        JFrame frame = new JFrame();
+        frame.add(chartPanel);
+        frame.setTitle("Biểu đồ Hóa Đơn");
+        frame.setSize(600, 400);
+        frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
+        frame.setVisible(true);
     }
 }

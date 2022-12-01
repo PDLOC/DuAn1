@@ -6,26 +6,22 @@
 			HÓA ĐƠN BÁN HÀNG
 
 Mã hóa đƠn: HD10
-Thời gian: 15:02:00 15/11/2022
+Thời gian: 08:00:12 30/11/2022
 NHÂN VIÊN: Phạm Đại Lộc
 ------------------------------------------------------------
 Mã		Tên Sản Phẩm	Số lượng	ĐƠn giá	Thành tiền
 
 -----------------------------------------------------------
-1. Laptop Gaming Acer Predator Helios 300 PH315-55-76KG
+1. Laptop Gaming MSI GF63 Thin 11UD 473VN
 
-SP3	2		89980000		44990000	
+SP5	1		19490000		19490000	
 
-2. Laptop Dell Gaming G15 5515 P105F004CGR
+2. Laptop ASUS ROG Zephyrus Duo 16 GX650RW-LO999W
 
-SP6	1		18490000		18490000	
-
-3. Laptop ASUS ROG Zephyrus Duo 16 GX650RW-LO999W
-
-SP8	3		27897000		9299000	
+SP8	2		18598000		9299000	
 
 ------------------------------------------------------------
-		Thành tiền:			136367000 VNĐ
+		Thành tiền:			38088000 VNĐ
 ------------------------------------------------------------
 ------------------------------------------------------------
 Mật khẩu Wifi: motdentam
