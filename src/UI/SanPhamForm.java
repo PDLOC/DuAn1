@@ -56,9 +56,9 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
     int row = -1;
     SanPhamDAO daoSP = new SanPhamDAO();
     DefaultTableModel modelSP = null;
-    ArrayList<SanPham> listSP = null;
+    ArrayList<SanPham> listSP = new ArrayList<>();
     DefaultTableModel modelNPP = null;
-    ArrayList<NhaPhanPhoi> listNPP = null;
+    ArrayList<NhaPhanPhoi> listNPP = new ArrayList<>();
 
     /**
      * Creates new form SanPhamForm
@@ -86,10 +86,10 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         fileChooserNPP = new javax.swing.JFileChooser();
         fileChooserSP = new javax.swing.JFileChooser();
         jLabel13 = new javax.swing.JLabel();
-        txtMaPP = new javax.swing.JTextField();
         jPopupMenu1 = new javax.swing.JPopupMenu();
         mniGiamGiaSP = new javax.swing.JMenuItem();
         lblQR = new javax.swing.JLabel();
+        txtMaPP = new javax.swing.JTextField();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -158,8 +158,6 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel13.setText("Mã phân phối:");
 
-        txtMaPP.setEditable(false);
-
         mniGiamGiaSP.setText("Giảm giá từng sản phẩm");
         mniGiamGiaSP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -169,6 +167,8 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         jPopupMenu1.add(mniGiamGiaSP);
 
         lblQR.setText("jLabel17");
+
+        txtMaPP.setEditable(false);
 
         setPreferredSize(new java.awt.Dimension(990, 690));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -645,7 +645,7 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
                 btnQRActionPerformed(evt);
             }
         });
-        jPanel2.add(btnQR, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 240, 90, -1));
+        jPanel2.add(btnQR, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 210, 90, -1));
 
         jTabbedPane1.addTab("SẢN PHẨM", jPanel2);
 
@@ -715,6 +715,7 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
     private void btnDelSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelSPActionPerformed
         // TODO add your handling code here:
         this.deleteSP();
+        this.clearSP();
     }//GEN-LAST:event_btnDelSPActionPerformed
 
     private void btnUpdateSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateSPActionPerformed
@@ -743,6 +744,7 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
     private void btnDelPPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelPPActionPerformed
         // TODO add your handling code here:
         this.deleteNPP();
+        this.clearNPP();
     }//GEN-LAST:event_btnDelPPActionPerformed
 
     private void btnUpdatePPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdatePPActionPerformed
@@ -795,19 +797,16 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
 
     private void cboNhaPPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboNhaPPActionPerformed
         // TODO add your handling code here:
-        int vitri = cboNhaPP.getSelectedIndex();
-        if (vitri == 0) {
-            txtMaPP.setText("NPP1");
-        } else if (vitri == 1) {
-            txtMaPP.setText("NPP2");
-        } else if (vitri == 2) {
-            txtMaPP.setText("NPP3");
-        } else if (vitri == 3) {
-            txtMaPP.setText("NPP4");
-        } else if (vitri == 4) {
-            txtMaPP.setText("NPP5");
-        } else if (vitri == 5) {
-            txtMaPP.setText("NPP6");
+        try {
+            String tennpp = (String) cboNhaPP.getSelectedItem();
+            List<NhaPhanPhoi> list = daoNPP.select();
+            for (NhaPhanPhoi npp : list) {
+                if (tennpp.equalsIgnoreCase(npp.getTenNPP())) {
+                    txtMaPP.setText(npp.getMaNPP());
+                }
+            }
+        } catch (Exception e) {
+
         }
     }//GEN-LAST:event_cboNhaPPActionPerformed
 
@@ -851,7 +850,7 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         if (tblSanPham.getSelectedRow() != -1) {
             writeQR();
             readQR();
-        }else{
+        } else {
 //            JOptionPane.showMessageDialog(this, "Vui lòng chọn sản phẩm");
         }
 
@@ -1029,7 +1028,7 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
     void clearNPP() {
         this.setForm(new NhaPhanPhoi());
         this.updateStatusNPP();
-        row = - 1;
+        row = -1;
         updateStatusNPP();
     }
 
@@ -1083,7 +1082,7 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         btnThemPP.setEnabled(!edit);
         btnUpdatePP.setEnabled(edit);
         btnDelPP.setEnabled(edit);
-        
+
         btnFirstPP.setEnabled(edit && !first);
         btnPrevPP.setEnabled(edit && !first);
         btnNextPP.setEnabled(edit && !last);

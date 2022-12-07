@@ -17,11 +17,6 @@
         <Property name="text" type="java.lang.String" value="M&#xe3; ph&#xe2;n ph&#x1ed1;i:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtMaPP">
-      <Properties>
-        <Property name="editable" type="boolean" value="false"/>
-      </Properties>
-    </Component>
     <Container class="javax.swing.JPopupMenu" name="jPopupMenu1">
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
@@ -41,6 +36,11 @@
     <Component class="javax.swing.JLabel" name="lblQR">
       <Properties>
         <Property name="text" type="java.lang.String" value="jLabel17"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtMaPP">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
       </Properties>
     </Component>
   </NonVisualComponents>
@@ -1112,7 +1112,7 @@
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="390" y="240" width="90" height="-1"/>
+                  <AbsoluteConstraints x="390" y="210" width="90" height="-1"/>
                 </Constraint>
               </Constraints>
             </Component>

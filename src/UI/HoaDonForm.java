@@ -94,7 +94,6 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
         txtsl = new javax.swing.JTextField();
         pmnXoaHD = new javax.swing.JPopupMenu();
         mniXoa = new javax.swing.JMenuItem();
-        mniXoaall = new javax.swing.JMenuItem();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -135,14 +134,6 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
             }
         });
         pmnXoaHD.add(mniXoa);
-
-        mniXoaall.setText("Xóa Tất Cả");
-        mniXoaall.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniXoaallActionPerformed(evt);
-            }
-        });
-        pmnXoaHD.add(mniXoaall);
 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -335,11 +326,6 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
         delete1(index);
     }//GEN-LAST:event_mniXoaActionPerformed
 
-    private void mniXoaallActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniXoaallActionPerformed
-        // TODO add your handling code here:
-        delete();
-    }//GEN-LAST:event_mniXoaallActionPerformed
-
     private void btnThanhTienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhTienActionPerformed
 
         try {
@@ -375,11 +361,8 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
                 ps.setString(2, IDProduct);
                 ps.setString(3, tensp);
                 ps.setString(4, soluong);
-
                 ps.setString(5, quantity);
-
                 int result = ps.executeUpdate();
-
             } catch (SQLException ex) {
                 System.out.println("loi" + ex);
             }
@@ -470,7 +453,6 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JMenuItem mniXoa;
-    private javax.swing.JMenuItem mniXoaall;
     private javax.swing.JPopupMenu pmnXoaHD;
     private javax.swing.JTable tblDanhSach;
     private javax.swing.JTable tblSP1;
@@ -570,20 +552,31 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
                 MaSP = tblSP1.getValueAt(tblSP1.getSelectedRow(), 0).toString();
                 String tensp = (String) tblSP1.getValueAt(i, 1);
                 long giasp = (long) tblSP1.getValueAt(i, 3);
+                String loaiSP = (String) tblSP1.getValueAt(i, 4);
                 int soLuongGoc = (int) tblSP1.getValueAt(i, 2);
-                ps.setString(1, MaSP);
-                ps.setString(2, tensp);
-                ps.setInt(3, soluong);
-                ps.setDouble(4, giasp);
-                double thanhtien = giasp * soluong;
-                ps.setDouble(5, thanhtien);
-                txtMaSP.setText((String) tblSP1.getValueAt(i, 0));
-                int result = ps.executeUpdate();
-                if (result > 0) {
-                    System.out.println("Đã thêm");
-                    int tongSoLuong = soLuongGoc - soluong;
-                    modelSP.setSoLuong(tongSoLuong);
-                    updateSoLuong();
+                if (soLuongGoc == 0) {
+                    JOptionPane.showMessageDialog(this, loaiSP + " hết hàng");
+                } else {
+                    if (soLuongGoc < soluong) {
+                        JOptionPane.showMessageDialog(this, loaiSP + " sản phẩm không đủ");
+                    } else {
+                        ps.setString(1, MaSP);
+                        ps.setString(2, tensp);
+                        ps.setInt(3, soluong);
+                        ps.setDouble(4, giasp);
+                        double thanhtien = giasp * soluong;
+                        ps.setDouble(5, thanhtien);
+                        txtMaSP.setText((String) tblSP1.getValueAt(i, 0));
+                        int result = ps.executeUpdate();
+                        if (result > 0) {
+                            int tongSoLuong = soLuongGoc - soluong;
+                            modelSP.setSoLuong(tongSoLuong);
+                            updateSoLuong();
+                            for (SanPham sanPham : list) {
+                                System.out.println("" + sanPham.isTinhTrang());
+                            }
+                        }
+                    }
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "Vui lòng nhập số > 0");
@@ -633,7 +626,6 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
             int result = ps.executeUpdate();
             if (result > 0) {
                 fillTableSP();
-                JOptionPane.showMessageDialog(this, "Số lượng đã đổi");
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "UPDATE Lỗi");
@@ -650,7 +642,6 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
             int result = ps.executeUpdate();
             if (result > 0) {
                 fillTableSP();
-                JOptionPane.showMessageDialog(this, "Số lượng đã đổi");
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "UPDATE Lỗi");
