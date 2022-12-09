@@ -175,7 +175,6 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
 
         jTabbedPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -193,7 +192,6 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         ));
         tblNhaPhanPhoi.setToolTipText("");
         tblNhaPhanPhoi.setGridColor(new java.awt.Color(255, 255, 255));
-        tblNhaPhanPhoi.setSelectionForeground(new java.awt.Color(255, 255, 0));
         tblNhaPhanPhoi.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 tblNhaPhanPhoiMousePressed(evt);

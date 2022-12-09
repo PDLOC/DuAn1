@@ -229,7 +229,7 @@ public class KhachHangForm extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(tblKhachHang);
 
-        jPanel8.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 327, 960, 280));
+        jPanel8.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 327, 1000, 290));
 
         jLabel20.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel20.setText("Tìm kiếm:");
@@ -254,7 +254,7 @@ public class KhachHangForm extends javax.swing.JInternalFrame {
         });
         jPanel8.add(btnFindKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 270, 120, 40));
 
-        getContentPane().add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 980, 610));
+        getContentPane().add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 990, 610));
 
         jPanel4.setBackground(new java.awt.Color(0, 102, 102));
 

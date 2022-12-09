@@ -100,7 +100,6 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
         tblSP1 = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblDanhSach = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         btnThanhTien = new javax.swing.JButton();
         txtThanhTien = new javax.swing.JTextField();
@@ -116,6 +115,7 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         txtMaKH = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         txtMaSP.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
@@ -195,7 +195,76 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
         tblDanhSach.setComponentPopupMenu(pmnXoaHD);
         jScrollPane2.setViewportView(tblDanhSach);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 980, 280));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 990, 290));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnThanhTien.setBackground(new java.awt.Color(204, 204, 204));
+        btnThanhTien.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnThanhTien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/Cash_30px.png"))); // NOI18N
+        btnThanhTien.setText("Thanh Toán");
+        btnThanhTien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThanhTienActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnThanhTien, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 280, 150, 40));
+
+        txtThanhTien.setEditable(false);
+        jPanel1.add(txtThanhTien, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 240, 130, -1));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel7.setText("Tổng tiền");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 210, 95, 20));
+        jPanel1.add(txtMaHD, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 170, 130, -1));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel4.setText("Mã hóa đơn");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 140, -1, -1));
+
+        txtTenNV.setEditable(false);
+        jPanel1.add(txtTenNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 240, 130, -1));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setText("Tên nhân viên");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 210, -1, -1));
+
+        txtMaNV.setEditable(false);
+        jPanel1.add(txtMaNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 170, 130, -1));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setText("Mã nhân viên");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 140, -1, -1));
+
+        btnChonKH.setBackground(new java.awt.Color(204, 204, 204));
+        btnChonKH.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/user_folder_40px.png"))); // NOI18N
+        btnChonKH.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnChonKH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChonKHActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnChonKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 60, 40, 30));
+
+        TxtTenKH.setEditable(false);
+        jPanel1.add(TxtTenKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 100, 130, -1));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel6.setText("Tên khách hàng");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 100, -1, -1));
+
+        txtMaKH.setEditable(false);
+        txtMaKH.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtMaKHCaretUpdate(evt);
+            }
+        });
+        jPanel1.add(txtMaKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 60, 130, -1));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel5.setText("Mã khách hàng");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 60, -1, -1));
 
         jButton2.setBackground(new java.awt.Color(51, 204, 255));
         jButton2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -206,65 +275,9 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 60, 229, 33));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 10, 229, 33));
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btnThanhTien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/icons8-purchase-order-50.png"))); // NOI18N
-        btnThanhTien.setText("Thanh Toán");
-        btnThanhTien.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThanhTienActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnThanhTien, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 259, 160, 60));
-        jPanel1.add(txtThanhTien, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 290, 104, -1));
-
-        jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel7.setText("Tổng tiền");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 260, 95, -1));
-        jPanel1.add(txtMaHD, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 230, 104, -1));
-
-        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel4.setText("Mã Hóa Đơn");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 200, -1, -1));
-        jPanel1.add(txtTenNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 170, 104, -1));
-
-        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel3.setText("Tên Nhân Viên");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 140, -1, -1));
-        jPanel1.add(txtMaNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 110, 104, -1));
-
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel2.setText("Mã Nhân Viên");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 80, -1, -1));
-
-        btnChonKH.setText("Chọn Khách Hàng");
-        btnChonKH.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnChonKHActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnChonKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 220, -1, -1));
-        jPanel1.add(TxtTenKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 170, 104, -1));
-
-        jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel6.setText("Tên Khách Hàng");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 140, -1, -1));
-
-        txtMaKH.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                txtMaKHCaretUpdate(evt);
-            }
-        });
-        jPanel1.add(txtMaKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 110, 104, -1));
-
-        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel5.setText("Mã Khách Hàng");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 80, -1, -1));
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 980, 610));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 50, 1000, 620));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
