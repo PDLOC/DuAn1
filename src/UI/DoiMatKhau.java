@@ -54,6 +54,7 @@ public class DoiMatKhau extends javax.swing.JDialog {
         setTitle("Đổi mật khẩu");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        pnlMain.setBackground(new java.awt.Color(255, 255, 255));
         pnlMain.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblUsername.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N

@@ -85,6 +85,7 @@ public class NhanVienForm extends javax.swing.JInternalFrame {
         btnNextNV = new javax.swing.JButton();
         btnLastNV = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(990, 690));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -222,6 +223,7 @@ public class NhanVienForm extends javax.swing.JInternalFrame {
 
         getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 990, 50));
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnNewNV.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N

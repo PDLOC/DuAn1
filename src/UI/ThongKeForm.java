@@ -188,12 +188,14 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tbpdoanhthu.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -254,6 +256,7 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
         pnlthongke.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION)));
         pnlthongke.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        pnlThongkebieudo.setBackground(new java.awt.Color(255, 255, 255));
         pnlThongkebieudo.setLayout(new javax.swing.BoxLayout(pnlThongkebieudo, javax.swing.BoxLayout.LINE_AXIS));
         pnlthongke.add(pnlThongkebieudo, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 2, 666, 326));
 
@@ -334,6 +337,7 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
 
         jPanel1.add(tbpdoanhthu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 940, 380));
 
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

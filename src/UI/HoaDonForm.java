@@ -101,20 +101,21 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblDanhSach = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        txtMaNV = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        txtTenNV = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        txtMaHD = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         btnThanhTien = new javax.swing.JButton();
+        txtThanhTien = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        txtMaHD = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        txtTenNV = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        txtMaNV = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        btnChonKH = new javax.swing.JButton();
         TxtTenKH = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtMaKH = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        btnChonKH = new javax.swing.JButton();
-        txtThanhTien = new javax.swing.JTextField();
 
         txtMaSP.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
@@ -207,48 +208,37 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
         });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 60, 229, 33));
 
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel2.setText("Mã Nhân Viên");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 110, -1, -1));
-        getContentPane().add(txtMaNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 130, 104, -1));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel3.setText("Tên Nhân Viên");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 160, -1, -1));
-        getContentPane().add(txtTenNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 180, 104, -1));
-
-        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel4.setText("Mã Hóa Đơn");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 210, -1, -1));
-        getContentPane().add(txtMaHD, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 240, 104, -1));
-
-        jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel7.setText("Tổng tiền");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 270, 95, -1));
-
+        btnThanhTien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/icons8-purchase-order-50.png"))); // NOI18N
         btnThanhTien.setText("Thanh Toán");
         btnThanhTien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThanhTienActionPerformed(evt);
             }
         });
-        getContentPane().add(btnThanhTien, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 259, 130, 60));
-        getContentPane().add(TxtTenKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 180, 104, -1));
+        jPanel1.add(btnThanhTien, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 259, 160, 60));
+        jPanel1.add(txtThanhTien, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 290, 104, -1));
 
-        jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel6.setText("Tên Khách Hàng");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 160, -1, -1));
+        jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel7.setText("Tổng tiền");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 260, 95, -1));
+        jPanel1.add(txtMaHD, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 230, 104, -1));
 
-        txtMaKH.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                txtMaKHCaretUpdate(evt);
-            }
-        });
-        getContentPane().add(txtMaKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 130, 104, -1));
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel4.setText("Mã Hóa Đơn");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 200, -1, -1));
+        jPanel1.add(txtTenNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 170, 104, -1));
 
-        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel5.setText("Mã Khách Hàng");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 110, -1, -1));
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel3.setText("Tên Nhân Viên");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 140, -1, -1));
+        jPanel1.add(txtMaNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 110, 104, -1));
+
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel2.setText("Mã Nhân Viên");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 80, -1, -1));
 
         btnChonKH.setText("Chọn Khách Hàng");
         btnChonKH.addActionListener(new java.awt.event.ActionListener() {
@@ -256,8 +246,25 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
                 btnChonKHActionPerformed(evt);
             }
         });
-        getContentPane().add(btnChonKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 210, -1, -1));
-        getContentPane().add(txtThanhTien, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 290, 104, -1));
+        jPanel1.add(btnChonKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 220, -1, -1));
+        jPanel1.add(TxtTenKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 170, 104, -1));
+
+        jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel6.setText("Tên Khách Hàng");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 140, -1, -1));
+
+        txtMaKH.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtMaKHCaretUpdate(evt);
+            }
+        });
+        jPanel1.add(txtMaKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 110, 104, -1));
+
+        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel5.setText("Mã Khách Hàng");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 80, -1, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 980, 610));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -449,6 +456,7 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

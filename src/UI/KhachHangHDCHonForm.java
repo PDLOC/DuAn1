@@ -76,6 +76,7 @@ public class KhachHangHDCHonForm extends javax.swing.JDialog {
 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -155,6 +156,7 @@ public class KhachHangHDCHonForm extends javax.swing.JDialog {
         rdoNuKH.setText("Nữ");
         jPanel8.add(rdoNuKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 100, -1, -1));
 
+        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
         jPanel7.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
         jPanel7.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -249,7 +251,7 @@ public class KhachHangHDCHonForm extends javax.swing.JDialog {
         });
         jPanel8.add(btnFindKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 270, 120, 40));
 
-        getContentPane().add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 980, 610));
+        getContentPane().add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 980, 610));
 
         jPanel4.setBackground(new java.awt.Color(0, 102, 102));
 

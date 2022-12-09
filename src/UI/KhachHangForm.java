@@ -79,6 +79,7 @@ public class KhachHangForm extends javax.swing.JInternalFrame {
         setPreferredSize(new java.awt.Dimension(990, 690));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -158,6 +159,7 @@ public class KhachHangForm extends javax.swing.JInternalFrame {
         rdoNuKH.setText("Nữ");
         jPanel8.add(rdoNuKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 100, -1, -1));
 
+        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
         jPanel7.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
         jPanel7.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
