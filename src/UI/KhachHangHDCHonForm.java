@@ -74,6 +74,7 @@ public class KhachHangHDCHonForm extends javax.swing.JDialog {
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(204, 204, 204));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel8.setBackground(new java.awt.Color(255, 255, 255));
@@ -226,7 +227,7 @@ public class KhachHangHDCHonForm extends javax.swing.JDialog {
         });
         jScrollPane2.setViewportView(tblKhachHang);
 
-        jPanel8.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 327, 1000, 320));
+        jPanel8.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 1010, 320));
 
         jLabel20.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel20.setText("Tìm kiếm:");
@@ -251,7 +252,7 @@ public class KhachHangHDCHonForm extends javax.swing.JDialog {
         });
         jPanel8.add(btnFindKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 270, 120, 40));
 
-        getContentPane().add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 990, 640));
+        getContentPane().add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1010, -1));
 
         jPanel4.setBackground(new java.awt.Color(0, 102, 102));
 
@@ -267,14 +268,14 @@ public class KhachHangHDCHonForm extends javax.swing.JDialog {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(350, 350, 350)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(365, Short.MAX_VALUE))
+                .addContainerGap(375, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 50));
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1010, 50));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

@@ -90,6 +90,9 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         mniGiamGiaSP = new javax.swing.JMenuItem();
         lblQR = new javax.swing.JLabel();
         txtMaPP = new javax.swing.JTextField();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -151,8 +154,6 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         cboNhaPP = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         btnQR = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -173,8 +174,35 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         setPreferredSize(new java.awt.Dimension(990, 690));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel4.setBackground(new java.awt.Color(0, 102, 102));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("QUẢN LÝ SẢN PHẨM");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(350, 350, 350)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(355, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 990, 50));
+
+        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         jTabbedPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -199,8 +227,8 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tblNhaPhanPhoi);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 960, 270));
-        jPanel1.add(txtNSXPP, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 130, 160, 30));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 990, 290));
+        jPanel1.add(txtNSXPP, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 130, 190, 30));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -216,10 +244,12 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Tên nhà phân phối:");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, 140, 30));
-        jPanel1.add(txtMaNPP, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 30, 160, 30));
-        jPanel1.add(txtTenNhaPP, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 80, 160, 30));
+        jPanel1.add(txtMaNPP, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 30, 190, 30));
+        jPanel1.add(txtTenNhaPP, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 80, 190, 30));
 
+        lblHinhNPP.setBackground(new java.awt.Color(255, 255, 255));
         lblHinhNPP.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lblHinhNPP.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblHinhNPP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblHinhNPPMouseClicked(evt);
@@ -230,18 +260,14 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lblHinhNPP, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(lblHinhNPP, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lblHinhNPP, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(lblHinhNPP, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 10, 150, 180));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 20, 150, 180));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -309,7 +335,7 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         });
         jPanel1.add(btnLastPP, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 260, 40, 40));
 
-        pnlChucNangPP.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnlChucNangPP.setBackground(new java.awt.Color(255, 255, 255));
 
         btnThemPP.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnThemPP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/save.png"))); // NOI18N
@@ -360,7 +386,7 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         pnlChucNangPPLayout.setHorizontalGroup(
             pnlChucNangPPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlChucNangPPLayout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
+                .addContainerGap(20, Short.MAX_VALUE)
                 .addGroup(pnlChucNangPPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnThemPP, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnUpdatePP, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -382,10 +408,11 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.add(pnlChucNangPP, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 10, 160, 220));
+        jPanel1.add(pnlChucNangPP, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 10, 160, 220));
 
         jTabbedPane1.addTab("NHÀ PHÂN PHỐI", jPanel1);
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -417,7 +444,7 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(tblSanPham);
 
-        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 960, 240));
+        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, 990, 260));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -439,7 +466,7 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         jPanel2.add(txtTenSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 50, 180, 30));
         jPanel2.add(txtSoLuongSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 180, 30));
 
-        jPanel5.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         btnThemSP.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -491,7 +518,7 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
+                .addContainerGap(25, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnThemSP, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnUpdateSP, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -599,6 +626,7 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         jPanel2.add(rdoHetHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 250, -1, -1));
 
         lblHinhSP.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lblHinhSP.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblHinhSP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblHinhSPMouseClicked(evt);
@@ -652,30 +680,9 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
 
         jTabbedPane1.addTab("SẢN PHẨM", jPanel2);
 
-        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 980, 610));
+        jPanel7.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 990, 630));
 
-        jPanel4.setBackground(new java.awt.Color(0, 102, 102));
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("QUẢN LÝ SẢN PHẨM");
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(350, 350, 350)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(355, Short.MAX_VALUE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 990, 50));
+        getContentPane().add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1000, 630));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -907,6 +914,7 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

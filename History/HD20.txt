@@ -5,23 +5,17 @@
 
 			HÓA ĐƠN BÁN HÀNG
 
-Mã hóa đợn: HD20
-Thời gian: 14:21:57 10/11/2022
+Mã hóa đƠn: HD20
+Thời gian: 09:28:25 11/12/2022
 NHÂN VIÊN: Phạm Đại Lộc
 ------------------------------------------------------------
-Mã		Tên Sản Phẩm	Số lượng	Đợn giá	Thành tiền
+Mã		Tên Sản Phẩm			Số lượng	ĐƠn giá	Thành tiền
 
 -----------------------------------------------------------
-1. Laptop Gaming Asus TUF A15 FA506IHRB-HN080W
-
-SP4	2		31780000		15890000	
-
-2. Tai nghe Razer Hammerhead Pro V2 In-ear Headset (RZ04-01730100-R3A1)
-
-SP9	1		750000		750000	
+1. SP016Chuột Có dây Gaming Logitech G403 Hero Đen	2		2160000		1080000		
 
 ------------------------------------------------------------
-		Thành tiền:			32530000 VNĐ
+		Thành tiền:			2160000 VNĐ
 ------------------------------------------------------------
 ------------------------------------------------------------
 Mật khẩu Wifi: motdentam

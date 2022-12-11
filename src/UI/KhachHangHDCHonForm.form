@@ -5,6 +5,11 @@
     <Component class="javax.swing.ButtonGroup" name="buttonGroup1">
     </Component>
   </NonVisualComponents>
+  <Properties>
+    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+      <Color blue="cc" green="cc" red="cc" type="rgb"/>
+    </Property>
+  </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
@@ -34,7 +39,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="0" y="50" width="990" height="640"/>
+          <AbsoluteConstraints x="0" y="50" width="1010" height="-1"/>
         </Constraint>
       </Constraints>
 
@@ -378,7 +383,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="-2" y="327" width="1000" height="320"/>
+              <AbsoluteConstraints x="0" y="330" width="1010" height="320"/>
             </Constraint>
           </Constraints>
 
@@ -502,7 +507,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="0" y="0" width="1000" height="50"/>
+          <AbsoluteConstraints x="0" y="0" width="1010" height="50"/>
         </Constraint>
       </Constraints>
 
@@ -512,7 +517,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="350" max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" pref="285" max="-2" attributes="0"/>
-                  <EmptySpace pref="365" max="32767" attributes="0"/>
+                  <EmptySpace pref="375" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

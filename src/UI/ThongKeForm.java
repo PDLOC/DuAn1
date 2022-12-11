@@ -141,6 +141,8 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         tbpdoanhthu = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
@@ -185,14 +187,39 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
         jPanel9 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         lbltongkhachhang = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+
+        setPreferredSize(new java.awt.Dimension(990, 690));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel4.setBackground(new java.awt.Color(0, 102, 102));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("THỐNG KÊ");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(428, 428, 428)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 1000, -1));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tbpdoanhthu.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -251,20 +278,22 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
         });
         jPanel3.add(btnthongketop, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 161, 131, 31));
 
-        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 250, 330));
+        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 260, 390));
 
         pnlthongke.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION)));
         pnlthongke.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnlThongkebieudo.setBackground(new java.awt.Color(255, 255, 255));
         pnlThongkebieudo.setLayout(new javax.swing.BoxLayout(pnlThongkebieudo, javax.swing.BoxLayout.LINE_AXIS));
-        pnlthongke.add(pnlThongkebieudo, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 2, 666, 326));
+        pnlthongke.add(pnlThongkebieudo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-8, 2, 740, 370));
 
+        pnlthongketrong.setBackground(new java.awt.Color(255, 255, 255));
         pnlthongketrong.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lbldtsp.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbldtsp.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbldtsp.setText("Doanh Thu Sản Phẩm");
-        pnlthongketrong.add(lbldtsp, new org.netbeans.lib.awtextra.AbsoluteConstraints(273, 11, -1, -1));
+        pnlthongketrong.add(lbldtsp, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, 200, 30));
 
         tblDoanhThu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -279,14 +308,15 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
         ));
         doanhthu.setViewportView(tblDoanhThu);
 
-        pnlthongketrong.add(doanhthu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 48, 646, 257));
+        pnlthongketrong.add(doanhthu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 48, 730, 340));
 
-        pnlthongke.add(pnlthongketrong, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 2, -1, -1));
+        pnlthongke.add(pnlthongketrong, new org.netbeans.lib.awtextra.AbsoluteConstraints(-8, -8, 750, 370));
 
-        jPanel2.add(pnlthongke, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 670, 330));
+        jPanel2.add(pnlthongke, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 730, 380));
 
         tbpdoanhthu.addTab("Doanh Thu", jPanel2);
 
+        pnlhoadon.setBackground(new java.awt.Color(255, 255, 255));
         pnlhoadon.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tblhoadon.setModel(new javax.swing.table.DefaultTableModel(
@@ -302,7 +332,7 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(tblhoadon);
 
-        pnlhoadon.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 52, 825, 268));
+        pnlhoadon.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 52, 990, 320));
 
         jLabel6.setText("NGÀY");
         pnlhoadon.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 14, -1, 20));
@@ -335,7 +365,7 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
 
         tbpdoanhthu.addTab("Hóa Đơn", pnlhoadon);
 
-        jPanel1.add(tbpdoanhthu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 940, 380));
+        jPanel1.add(tbpdoanhthu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 990, 410));
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -400,7 +430,7 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
         lblsohoadon.setText("0");
         jPanel7.add(lblsohoadon, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 180, -1));
 
-        jPanel5.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, 180, 90));
+        jPanel5.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 180, 90));
 
         jPanel8.setBackground(new java.awt.Color(0, 153, 153));
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -414,7 +444,7 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
         lblsosanpham.setText("0");
         jPanel8.add(lblsosanpham, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 180, -1));
 
-        jPanel5.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 10, 180, 90));
+        jPanel5.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 10, 180, 90));
 
         jPanel9.setBackground(new java.awt.Color(0, 153, 153));
         jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -429,48 +459,11 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
         lbltongkhachhang.setText("0");
         jPanel9.add(lbltongkhachhang, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 190, -1));
 
-        jPanel5.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 10, 190, 90));
+        jPanel5.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 10, 190, 90));
 
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 940, 220));
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 990, 230));
 
-        jPanel4.setBackground(new java.awt.Color(0, 102, 102));
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("THỐNG KÊ");
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(428, 428, 428)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 964, Short.MAX_VALUE)
-                .addContainerGap())
-            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 47, 1000, 630));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

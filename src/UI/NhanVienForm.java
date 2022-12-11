@@ -196,6 +196,7 @@ public class NhanVienForm extends javax.swing.JInternalFrame {
         jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, -1, 30));
 
         lblPicture.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lblPicture.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblPicture.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblPictureMouseClicked(evt);

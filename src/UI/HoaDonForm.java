@@ -217,6 +217,8 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel7.setText("Tổng tiền");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 210, 95, 20));
+
+        txtMaHD.setEditable(false);
         jPanel1.add(txtMaHD, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 170, 130, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -347,9 +349,7 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_mniXoaActionPerformed
 
     private void btnThanhTienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhTienActionPerformed
-
         try {
-
             String sql = "insert into hoadon values (?,?,?,?,?,?,GETDATE())";
             PreparedStatement ps = cnn.prepareStatement(sql);
             ps.setString(1, txtMaHD.getText());
@@ -358,14 +358,14 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
             ps.setString(4, txtTenNV.getText());
             ps.setString(5, TxtTenKH.getText());
             ps.setString(6, txtThanhTien.getText());
-
             int result = ps.executeUpdate();
             if (result > 0) {
+                if (txtsl.getText().equalsIgnoreCase("") || txtsl.getText().equalsIgnoreCase("0")) {
+                    JOptionPane.showMessageDialog(this, "Vui lòng chọn sản phẩm !", "ERROR", JOptionPane.ERROR_MESSAGE);
+                }
                 JOptionPane.showMessageDialog(this, "Thêm thành công");
             }
-
         } catch (SQLException ex) {
-            System.out.println("" + ex);
         }
         int line = tblDanhSach.getRowCount();
         for (int i = 0; i < line; i++) {
@@ -387,49 +387,54 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
                 System.out.println("loi" + ex);
             }
         }
-
-        try {
-
-            Date now = new Date();
-            Writer bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("History//" + txtMaHD.getText().trim() + ".txt")));
-            bw.write("\t\t\tLAPTOP VN\r\n\r\n");
-            bw.write("\t\t590 CMT8, P.11, Q.3, TPHCM\r\n");
-            bw.write("\t\t\tSĐT: 01212692802\r\n\r\n");
-            bw.write("\t\t\tHÓA ĐƠN BÁN HÀNG\r\n\r\n");
-            bw.write("Mã hóa đƠn: " + txtMaHD.getText() + "\r\n");
-            bw.write("Thời gian: " + ft.format(now) + "\r\n");
-            bw.write("NHÂN VIÊN: " + txtTenNV.getText() + "\r\n");
-            bw.write("------------------------------------------------------------\r\n");
-            bw.write("Mã\t\tTên Sản Phẩm\tSố lượng\tĐƠn giá\tThành tiền\r\n\n");
-            bw.write("-----------------------------------------------------------\r\n");
-            //Ghi sản phẩm
-            int quantotal = 0;
-            for (int i = 0; i < line; i++) {
-                String id = (String) tblModel.getValueAt(i, 0);
-                String name = (String) tblModel.getValueAt(i, 1);
-                int size = (int) tblModel.getValueAt(i, 2);
-                String price = String.valueOf(tblModel.getValueAt(i, 3));
-                String quantity = String.valueOf(tblModel.getValueAt(i, 4));
-                bw.write((i + 1) + ". " + name + "\r\n\n");
-                bw.write(id + "\t" + size + "\t\t" + quantity + "\t\t" + price + "\t" + "\r\n\r\n");
-                quantotal += Integer.parseInt(quantity);
+        if (txtMaKH.getText().equalsIgnoreCase("")) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn khách hàng !", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else if (txtMaSP.getText().equalsIgnoreCase("") || txtThanhTien.getText().equalsIgnoreCase("") || txtThanhTien.getText().equalsIgnoreCase("0")) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn sản phẩm !", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else {
+            try {
+                Date now = new Date();
+                Writer bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("History//" + txtMaHD.getText().trim() + ".txt")));
+                bw.write("\t\t\t    LAPTOP VN\r\n\r\n");
+                bw.write("\t\t   590 CMT8, P.11, Q.3, TPHCM\r\n");
+                bw.write("\t\t\tSĐT: 01212692802\r\n\r\n");
+                bw.write("\t\t\tHÓA ĐƠN BÁN HÀNG\r\n\r\n");
+                bw.write("MÃ HÓA ĐƠN: " + txtMaHD.getText() + "\r\n");
+                bw.write("THỜI GIAN: " + ft.format(now) + "\r\n");
+                bw.write("NHÂN VIÊN: " + txtTenNV.getText() + "\r\n");
+                bw.write("------------------------------------------------------------\r\n");
+                bw.write("\tTÊN SẢN PHẨM\t\t\t\t    SỐ LƯỢNG\t\t\t\t  THÀNH TIỀN\r\n\n");
+                bw.write("-----------------------------------------------------------\r\n");
+                //Ghi sản phẩm
+                int quantotal = 0;
+                for (int i = 0; i < line; i++) {
+                    String id = (String) tblModel.getValueAt(i, 0);
+                    String name = (String) tblModel.getValueAt(i, 1);
+                    int size = (int) tblModel.getValueAt(i, 2);
+                    String price = String.valueOf(tblModel.getValueAt(i, 3));
+                    String quantity = String.valueOf(tblModel.getValueAt(i, 4));
+                    bw.write((i + 1) + "." + name + "\t\t\t" + size + "\t\t\t" + price + "\t\t" + "\r\n\r\n");
+//                    bw.write("\t"+ name + "\t\t" + size + "\t\t" + quantity + "\t\t" + price + "\t\t" + "\r\n\r\n");
+                    quantotal += Integer.parseInt(quantity);
+                }
+                bw.write("------------------------------------------------------------\r\n");
+                bw.write("\t\tThành tiền:\t\t\t" + txtThanhTien.getText() + " VNĐ\r\n");
+                bw.write("------------------------------------------------------------\r\n");
+                bw.write("------------------------------------------------------------\r\n");
+                bw.write("Mật khẩu Wifi: motdentam\r\n");
+                bw.write("---------------------CÁM ƠN QUÝ KHÁCH!----------------------");
+                bw.close();
+                //update số ly và chiết khấu vào bảng customer
+            } catch (Exception e) {
+                System.out.println("Lỗi in" + e);
             }
-            bw.write("------------------------------------------------------------\r\n");
-            bw.write("\t\tThành tiền:\t\t\t" + txtThanhTien.getText() + " VNĐ\r\n");
-            bw.write("------------------------------------------------------------\r\n");
-            bw.write("------------------------------------------------------------\r\n");
-            bw.write("Mật khẩu Wifi: motdentam\r\n");
-            bw.write("---------------------CÁM ƠN QUÝ KHÁCH!----------------------");
-            bw.close();
-            //update số ly và chiết khấu vào bảng customer
-        } catch (Exception e) {
-            System.out.println("Lỗi in" + e);
-        }
-        //Mở file txt
-        Runtime run = Runtime.getRuntime();
-        try {
-            run.exec("notepad History//" + txtMaHD.getText().trim() + ".txt");
-        } catch (IOException e) {
+            //Mở file txt
+            Runtime run = Runtime.getRuntime();
+            try {
+                run.exec("notepad History//" + txtMaHD.getText().trim() + ".txt");
+            } catch (IOException e) {
+
+            }
         }
         delete();
     }//GEN-LAST:event_btnThanhTienActionPerformed

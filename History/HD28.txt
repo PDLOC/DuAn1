@@ -1,23 +1,23 @@
-			LAPTOP VN
+			    LAPTOP VN
 
-		590 CMT8, P.11, Q.3, TPHCM
+		   590 CMT8, P.11, Q.3, TPHCM
 			SĐT: 01212692802
 
 			HÓA ĐƠN BÁN HÀNG
 
-Mã hóa đƠn: HD21
-Thời gian: 09:30:49 11/12/2022
+MÃ HÓA ĐƠN: HD28
+THỜI GIAN: 09:44:57 11/12/2022
 NHÂN VIÊN: Phạm Đại Lộc
 ------------------------------------------------------------
-Mã		Tên Sản Phẩm			Số lượng	ĐƠn giá	Thành tiền
+	TÊN SẢN PHẨM				    SỐ LƯỢNG				  THÀNH TIỀN
 
 -----------------------------------------------------------
-1.SP014	Chuột Có dây Gaming Razer DeathAdder Essential		3		1800000		600000		
+1.Chuột Gaming Rapoo V16.Black			1			250000		
 
-2.SP017	Chuột Có dây Gaming Logitech G102 Gen2 Lightsync		1		600000		600000		
+2.Laptop Gaming Asus TUF A15 FA506IHRB-HN080W			1			15890000		
 
 ------------------------------------------------------------
-		Thành tiền:			2400000 VNĐ
+		Thành tiền:			16140000 VNĐ
 ------------------------------------------------------------
 ------------------------------------------------------------
 Mật khẩu Wifi: motdentam
