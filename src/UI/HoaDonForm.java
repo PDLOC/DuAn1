@@ -403,8 +403,7 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
                 bw.write("THỜI GIAN: " + ft.format(now) + "\r\n");
                 bw.write("NHÂN VIÊN: " + txtTenNV.getText() + "\r\n");
                 bw.write("------------------------------------------------------------\r\n");
-                bw.write("\tTÊN SẢN PHẨM\t\t\t\t    SỐ LƯỢNG\t\t\t\t  THÀNH TIỀN\r\n\n");
-                bw.write("-----------------------------------------------------------\r\n");
+
                 //Ghi sản phẩm
                 int quantotal = 0;
                 for (int i = 0; i < line; i++) {
@@ -413,13 +412,13 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
                     int size = (int) tblModel.getValueAt(i, 2);
                     String price = String.valueOf(tblModel.getValueAt(i, 3));
                     String quantity = String.valueOf(tblModel.getValueAt(i, 4));
-                    bw.write((i + 1) + "." + name + "\t\t\t" + size + "\t\t\t" + price + "\t\t" + "\r\n\r\n");
-//                    bw.write("\t"+ name + "\t\t" + size + "\t\t" + quantity + "\t\t" + price + "\t\t" + "\r\n\r\n");
+                    bw.write((i + 1) + "." + name + "\t\n"+"Số lượng: "+ size + "\t\n"+"Giá Thành: "+ price + "\t\t" + "\r\n\r\n");
+
                     quantotal += Integer.parseInt(quantity);
                 }
                 bw.write("------------------------------------------------------------\r\n");
                 bw.write("\t\tThành tiền:\t\t\t" + txtThanhTien.getText() + " VNĐ\r\n");
-                bw.write("------------------------------------------------------------\r\n");
+              
                 bw.write("------------------------------------------------------------\r\n");
                 bw.write("Mật khẩu Wifi: motdentam\r\n");
                 bw.write("---------------------CÁM ƠN QUÝ KHÁCH!----------------------");
@@ -512,6 +511,10 @@ public class HoaDonForm extends javax.swing.JInternalFrame {
             ps.close();
             LoadDataToTableHoaDonChiTiet();
             LoadDataToTableHoaDonChiTiet();
+            txtMaHD.setText("");
+            txtThanhTien.setText("");
+            txtMaKH.setText("");
+            TxtTenKH.setText("");
         } catch (Exception e) {
         }
     }
