@@ -6,7 +6,7 @@
 package UI;
 
 import Helper.Auth;
-import java.awt.Color   ;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
@@ -36,7 +36,7 @@ public class Main extends javax.swing.JFrame {
         SanPhamForm sp = new SanPhamForm();
         lblUsername.setText(Auth.user.getTenNV());
         jDesktopPane1.add(sp).setVisible(true);
-        pnlSanPham.setBackground(panelClick);
+        pnlMuaHang.setBackground(panelClick);
     }
 
     /**
@@ -61,10 +61,10 @@ public class Main extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         pnlSanPham = new javax.swing.JPanel();
-        ShowHoaDon = new javax.swing.JPanel();
+        ShowMuaHang = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        pnlHoaDon = new javax.swing.JPanel();
+        pnlMuaHang = new javax.swing.JPanel();
         ShowNhanVien = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -80,10 +80,15 @@ public class Main extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         pnlThongKe = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        ShowHoaDon = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        pnlHoaDon = new javax.swing.JPanel();
         jDesktopPane1 = new javax.swing.JDesktopPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cửa hàng máy tính");
+        setUndecorated(true);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -100,7 +105,7 @@ public class Main extends javax.swing.JFrame {
                 jLabel1MouseClicked(evt);
             }
         });
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 80, -1));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 80, -1));
 
         lblUsername.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblUsername.setForeground(new java.awt.Color(51, 255, 255));
@@ -118,7 +123,7 @@ public class Main extends javax.swing.JFrame {
                 lblDoiMatKhauMousePressed(evt);
             }
         });
-        jPanel2.add(lblDoiMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 170, 100, -1));
+        jPanel2.add(lblDoiMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 100, -1));
 
         ShowKhachHang.setBackground(new java.awt.Color(0, 153, 153));
         ShowKhachHang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -172,7 +177,7 @@ public class Main extends javax.swing.JFrame {
                 .addGap(20, 20, 20))
         );
 
-        jPanel2.add(ShowKhachHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 220, 60));
+        jPanel2.add(ShowKhachHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 220, 60));
 
         ShowSanPham.setBackground(new java.awt.Color(0, 153, 153));
         ShowSanPham.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -226,63 +231,63 @@ public class Main extends javax.swing.JFrame {
                 .addGap(20, 20, 20))
         );
 
-        jPanel2.add(ShowSanPham, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 220, 60));
+        jPanel2.add(ShowSanPham, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 220, 60));
 
-        ShowHoaDon.setBackground(new java.awt.Color(0, 153, 153));
-        ShowHoaDon.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        ShowHoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
+        ShowMuaHang.setBackground(new java.awt.Color(0, 153, 153));
+        ShowMuaHang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ShowMuaHang.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ShowHoaDonMouseClicked(evt);
+                ShowMuaHangMouseClicked(evt);
             }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                ShowHoaDonMousePressed(evt);
+                ShowMuaHangMousePressed(evt);
             }
         });
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Hóa đơn");
+        jLabel10.setText("Mua hàng");
 
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/hoadon.png"))); // NOI18N
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/add_shopping_cart_40px.png"))); // NOI18N
 
-        javax.swing.GroupLayout pnlHoaDonLayout = new javax.swing.GroupLayout(pnlHoaDon);
-        pnlHoaDon.setLayout(pnlHoaDonLayout);
-        pnlHoaDonLayout.setHorizontalGroup(
-            pnlHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnlMuaHangLayout = new javax.swing.GroupLayout(pnlMuaHang);
+        pnlMuaHang.setLayout(pnlMuaHangLayout);
+        pnlMuaHangLayout.setHorizontalGroup(
+            pnlMuaHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 15, Short.MAX_VALUE)
         );
-        pnlHoaDonLayout.setVerticalGroup(
-            pnlHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pnlMuaHangLayout.setVerticalGroup(
+            pnlMuaHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 40, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout ShowHoaDonLayout = new javax.swing.GroupLayout(ShowHoaDon);
-        ShowHoaDon.setLayout(ShowHoaDonLayout);
-        ShowHoaDonLayout.setHorizontalGroup(
-            ShowHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ShowHoaDonLayout.createSequentialGroup()
+        javax.swing.GroupLayout ShowMuaHangLayout = new javax.swing.GroupLayout(ShowMuaHang);
+        ShowMuaHang.setLayout(ShowMuaHangLayout);
+        ShowMuaHangLayout.setHorizontalGroup(
+            ShowMuaHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ShowMuaHangLayout.createSequentialGroup()
                 .addGap(2, 2, 2)
-                .addComponent(pnlHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlMuaHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(20, Short.MAX_VALUE))
         );
-        ShowHoaDonLayout.setVerticalGroup(
-            ShowHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ShowHoaDonLayout.createSequentialGroup()
+        ShowMuaHangLayout.setVerticalGroup(
+            ShowMuaHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ShowMuaHangLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(ShowHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(ShowMuaHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(ShowHoaDonLayout.createSequentialGroup()
+                    .addGroup(ShowMuaHangLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(pnlHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(pnlMuaHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(20, 20, 20))
         );
 
-        jPanel2.add(ShowHoaDon, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 220, 60));
+        jPanel2.add(ShowMuaHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 220, 60));
 
         ShowNhanVien.setBackground(new java.awt.Color(0, 153, 153));
         ShowNhanVien.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -335,7 +340,7 @@ public class Main extends javax.swing.JFrame {
                 .addGap(20, 20, 20))
         );
 
-        jPanel2.add(ShowNhanVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 220, 60));
+        jPanel2.add(ShowNhanVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 220, 60));
 
         KetThuc.setBackground(new java.awt.Color(0, 153, 153));
         KetThuc.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -389,7 +394,7 @@ public class Main extends javax.swing.JFrame {
                 .addGap(20, 20, 20))
         );
 
-        jPanel2.add(KetThuc, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 510, 220, 60));
+        jPanel2.add(KetThuc, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 540, 220, 60));
 
         lblDongHo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblDongHo.setForeground(new java.awt.Color(255, 255, 255));
@@ -452,10 +457,63 @@ public class Main extends javax.swing.JFrame {
                 .addGap(20, 20, 20))
         );
 
-        jPanel2.add(ShowThongKe, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 450, -1, 60));
+        jPanel2.add(ShowThongKe, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 480, -1, 60));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/test_account_120px.png"))); // NOI18N
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 120, 100));
+
+        ShowHoaDon.setBackground(new java.awt.Color(0, 153, 153));
+        ShowHoaDon.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ShowHoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ShowHoaDonMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                ShowHoaDonMousePressed(evt);
+            }
+        });
+
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setText("Hóa đơn");
+
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/hoadon.png"))); // NOI18N
+
+        javax.swing.GroupLayout pnlHoaDonLayout = new javax.swing.GroupLayout(pnlHoaDon);
+        pnlHoaDon.setLayout(pnlHoaDonLayout);
+        pnlHoaDonLayout.setHorizontalGroup(
+            pnlHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 15, Short.MAX_VALUE)
+        );
+        pnlHoaDonLayout.setVerticalGroup(
+            pnlHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout ShowHoaDonLayout = new javax.swing.GroupLayout(ShowHoaDon);
+        ShowHoaDon.setLayout(ShowHoaDonLayout);
+        ShowHoaDonLayout.setHorizontalGroup(
+            ShowHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ShowHoaDonLayout.createSequentialGroup()
+                .addComponent(pnlHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
+        );
+        ShowHoaDonLayout.setVerticalGroup(
+            ShowHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ShowHoaDonLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(ShowHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20))
+        );
+
+        jPanel2.add(ShowHoaDon, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 420, 220, 60));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 710));
 
@@ -483,7 +541,7 @@ public class Main extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        setBounds(0, 0, 1244, 725);
+        setBounds(0, 0, 1230, 688);
     }// </editor-fold>//GEN-END:initComponents
 
     private void ShowKhachHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ShowKhachHangMousePressed
@@ -491,10 +549,10 @@ public class Main extends javax.swing.JFrame {
         pnlNhanVien.setBackground(panelDefault);
         pnlKhachHang.setBackground(panelClick);
         pnlSanPham.setBackground(panelDefault);
-        pnlHoaDon.setBackground(panelDefault);
+        pnlMuaHang.setBackground(panelDefault);
         pnlThongKe.setBackground(panelDefault);
         pnlKetThuc.setBackground(panelDefault);
-
+        pnlHoaDon.setBackground(panelDefault);
     }//GEN-LAST:event_ShowKhachHangMousePressed
 
     private void ShowKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ShowKhachHangMouseClicked
@@ -509,9 +567,10 @@ public class Main extends javax.swing.JFrame {
         pnlKhachHang.setBackground(panelDefault);
         pnlSanPham.setBackground(panelClick);
         pnlKhachHang.setBackground(panelDefault);
-        pnlHoaDon.setBackground(panelDefault);
+        pnlMuaHang.setBackground(panelDefault);
         pnlThongKe.setBackground(panelDefault);
         pnlKetThuc.setBackground(panelDefault);
+        pnlHoaDon.setBackground(panelDefault);
 
     }//GEN-LAST:event_ShowSanPhamMousePressed
 
@@ -521,24 +580,24 @@ public class Main extends javax.swing.JFrame {
         jDesktopPane1.add(sp).setVisible(true);
     }//GEN-LAST:event_ShowSanPhamMouseClicked
 
-    private void ShowHoaDonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ShowHoaDonMousePressed
+    private void ShowMuaHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ShowMuaHangMousePressed
         // TODO add your handling code here:
         pnlNhanVien.setBackground(panelDefault);
         pnlKhachHang.setBackground(panelDefault);
         pnlSanPham.setBackground(panelDefault);
         pnlKhachHang.setBackground(panelDefault);
-        pnlHoaDon.setBackground(panelClick);
-
+        pnlMuaHang.setBackground(panelClick);
+        pnlHoaDon.setBackground(panelDefault);
         pnlThongKe.setBackground(panelDefault);
         pnlKetThuc.setBackground(panelDefault);
 
-    }//GEN-LAST:event_ShowHoaDonMousePressed
+    }//GEN-LAST:event_ShowMuaHangMousePressed
 
-    private void ShowHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ShowHoaDonMouseClicked
+    private void ShowMuaHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ShowMuaHangMouseClicked
         // TODO add your handling code here:
-        HoaDonForm hd = new HoaDonForm();
+        MuaHangForm hd = new MuaHangForm();
         jDesktopPane1.add(hd).setVisible(true);
-    }//GEN-LAST:event_ShowHoaDonMouseClicked
+    }//GEN-LAST:event_ShowMuaHangMouseClicked
 
     private void ShowThongKeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ShowThongKeMousePressed
         // TODO add your handling code here:
@@ -546,9 +605,11 @@ public class Main extends javax.swing.JFrame {
         pnlKhachHang.setBackground(panelDefault);
         pnlSanPham.setBackground(panelDefault);
         pnlKhachHang.setBackground(panelDefault);
-        pnlHoaDon.setBackground(panelDefault);
+        pnlMuaHang.setBackground(panelDefault);
         pnlThongKe.setBackground(panelClick);
         pnlKetThuc.setBackground(panelDefault);
+        pnlHoaDon.setBackground(panelDefault);
+
     }//GEN-LAST:event_ShowThongKeMousePressed
 
     private void ShowThongKeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ShowThongKeMouseClicked
@@ -576,9 +637,11 @@ public class Main extends javax.swing.JFrame {
         pnlKhachHang.setBackground(panelDefault);
         pnlSanPham.setBackground(panelDefault);
         pnlKhachHang.setBackground(panelDefault);
-        pnlHoaDon.setBackground(panelDefault);
+        pnlMuaHang.setBackground(panelDefault);
         pnlThongKe.setBackground(panelDefault);
         pnlKetThuc.setBackground(panelClick);
+        pnlHoaDon.setBackground(panelDefault);
+
     }//GEN-LAST:event_KetThucMousePressed
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
@@ -604,9 +667,9 @@ public class Main extends javax.swing.JFrame {
 
     private void ShowNhanVienMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ShowNhanVienMousePressed
         // TODO add your handling code here:
-        pnlNhanVien.setBackground(panelClick);
-        pnlKhachHang.setBackground(panelDefault);
+        pnlMuaHang.setBackground(panelDefault);
         pnlSanPham.setBackground(panelDefault);
+        pnlNhanVien.setBackground(panelClick);
         pnlKhachHang.setBackground(panelDefault);
         pnlHoaDon.setBackground(panelDefault);
         pnlThongKe.setBackground(panelDefault);
@@ -623,6 +686,23 @@ public class Main extends javax.swing.JFrame {
             jDesktopPane1.add(nv).setVisible(true);
         }
     }//GEN-LAST:event_ShowNhanVienMouseClicked
+
+    private void ShowHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ShowHoaDonMouseClicked
+        // TODO add your handling code here:
+        HoaDonForm1 hd = new HoaDonForm1();
+        jDesktopPane1.add(hd).setVisible(true);
+    }//GEN-LAST:event_ShowHoaDonMouseClicked
+
+    private void ShowHoaDonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ShowHoaDonMousePressed
+        // TODO add your handling code here:
+        pnlHoaDon.setBackground(panelClick);
+        pnlNhanVien.setBackground(panelDefault);
+        pnlSanPham.setBackground(panelDefault);
+        pnlKhachHang.setBackground(panelDefault);
+        pnlMuaHang.setBackground(panelDefault);
+        pnlThongKe.setBackground(panelDefault);
+        pnlKetThuc.setBackground(panelDefault);
+    }//GEN-LAST:event_ShowHoaDonMousePressed
 
     /**
      * @param args the command line arguments
@@ -666,6 +746,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel KetThuc;
     private javax.swing.JPanel ShowHoaDon;
     private javax.swing.JPanel ShowKhachHang;
+    private javax.swing.JPanel ShowMuaHang;
     private javax.swing.JPanel ShowNhanVien;
     private javax.swing.JPanel ShowSanPham;
     private javax.swing.JPanel ShowThongKe;
@@ -674,6 +755,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -693,6 +776,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel pnlHoaDon;
     private javax.swing.JPanel pnlKetThuc;
     private javax.swing.JPanel pnlKhachHang;
+    private javax.swing.JPanel pnlMuaHang;
     private javax.swing.JPanel pnlNhanVien;
     private javax.swing.JPanel pnlSanPham;
     private javax.swing.JPanel pnlThongKe;
@@ -702,7 +786,7 @@ public class Main extends javax.swing.JFrame {
         pnlKhachHang.setBackground(panelDefault);
         pnlSanPham.setBackground(panelDefault);
         pnlKhachHang.setBackground(panelDefault);
-        pnlHoaDon.setBackground(panelDefault);
+        pnlMuaHang.setBackground(panelDefault);
         pnlThongKe.setBackground(panelDefault);
         pnlKetThuc.setBackground(panelDefault);
     }

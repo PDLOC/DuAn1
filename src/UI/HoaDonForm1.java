@@ -1,26 +1,27 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
 package UI;
 
+import java.util.Locale;
 import DAO.HoaDonChiTietDAO;
 import DAO.hdct1DAO;
 import ENTITY.ChiTietHoaDon;
 import ENTITY.HoaDon;
 import java.sql.*;
 import java.text.NumberFormat;
-
 import java.util.List;
 import java.util.Locale;
 import javax.swing.JOptionPane;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Nguyen vu
+ * @author Admin
  */
-public class CTHoaDonForm extends javax.swing.JDialog {
+public class HoaDonForm1 extends javax.swing.JInternalFrame {
 
     DefaultTableModel tblModel;
     Connection cnn;
@@ -28,16 +29,14 @@ public class CTHoaDonForm extends javax.swing.JDialog {
     HoaDonChiTietDAO dao1 = new HoaDonChiTietDAO();
 
     /**
-     * Creates new form
+     * Creates new form HoaDonForm1
      */
-    public CTHoaDonForm() {
-
+    public HoaDonForm1() {
         initComponents();
-
-        setLocationRelativeTo(null);
-
+        this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        BasicInternalFrameUI bi = (BasicInternalFrameUI) this.getUI();
+        bi.setNorthPane(null);
         try {
-
             String url = "jdbc:sqlserver://localhost:1433;databaseName=duan1;encrypt=true;trustServerCertificate=true;";
             String user = "edu";
             String pass = "123";
@@ -57,28 +56,26 @@ public class CTHoaDonForm extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         txtma = new javax.swing.JTextField();
         btntim = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDanhSach = new javax.swing.JTable();
-        jPanel1 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(990, 690));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Hoá Đơn Chi Tiết");
-        jLabel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 728, 34));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtma.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtmaActionPerformed(evt);
             }
         });
-        getContentPane().add(txtma, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 41, 568, 25));
+        jPanel1.add(txtma, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 790, 25));
 
         btntim.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btntim.setText("Tìm");
@@ -87,7 +84,7 @@ public class CTHoaDonForm extends javax.swing.JDialog {
                 btntimActionPerformed(evt);
             }
         });
-        getContentPane().add(btntim, new org.netbeans.lib.awtextra.AbsoluteConstraints(598, 41, 118, -1));
+        jPanel1.add(btntim, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 20, 118, -1));
 
         tblDanhSach.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -107,10 +104,32 @@ public class CTHoaDonForm extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(tblDanhSach);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 84, 710, 210));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 84, 980, 210));
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 300));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 990, 620));
+
+        jPanel4.setBackground(new java.awt.Color(0, 102, 102));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("QUẢN LÝ HÓA ĐƠN");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(350, 350, 350)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(355, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 990, 50));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -126,15 +145,11 @@ public class CTHoaDonForm extends javax.swing.JDialog {
 
     private void tblDanhSachMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDanhSachMousePressed
         // TODO add your handling code here:
-
-//      int npp=1;
-
-		
-	// tạo 1 NumberFormat để định dạng tiền tệ theo tiêu chuẩn của Việt Nam
-	// đơn vị tiền tệ của Việt Nam là đồng
-	Locale localeVN = new Locale("vi", "VN");
-	NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
-	
+        //      int npp=1;
+        // tạo 1 NumberFormat để định dạng tiền tệ theo tiêu chuẩn của Việt Nam
+        // đơn vị tiền tệ của Việt Nam là đồng
+        Locale localeVN = new Locale("vi", "VN");
+        NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
         try {
             int i = tblDanhSach.getSelectedRow();
             String mahd = (String) tblDanhSach.getValueAt(i, 0);
@@ -144,83 +159,31 @@ public class CTHoaDonForm extends javax.swing.JDialog {
             long str2 = 0;
             for (ChiTietHoaDon ct : list) {
 
-                str+= ct.getTenSP();
-                str1+= ct.getSoLuong();
-                str2+= ct.getTongtien();
+                str += ct.getTenSP();
+                str1 += ct.getSoLuong();
+                str2 += ct.getTongtien();
             }
-            JOptionPane.showMessageDialog(null, "Tổng Sản Phẩm Đã :\t " 
-                    + str1 
+            JOptionPane.showMessageDialog(null, "Tổng Sản Phẩm Đã :\t "
+                    + str1
                     + "\n" + "Sản Phẩm:\n"
-                    + str + "Tổng Giá Tiền:\t" 
-                    +currencyVN.format(str2),str3,-1);
-          
-      
+                    + str + "Tổng Giá Tiền:\t"
+                    + currencyVN.format(str2), str3, -1);
         } catch (Exception e) {
             System.out.println(e);;
         }
-
-
     }//GEN-LAST:event_tblDanhSachMousePressed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CTHoaDonForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CTHoaDonForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CTHoaDonForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CTHoaDonForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CTHoaDonForm().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btntim;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblDanhSach;
     private javax.swing.JTextField txtma;
     // End of variables declaration//GEN-END:variables
-     hdct1DAO dao = new hdct1DAO();
+    hdct1DAO dao = new hdct1DAO();
 
     void fillTable() {
         DefaultTableModel modelct = (DefaultTableModel) tblDanhSach.getModel();

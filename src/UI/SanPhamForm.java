@@ -260,14 +260,16 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblHinhNPP, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblHinhNPP, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lblHinhNPP, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 20, 150, 180));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 20, 160, 180));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -968,7 +970,7 @@ public class SanPhamForm extends javax.swing.JInternalFrame {
         txtNSXPP.setText(modelNPP.getNoiSX());
         lblHinhNPP.setText(modelNPP.getHinh());
         if (modelNPP.getHinh() != null) {
-            Image img = XImage.readLogo(modelNPP.getHinh()).getImage().getScaledInstance(lblHinhNPP.getWidth(), lblHinhNPP.getHeight(), Image.SCALE_SMOOTH);
+            Image img = XImage.readLogo(modelNPP.getHinh()).getImage().getScaledInstance(160, 180, Image.SCALE_SMOOTH);
             lblHinhNPP.setIcon(new ImageIcon(img));
         } else {
             lblHinhNPP.setIcon(null);
