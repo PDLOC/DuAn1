@@ -14,6 +14,7 @@ public class HoaDon {
     private String mahd;
     private String makh;
     private String manv;
+   
         private String tennv;
         private String tenkh;
         private long thanhtien;
@@ -87,6 +88,8 @@ public class HoaDon {
     public void setNgaymua(Date ngaymua) {
         this.ngaymua = ngaymua;
     }
+
+ 
 
    
 }

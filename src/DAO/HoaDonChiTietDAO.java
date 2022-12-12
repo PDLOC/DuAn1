@@ -58,6 +58,7 @@ public class HoaDonChiTietDAO {
     private ChiTietHoaDon readFromResultSet(ResultSet rs) throws SQLException{
         ChiTietHoaDon model=new ChiTietHoaDon();
         model.setMaHD(rs.getString("MaHD"));
+         model.setMaSP(rs.getString("MaSp"));
         model.setTenSP(rs.getString("tensp"));
         model.setSoLuong(rs.getInt("Soluong"));
         model.setTongtien(rs.getLong("tongtien"));

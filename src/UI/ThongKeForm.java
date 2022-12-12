@@ -43,6 +43,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
 import javax.swing.JFileChooser;
+import javax.swing.table.TableModel;
 import org.apache.poi.hpsf.ClassID;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -330,6 +331,11 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
                 "MaHD", "MaNV", "MaKH", "TenNV", "TenKH", "Thành Tiền", "Ngày Mua"
             }
         ));
+        tblhoadon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblhoadonMousePressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblhoadon);
 
         pnlhoadon.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 52, 990, 320));
@@ -553,6 +559,21 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
         BieuDoHoaDon();
 
     }//GEN-LAST:event_btnbieudohoadonActionPerformed
+
+    private void tblhoadonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblhoadonMousePressed
+        // TODO add your handling code here:
+          new CTHoaDonForm().setVisible(true);
+        try {
+            int index = tblhoadon.getSelectedRow();
+            TableModel model = tblhoadon.getModel();
+            String id = (String) model.getValueAt(index, 0);
+ 
+         CTHoaDonForm.hdn3.txt1.setText(id);
+
+        } catch (Exception e) {
+            System.out.println("fm" + e);
+        }
+    }//GEN-LAST:event_tblhoadonMousePressed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -1099,7 +1120,7 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
 
                 Date d = rs.getDate(7);
 
-                HoaDon hd = new HoaDon(mahd, makh, manv, tennv, tenkh, tt, d);
+                HoaDon hd = new HoaDon(mahd, makh, manv, tennv, tenkh, tt,d);
                 ListHD.add(hd);
             }
             FillToTableHoaDon();

@@ -689,7 +689,7 @@ public class Main extends javax.swing.JFrame {
 
     private void ShowHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ShowHoaDonMouseClicked
         // TODO add your handling code here:
-        HoaDonForm1 hd = new HoaDonForm1();
+        HoaDonForm hd = new HoaDonForm();
         jDesktopPane1.add(hd).setVisible(true);
     }//GEN-LAST:event_ShowHoaDonMouseClicked
 

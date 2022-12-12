@@ -115,7 +115,6 @@ public class MuaHangForm extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         txtMaKH = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
 
         txtMaSP.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
@@ -268,31 +267,10 @@ public class MuaHangForm extends javax.swing.JInternalFrame {
         jLabel5.setText("Mã khách hàng");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 60, -1, -1));
 
-        jButton2.setBackground(new java.awt.Color(51, 204, 255));
-        jButton2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jButton2.setText("Chi Tiết Hóa Đơn");
-        jButton2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 10, 229, 33));
-
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 50, 1000, 620));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        try {
-            new HoaDonForm().setVisible(true);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnChonKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonKHActionPerformed
         // TODO add your handling code here:
@@ -465,7 +443,6 @@ public class MuaHangForm extends javax.swing.JInternalFrame {
     public javax.swing.JTextField TxtTenKH;
     private javax.swing.JButton btnChonKH;
     private javax.swing.JButton btnThanhTien;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
