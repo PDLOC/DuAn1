@@ -33,9 +33,9 @@ public class Main extends javax.swing.JFrame {
         panelClick = new Color(102, 255, 204);
         init();
         background();
-        SanPhamForm sp = new SanPhamForm();
+        MuaHangForm hd = new MuaHangForm();
         lblUsername.setText(Auth.user.getTenNV());
-        jDesktopPane1.add(sp).setVisible(true);
+        jDesktopPane1.add(hd).setVisible(true);
         pnlMuaHang.setBackground(panelClick);
     }
 
